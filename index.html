@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>อิตาลีเหนือ — 17–26 ต.ค. 2026 · 7 คน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest: #1C2B1A;
+  --teal: #2D6A5E;
+  --teal-light: #3d8c7e;
+  --gold: #C8973A;
+  --gold-light: #e8b45a;
+  --cream: #F5F0E8;
+  --cream-dark: #EAE4D8;
+  --sage: #84A97B;
+  --red: #B85042;
+  --muted: #7A7060;
+  --text: #1C2B1A;
+  --white: #FFFFFF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--forest);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem 6rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  background: var(--teal);
+  opacity: 0.18;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: -8%;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.10;
+}
+
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: #AABBA8;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 3rem;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.pill-gold { background: rgba(200,151,58,0.2); color: var(--gold-light); border: 1px solid rgba(200,151,58,0.35); }
+.pill-teal { background: rgba(45,106,94,0.3); color: #7ecfbf; border: 1px solid rgba(45,106,94,0.5); }
+.pill-sage { background: rgba(132,169,123,0.2); color: #a8c8a0; border: 1px solid rgba(132,169,123,0.35); }
+
+.route-flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 1rem;
+}
+
+.route-stop {
+  font-size: 0.8rem;
+  color: #8da88b;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.route-arrow {
+  margin: 0 0.5rem;
+  color: var(--gold);
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.scroll-hint span {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: #5a7358;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.scroll-dot {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 0 auto;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(28,43,26,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,151,58,0.15);
+  padding: 0 1.5rem;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+  padding: 1rem 1.1rem;
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6a8a68;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.03em;
+}
+
+.nav-btn:hover { color: var(--cream); }
+.nav-btn.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+/* ─── ALERT BANNER ─── */
+.alert-banner {
+  background: #3d1f0a;
+  border-left: 4px solid var(--red);
+  padding: 1rem 1.5rem;
+  margin: 2rem auto;
+  max-width: 1100px;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.alert-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+.alert-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #e88a6a;
+  margin-bottom: 0.3rem;
+}
+
+.alert-text {
+  font-size: 0.88rem;
+  color: #d4a090;
+  line-height: 1.6;
+}
+
+.alert-text a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── SECTION ─── */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 1rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.section-day {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+.section-date {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-left: auto;
+  flex-shrink: 0;
+  font-weight: 400;
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: -1.3rem;
+  margin-bottom: 1.8rem;
+  font-weight: 300;
+}
+
+/* ─── WARNING BOX ─── */
+.warning {
+  background: #fff8f0;
+  border: 1px solid #e8c4a0;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1.8rem;
+  font-size: 0.88rem;
+  color: #7a4e1a;
+  line-height: 1.6;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.warning-red {
+  background: #fff5f5;
+  border-color: #e8a0a0;
+  border-left-color: var(--red);
+  color: #7a1a1a;
+}
+
+/* ─── SPOTS GRID ─── */
+.spots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.spot-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.spot-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(28,43,26,0.1);
+}
+
+.spot-card-header {
+  padding: 1.1rem 1.1rem 0.7rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.spot-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.spot-main { flex: 1; }
+
+.spot-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+
+.spot-tagline {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.spot-time-badge {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.65rem;
+  background: var(--cream-dark);
+  color: var(--muted);
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.spot-body {
+  padding: 0 1.1rem 0.7rem;
+  display: none;
+}
+
+.spot-body.open { display: block; }
+
+.spot-divider {
+  height: 1px;
+  background: var(--cream-dark);
+  margin: 0.7rem 0;
+}
+
+.spot-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.spot-detail-box {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+}
+
+.detail-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.detail-val {
+  font-size: 0.82rem;
+  color: var(--forest);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.spot-section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.spot-text {
+  font-size: 0.85rem;
+  color: #3d4d3b;
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+}
+
+.spot-tip {
+  background: rgba(45,106,94,0.08);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.82rem;
+  color: var(--teal);
+  line-height: 1.55;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.spot-footer {
+  padding: 0.5rem 1.1rem 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spot-expand-btn {
+  font-size: 0.78rem;
+  color: var(--teal);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 500;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s;
+}
+
+.spot-expand-btn:hover { color: var(--teal-light); }
+
+.spot-expand-btn .arrow {
+  display: inline-block;
+  transition: transform 0.25s;
+}
+
+.spot-expand-btn.open .arrow { transform: rotate(180deg); }
+
+/* ─── OVERVIEW GRID ─── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+
+.overview-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+  border-left: 4px solid transparent;
+}
+
+.overview-card:hover {
+  border-color: var(--teal);
+  border-left-color: var(--teal);
+  transform: translateX(3px);
+}
+
+.overview-card.highlight { border-left-color: var(--gold); }
+.overview-card.warning-card { border-left-color: var(--red); }
+
+.ov-day {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.1rem;
+}
+
+.ov-city {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 0.15rem;
+}
+
+.ov-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.ov-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+/* ─── INFO CARDS ─── */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 12px;
+  padding: 1.3rem 1.4rem;
+}
+
+.info-card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.info-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+}
+
+.info-card-body {
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.info-card-body strong { color: var(--forest); font-weight: 600; }
+.info-card-body a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(45,106,94,0.3); }
+.info-card-body a:hover { border-bottom-color: var(--teal); }
+
+/* ─── STATUS BADGE ─── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.status-open { background: rgba(132,169,123,0.15); color: #3d6e35; border: 1px solid rgba(132,169,123,0.3); }
+.status-check { background: rgba(200,151,58,0.12); color: #8a5e1a; border: 1px solid rgba(200,151,58,0.3); }
+.status-closed { background: rgba(184,80,66,0.1); color: #8a2a1a; border: 1px solid rgba(184,80,66,0.25); }
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ─── CHECKLIST ─── */
+.checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--forest);
+}
+
+.checklist li .priority {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  margin-top: 1px;
+}
+
+.p-critical { background: rgba(184,80,66,0.12); color: var(--red); }
+.p-high { background: rgba(200,151,58,0.12); color: #8a5e10; }
+.p-med { background: rgba(45,106,94,0.12); color: var(--teal); }
+.p-info { background: rgba(132,169,123,0.12); color: #3d6e35; }
+
+.checklist li a {
+  color: var(--teal);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(45,106,94,0.4);
+}
+
+.checklist li a:hover { border-bottom-style: solid; }
+
+/* ─── CABLE CAR STATUS ─── */
+.cable-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--cream-dark);
+  margin-bottom: 1.5rem;
+}
+
+.cable-table th {
+  background: var(--forest);
+  color: var(--cream);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+.cable-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.87rem;
+  border-bottom: 1px solid var(--cream-dark);
+  vertical-align: middle;
+}
+
+.cable-table tr:last-child td { border-bottom: none; }
+.cable-table tr:hover td { background: var(--cream); }
+
+.cable-table td:first-child { font-weight: 600; color: var(--forest); }
+
+/* ─── DIVIDER ─── */
+.divider {
+  max-width: 1100px;
+  margin: 0 auto 0;
+  padding: 0 1.5rem;
+  height: 1px;
+  background: var(--cream-dark);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--forest);
+  color: #6a8a68;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  font-size: 0.82rem;
+  margin-top: 5rem;
+}
+
+footer strong { color: var(--gold-light); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 600px) {
+  .section-header { flex-wrap: wrap; gap: 0.3rem; }
+  .section-date { margin-left: 0; }
+  .spot-detail-grid { grid-template-columns: 1fr; }
+  .overview-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── ANIMATIONS ─── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-in.visible { opacity: 1; transform: none; }
+
+/* ─── PHOTO GALLERY ─── */
+.photo-strip-wrap {
+  margin: 0.5rem 1.1rem 0;
+}
+.photo-strip-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.photo-strip {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cream-dark) transparent;
+  padding-bottom: 3px;
+}
+.photo-strip::-webkit-scrollbar { height: 3px; }
+.photo-strip::-webkit-scrollbar-thumb { background: var(--cream-dark); border-radius: 2px; }
+.photo-thumb {
+  flex-shrink: 0;
+  width: 120px;
+  height: 82px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--cream-dark);
+  cursor: pointer;
+  transition: transform 0.15s;
+  display: block;
+}
+.photo-thumb:hover { transform: scale(1.05); }
+.photo-skeleton {
+  flex-shrink: 0;
+  width: 120px;
+  height: 82px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--cream-dark) 25%, var(--cream) 50%, var(--cream-dark) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.3s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+/* Lightbox */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#lightbox.open { display: flex; }
+#lb-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+#lb-caption {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.8rem;
+  margin-top: 0.75rem;
+  text-align: center;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+.lb-close {
+  position: absolute;
+  top: 1rem; right: 1.5rem;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  line-height: 1;
+}
+.lb-close:hover { opacity: 1; }
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: white;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+.lb-nav:hover { opacity: 1; background: rgba(255,255,255,0.2); }
+#lb-prev { left: 1rem; }
+#lb-next { right: 1rem; }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Italy · October 2026 · 7 คน</p>
+    <h1 class="hero-title"><em>อิตาลี</em><br>เหนือ</h1>
+    <p class="hero-sub">9 วัน เที่ยวแบบ deep — เช่ารถ ขับเอง เดินเอง ไม่รีบ<br>Milan → Verona → Lake Garda → Dolomites → Venice → Cinque Terre</p>
+    <div class="hero-pills">
+      <span class="pill pill-gold">17–26 ตุลาคม 2026</span>
+      <span class="pill pill-teal">9 วัน</span>
+      <span class="pill pill-teal">7 คน</span>
+      <span class="pill pill-sage">เช่ารถ + รถไฟ</span>
+    </div>
+    <div class="route-flow">
+      <span class="route-stop">Milan</span><span class="route-arrow">→</span>
+      <span class="route-stop">Verona</span><span class="route-arrow">→</span>
+      <span class="route-stop">Lake Garda</span><span class="route-arrow">→</span>
+      <span class="route-stop">Dolomites</span><span class="route-arrow">→</span>
+      <span class="route-stop">Venice</span><span class="route-arrow">→</span>
+      <span class="route-stop">Cinque Terre</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- NAV -->
+<div id="lightbox" onclick="if(event.target===this)lbClose()">
+  <button class="lb-close" onclick="lbClose()">✕</button>
+  <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <p id="lb-caption"></p>
+  <button class="lb-nav" id="lb-next" onclick="lbNav(1)">›</button>
+</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="scrollTo('overview')">ภาพรวม</button>
+    <button class="nav-btn" onclick="scrollTo('alerts')">⚠ แจ้งเตือน</button>
+    <button class="nav-btn" onclick="scrollTo('day1')">Day 1 · Milan</button>
+    <button class="nav-btn" onclick="scrollTo('day2')">Day 2 · Verona</button>
+    <button class="nav-btn" onclick="scrollTo('day3')">Day 3 · Dolomites</button>
+    <button class="nav-btn" onclick="scrollTo('day4')">Day 4 · WOW</button>
+    <button class="nav-btn" onclick="scrollTo('day5')">Day 5 · Venice</button>
+    <button class="nav-btn" onclick="scrollTo('day6')">Day 6 · Venice</button>
+    <button class="nav-btn" onclick="scrollTo('day7')">Day 7 · La Spezia</button>
+    <button class="nav-btn" onclick="scrollTo('day8')">Day 8 · Cinque Terre</button>
+    <button class="nav-btn" onclick="scrollTo('day9')">Day 9 · กลับ</button>
+    <button class="nav-btn" onclick="scrollTo('checklist')">Checklist</button>
+  </div>
+</nav>
+
+<!-- OVERVIEW -->
+<div id="overview" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Overview</span>
+    <h2 class="section-title">ภาพรวม 9 วัน</h2>
+  </div>
+  <div class="overview-grid">
+    <a class="overview-card" href="#day1">
+      <div class="ov-icon">🏙️</div>
+      <div>
+        <div class="ov-day">Day 1 · 18 Oct 2026</div>
+        <div class="ov-city">Milan</div>
+        <div class="ov-note">ถึง — พักฟื้น Jet lag</div>
+      </div>
+    </a>
+    <a class="overview-card" href="#day2">
+      <div class="ov-icon">🌹</div>
+      <div>
+        <div class="ov-day">Day 2 · 19 Oct 2026</div>
+        <div class="ov-city">Verona → Sirmione</div>
+        <div class="ov-note">Romeo & Juliet → Lake Garda</div>
+      </div>
+    </a>
+    <a class="overview-card" href="#day3">
+      <div class="ov-icon">🚗</div>
+      <div>
+        <div class="ov-day">Day 3 · 20 Oct 2026</div>
+        <div class="ov-city">Dolomites (เดินทาง)</div>
+        <div class="ov-note">Lake Garda → Ortisei</div>
+      </div>
+    </a>
+    <a class="overview-card highlight" href="#day4">
+      <div class="ov-icon">⭐</div>
+      <div>
+        <div class="ov-day">Day 4 · 21 Oct 2026</div>
+        <div class="ov-city">Dolomites เต็มวัน</div>
+        <div class="ov-note">★ WOW Day — Highlight ของทริป</div>
+      </div>
+    </a>
+    <a class="overview-card warning-card" href="#day5">
+      <div class="ov-icon">⛵</div>
+      <div>
+        <div class="ov-day">Day 5 · 22 Oct 2026</div>
+        <div class="ov-city">Venice</div>
+        <div class="ov-note">คืนรถ Mestre → Water Bus เข้า</div>
+      </div>
+    </a>
+    <a class="overview-card highlight" href="#day6">
+      <div class="ov-icon">⭐</div>
+      <div>
+        <div class="ov-day">Day 6 · 23 Oct 2026</div>
+        <div class="ov-city">Venice เต็มวัน</div>
+        <div class="ov-note">★ เดินหลง ค้นพบ ไม่ต้องรีบ</div>
+      </div>
+    </a>
+    <a class="overview-card" href="#day7">
+      <div class="ov-icon">🚂</div>
+      <div>
+        <div class="ov-day">Day 7 · 24 Oct 2026</div>
+        <div class="ov-city">La Spezia</div>
+        <div class="ov-note">Venice → รถไฟ ~3.5 ชม.</div>
+      </div>
+    </a>
+    <a class="overview-card highlight" href="#day8">
+      <div class="ov-icon">⭐</div>
+      <div>
+        <div class="ov-day">Day 8 · 25 Oct 2026</div>
+        <div class="ov-city">Cinque Terre เต็มวัน</div>
+        <div class="ov-note">★ 3 หมู่บ้านที่ดีที่สุด</div>
+      </div>
+    </a>
+    <a class="overview-card" href="#day9">
+      <div class="ov-icon">✈️</div>
+      <div>
+        <div class="ov-day">Day 9 · 26 Oct 2026</div>
+        <div class="ov-city">กลับบ้าน</div>
+        <div class="ov-note">La Spezia → Milan → บิน</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ALERTS -->
+<div id="alerts" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">⚠ Live Info</span>
+    <h2 class="section-title">ข้อมูลสำคัญ + สถานะล่าสุด</h2>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.2rem;">ข้อมูลจากการค้นหาล่าสุด — <strong>ต้องเช็กอีกครั้งก่อนออกเดินทาง</strong></p>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.8rem;color:var(--forest);">สถานะ Cable Car — Dolomites</h3>
+  <table class="cable-table">
+    <thead>
+      <tr>
+        <th>Cable Car</th>
+        <th>สถานะ (Summer 2026)</th>
+        <th>วันปิด</th>
+        <th>จอง</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Seceda (Ortisei)</td>
+        <td>
+          <span class="status-badge status-closed">
+            <span class="status-dot"></span>
+            ⚠ น่าจะปิดก่อนทริป
+          </span>
+        </td>
+        <td style="font-size:0.82rem;color:var(--muted);">Gardena Card หมด 11 ต.ค. — เช็ก autumn dates ที่ seceda.it</td>
+        <td><a href="https://www.seceda.it/en/tickets" target="_blank" style="font-size:0.82rem;color:var(--teal);">seceda.it →</a></td>
+      </tr>
+      <tr>
+        <td>Alpe di Siusi (Seiser Alm)</td>
+        <td>
+          <span class="status-badge status-open">
+            <span class="status-dot"></span>
+            เปิดถึง 2 Nov 2026 ✓ (ยืนยันทางการ)
+          </span>
+        </td>
+        <td style="font-size:0.82rem;color:var(--muted);">ปิดช่วง Nov–ต้น Dec (off-season)</td>
+        <td><a href="https://www.seiser-alm.it/en" target="_blank" style="font-size:0.82rem;color:var(--teal);">seiser-alm.it →</a></td>
+      </tr>
+      <tr>
+        <td>Val Gardena lifts (ทั่วไป)</td>
+        <td>
+          <span class="status-badge status-check">
+            <span class="status-dot"></span>
+            บางเส้นปิด between seasons
+          </span>
+        </td>
+        <td style="font-size:0.82rem;color:var(--muted);">เช็ก val-gardena.com</td>
+        <td><a href="https://www.val-gardena.com/en/summer/mobility/lifts-cable-cars/" target="_blank" style="font-size:0.82rem;color:var(--teal);">val-gardena.com →</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warning warning-red" style="margin-bottom:1.5rem;">
+    <span>🚨</span>
+    <div>
+      <strong>⚠ อัปเดต 2026 สำคัญ:</strong> Gardena Card ปี 2026 ใช้ได้ถึง <strong>11 ต.ค. 2026</strong> เท่านั้น — น่าจะปิด Summer season ก่อนทริปเรา (17 ต.ค.) ต้อง <strong>เช็ก seceda.it</strong> ว่ามี Autumn extension ไหม ถ้าปิด → pivot ไป Val di Funes / Santa Maddalena / Lago di Braies แทน (สวยมากอยู่!)
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin:1.5rem 0 0.8rem;color:var(--forest);">สถานะ Sentiero Azzurro — Cinque Terre</h3>
+  <table class="cable-table">
+    <thead>
+      <tr>
+        <th>เส้นทาง</th>
+        <th>สถานะ</th>
+        <th>หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Via dell'Amore (Riomaggiore–Manarola)</td>
+        <td><span class="status-badge status-open"><span class="status-dot"></span>เปิดแล้ว</span></td>
+        <td style="font-size:0.82rem;color:var(--muted);">เปิดตั้งแต่ Aug 2024 — ต้องจองล่วงหน้า max 100 คน/15 นาที</td>
+      </tr>
+      <tr>
+        <td>Manarola–Corniglia</td>
+        <td><span class="status-badge status-closed"><span class="status-dot"></span>ปิดระยะยาว</span></td>
+        <td style="font-size:0.82rem;color:var(--muted);">Landslide — ไม่มีกำหนดเปิด</td>
+      </tr>
+      <tr>
+        <td>Corniglia–Vernazza</td>
+        <td><span class="status-badge status-open"><span class="status-dot"></span>เปิด</span></td>
+        <td style="font-size:0.82rem;color:var(--muted);">Open ปกติ</td>
+      </tr>
+      <tr>
+        <td>Vernazza–Monterosso</td>
+        <td><span class="status-badge status-open"><span class="status-dot"></span>เปิด</span></td>
+        <td style="font-size:0.82rem;color:var(--muted);">One-way (Monterosso→Vernazza) ช่วง 9:00–14:00</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem;">
+    เช็กสถานะ real-time: <a href="https://www.parconazionale5terre.it" target="_blank" style="color:var(--teal);">parconazionale5terre.it</a> · ซื้อ card: <a href="https://card.parconazionale5terre.it" target="_blank" style="color:var(--teal);">card.parconazionale5terre.it</a>
+  </p>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin:1.5rem 0 0.8rem;color:var(--forest);">Links จอง — ต้องทำก่อนออกเดินทาง</h3>
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="info-card-icon">⛪</div>
+      <div class="info-card-title">Basilica di San Marco, Venice</div>
+      <div class="info-card-body">จองเวลาเข้าฟรีล่วงหน้าออนไลน์ ไม่งั้นรอนาน 45–90 นาที<br><br><a href="https://www.basilicasanmarco.it" target="_blank">basilicasanmarco.it →</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🏛️</div>
+      <div class="info-card-title">Doge's Palace (Palazzo Ducale), Venice</div>
+      <div class="info-card-body">จองออนไลน์ข้ามคิวได้เลย ราคา <strong>~€30</strong> รวม San Marco Museum<br><br><a href="https://palazzoducale.visitmuve.it" target="_blank">palazzoducale.visitmuve.it →</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🚞</div>
+      <div class="info-card-title">รถไฟ Trenitalia / Italo</div>
+      <div class="info-card-body">Venice → La Spezia และ La Spezia → Milan จอง <strong>2–4 สัปดาห์ล่วงหน้า</strong> ราคาถูกกว่ามาก<br><br><a href="https://www.trenitalia.com" target="_blank">trenitalia.com →</a> · <a href="https://www.italotreno.it" target="_blank">italotreno.it →</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🚡</div>
+      <div class="info-card-title">Seceda Cable Car, Dolomites</div>
+      <div class="info-card-body">ปี 2026: ต้องจอง time slot ออนไลน์ (2/3 จองล่วงหน้า / 1/3 walk-up) · <strong>Gardena Card หมด 11 ต.ค.</strong> — เช็กว่า Seceda ยังเปิดอยู่ไหม 17–21 ต.ค.<br><br><a href="https://www.seceda.it/en/tickets" target="_blank">seceda.it/tickets →</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">💕</div>
+      <div class="info-card-title">Via dell'Amore, Cinque Terre</div>
+      <div class="info-card-body">จำกัด 100 คน/15 นาที — ต้องจองออนไลน์เท่านั้น ซื้อที่หน้างานไม่ได้<br><br><a href="https://www.viadellamore.info" target="_blank">viadellamore.info →</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🚌</div>
+      <div class="info-card-title">Vaporetto Pass, Venice</div>
+      <div class="info-card-body">ซื้อ 24h/48h/72h pass ที่ <strong>ACTV</strong> ราคา ~€25/คน/วัน คุ้มกว่าซื้อ single ticket มาก<br><br><a href="https://www.actv.it" target="_blank">actv.it →</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 1 -->
+<div id="day1" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 1</span>
+    <h2 class="section-title">Milan — ลงจอด พักฟื้น</h2>
+    <span class="section-date">18 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">Jet lag day · เดินเบาๆ อย่าจัดแน่น · พัก 1 คืน</p>
+  <div class="spots-grid" id="spots-day1"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 2 -->
+<div id="day2" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 2</span>
+    <h2 class="section-title">Verona → Sirmione</h2>
+    <span class="section-date">19 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">Romeo & Juliet ก่อนเที่ยง · Lake Garda ตอนเย็น</p>
+  <div class="warning">
+    <span>⏰</span>
+    <div>Verona แค่ครึ่งวันพอ — ต้องถึง Sirmione <strong>ก่อนพระอาทิตย์ตก</strong> เพราะ Sirmione ตอนเย็น romantic มากและคนน้อยลงเยอะ บรรยากาศต่างกันมาก</div>
+  </div>
+  <div class="spots-grid" id="spots-day2"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 3 -->
+<div id="day3" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 3</span>
+    <h2 class="section-title">Lake Garda → Ortisei</h2>
+    <span class="section-date">20 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">วันเดินทาง — ออกเช้า ไปให้ถึง Dolomites ช่วงบ่าย</p>
+  <div class="warning warning-red">
+    <span>🚨</span>
+    <div><strong>เส้นทาง 3–3.5 ชั่วโมง</strong> อย่าแวะเยอะ และ <strong>เช็ก cable car dates ก่อนเดินทาง</strong> — ปลาย ต.ค. บาง cable car เข้าสู่ช่วง maintenance "between seasons" แล้ว ถ้าปิด ให้ pivot ไป Val di Funes / Lago di Braies แทน</div>
+  </div>
+  <div class="spots-grid" id="spots-day3"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 4 -->
+<div id="day4" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 4 ★ WOW</span>
+    <h2 class="section-title">Dolomites เต็มวัน</h2>
+    <span class="section-date">21 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">Highlight ของทริป — ใช้ทุกชั่วโมงให้คุ้ม</p>
+  <div class="warning warning-red">
+    <span>🚨</span>
+    <div>เช็ก <strong>Seceda / Alpe di Siusi / Sassolungo</strong> ก่อนวางแผนวันนี้ — ถ้าปิด ให้ pivot ทั้งวันไป Val di Funes + Santa Maddalena + Lago di Braies + Passo Gardena ยังสวยมากอยู่</div>
+  </div>
+  <div class="spots-grid" id="spots-day4"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 5 -->
+<div id="day5" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 5</span>
+    <h2 class="section-title">Dolomites → Venice</h2>
+    <span class="section-date">22 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">คืนรถที่ Mestre · เข้า Venice ด้วย Vaporetto</p>
+  <div class="warning warning-red">
+    <span>⛔</span>
+    <div><strong>ห้ามขับรถเข้า Venice Island เด็ดขาด</strong> — คืนรถที่ Mestre (หรือ Venice Airport) แล้วนั่ง Vaporetto Line 1 หรือ 2 เข้าเกาะ ค่าที่จอดรถใน Venice แพงมากและไม่จำเป็นเลย</div>
+  </div>
+  <div class="spots-grid" id="spots-day5"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 6 -->
+<div id="day6" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 6 ★</span>
+    <h2 class="section-title">Venice เต็มวัน</h2>
+    <span class="section-date">23 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">เดินหลง ค้นพบ — ไม่มีแผนตายตัว</p>
+  <div class="spots-grid" id="spots-day6"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 7 -->
+<div id="day7" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 7</span>
+    <h2 class="section-title">Venice → La Spezia</h2>
+    <span class="section-date">24 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">รถไฟ ~3.5 ชั่วโมง ผ่าน Bologna</p>
+  <div class="warning">
+    <span>🎟️</span>
+    <div>จองตั๋ว <strong>Trenitalia Frecciarossa</strong> ล่วงหน้า 2–4 สัปดาห์ ราคาถูกกว่ามาก ตั๋ว last-minute แพงขึ้น 3–5x · จาก Venezia Santa Lucia → La Spezia Centrale</div>
+  </div>
+  <div class="spots-grid" id="spots-day7"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 8 -->
+<div id="day8" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 8 ★</span>
+    <h2 class="section-title">Cinque Terre เต็มวัน</h2>
+    <span class="section-date">25 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">เลือก 3 หมู่บ้านพอ · Vernazza · Manarola · Riomaggiore</p>
+  <div class="warning warning-red">
+    <span>⚠️</span>
+    <div>อย่าพยายามเก็บครบ 5 หมู่บ้านในวันเดียว — <strong>เลือก 3</strong> แล้วใช้เวลาช้าๆ จะสวยกว่า และ Manarola–Corniglia trail ยัง<strong>ปิดระยะยาว</strong> (landslide) ใช้รถไฟแทน</div>
+  </div>
+  <div class="spots-grid" id="spots-day8"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAY 9 -->
+<div id="day9" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Day 9</span>
+    <h2 class="section-title">La Spezia → Milan → กลับบ้าน</h2>
+    <span class="section-date">26 ตุลาคม 2026</span>
+  </div>
+  <p class="section-subtitle">รถไฟเช้า · แวะ Milan · บิน</p>
+  <div class="warning warning-red">
+    <span>⏱️</span>
+    <div>La Spezia → Milan ใช้เวลา <strong>2.5–3 ชั่วโมง</strong> · เผื่อเวลา check-in <strong>2.5–3 ชั่วโมง</strong>ก่อนบิน · Milan มีสองสนามบิน: <strong>Malpensa (MXP)</strong> 45–60 นาทีจาก Centrale และ <strong>Linate (LIN)</strong> 20 นาที</div>
+  </div>
+  <div class="spots-grid" id="spots-day9"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CHECKLIST -->
+<div id="checklist" class="section fade-in">
+  <div class="section-header">
+    <span class="section-day">Pre-Trip</span>
+    <h2 class="section-title">Checklist ก่อนออกเดินทาง</h2>
+  </div>
+  <p class="section-subtitle" style="margin-bottom:1.5rem;">ทำทั้งหมดนี้<strong>ก่อนจองโรงแรม</strong> — โดยเฉพาะข้อ 1</p>
+  <ul class="checklist">
+    <li>
+      <span class="priority p-critical">Critical</span>
+      <span>เช็ก <strong>Seceda / Alpe di Siusi / Sassolungo cable car dates</strong> ปลาย ต.ค. — <a href="https://www.seceda.it/en" target="_blank">seceda.it</a> · <a href="https://www.seiser-alm.it/en" target="_blank">seiser-alm.it</a> · <a href="https://www.val-gardena.com/en/summer/mobility/lifts-cable-cars/" target="_blank">val-gardena.com</a></span>
+    </li>
+    <li>
+      <span class="priority p-high">High</span>
+      <span>จอง <strong>Basilica San Marco</strong> เช้า (ฟรี!) — <a href="https://www.basilicasanmarco.it" target="_blank">basilicasanmarco.it</a> — ไม่งั้นรอ 90 นาที</span>
+    </li>
+    <li>
+      <span class="priority p-high">High</span>
+      <span>จอง <strong>Doge's Palace</strong> ออนไลน์ ข้ามคิวได้เลย ~€30 — <a href="https://palazzoducale.visitmuve.it" target="_blank">palazzoducale.visitmuve.it</a></span>
+    </li>
+    <li>
+      <span class="priority p-high">High</span>
+      <span>จองตั๋วรถไฟ <strong>Venice → La Spezia</strong> และ <strong>La Spezia → Milan</strong> ล่วงหน้า — <a href="https://www.trenitalia.com" target="_blank">trenitalia.com</a></span>
+    </li>
+    <li>
+      <span class="priority p-med">Med</span>
+      <span>เช่ารถ <strong>Milan → Mestre</strong> (คืนรถก่อนเข้า Venice!) ตรวจสอบว่ารวม insurance และไม่มี hidden fee</span>
+    </li>
+    <li>
+      <span class="priority p-med">Med</span>
+      <span>จอง <strong>Via dell'Amore</strong> Cinque Terre ล่วงหน้า max 100 คน/15 นาที — <a href="https://www.viadellamore.info" target="_blank">viadellamore.info</a></span>
+    </li>
+    <li>
+      <span class="priority p-med">Med</span>
+      <span>เช็กสถานะ <strong>Sentiero Azzurro</strong> ก่อนไป Cinque Terre — <a href="https://www.parconazionale5terre.it" target="_blank">parconazionale5terre.it</a></span>
+    </li>
+    <li>
+      <span class="priority p-med">Med</span>
+      <span>ซื้อ <strong>Vaporetto pass</strong> Venice ที่ ACTV 24h ~€25/คน — คุ้มกว่า single ticket ถ้าใช้มากกว่า 3 เที่ยว</span>
+    </li>
+    <li>
+      <span class="priority p-info">Info</span>
+      <span>เช็ก <strong>sunset time ปลาย ต.ค.</strong> สำหรับ Enrosadira (Dolomites) — ประมาณ 18:00–18:15 ตาม <a href="https://www.timeanddate.com/sun/italy/ortisei" target="_blank">timeanddate.com</a></span>
+    </li>
+    <li>
+      <span class="priority p-info">Info</span>
+      <span>เช็ก <strong>อากาศ Dolomites ปลาย ต.ค.</strong> — อาจมีหิมะแรกบนยอดเขา ต้องเตรียมเสื้อกันหนาวและรองเท้าที่เหมาะสม</span>
+    </li>
+  </ul>
+</div>
+
+<footer>
+  <p style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#7ecfbf;margin-bottom:0.8rem;">Buon Viaggio! 🇮🇹</p>
+  <p>Milan · Verona · Lake Garda · Dolomites · Venice · Cinque Terre</p>
+  <p style="margin-top:0.5rem;">17–26 ตุลาคม 2026 · 9 วัน · 7 คน</p>
+  <p style="margin-top:1.2rem;font-size:0.72rem;color:#3d5a3b;">ข้อมูลจากการค้นหาล่าสุด — กรุณาตรวจสอบก่อนเดินทางทุกครั้ง</p>
+</footer>
+
+<script>
+const data = {
+  day1: [
+    { name:"Piazza del Duomo", tagline:"จัตุรัสกลางเมือง + วิหารโกธิก 600 ปี", time:"09:00–11:00", why:"วิหาร Gothic ที่ใช้เวลาสร้างกว่า 600 ปี ใหญ่ที่สุดในอิตาลี Facade อลังมาก ตอนเช้าแสงสวยและคนยังไม่แน่น", mustgo:"Landmark ที่ต้องเห็น ถ่ายรูปตอนเช้าได้สวยที่สุด ฟ้าใสก่อนนักท่องเที่ยวมา", besttime:"08:30–10:00", duration:"1.5–2 ชั่วโมง", cost:"ฟรี (ดาดฟ้า ~€15)", tip:"ขึ้นดาดฟ้าต้องจองล่วงหน้า แต่ถ้า jet lag อยู่ แค่เดินข้างล่างก็ wow แล้ว" },
+    { name:"Galleria Vittorio Emanuele II", tagline:"Shopping arcade สวยเหมือนพระราชวัง 1877", time:"11:00–12:00", why:"อาคาร Victorian arcade ปี 1877 ข้างในมีแบรนด์ luxury โมเสคพื้นงดงาม และ glass ceiling สวยมาก", mustgo:"ติดกับ Duomo เดินได้เลย ฟรีถ้าไม่ช้อป ถ่ายรูปสวยมาก", besttime:"ช่วงสาย 10:30–12:00", duration:"30–45 นาที", cost:"ฟรี", tip:"เดิน Spin รองเท้าบนโมเสครูปวัวเพื่อโชค — เป็น tradition ของ Milan" },
+    { name:"Castello Sforzesco", tagline:"ปราสาทยุคกลาง + สวนร่มรื่นด้านหลัง", time:"13:00–14:30", why:"ปราสาทอายุ 600+ ปี มี courtyard ขนาดใหญ่ และ museum ด้านใน บรรยากาศร่มรื่น เหมาะพักฟื้น jet lag", mustgo:"ถ้าอยากพักฟื้นใน outdoor ที่โล่งและสวย Castello + Parco Sempione คือคำตอบ", besttime:"บ่าย 13:00–15:00", duration:"1–2 ชั่วโมง", cost:"เข้า courtyard ฟรี / museum ~€5", tip:"Parco Sempione ด้านหลังปราสาทมีสนามหญ้า ทะเลสาบเล็กๆ นั่งชิลได้นาน" },
+    { name:"Brera District", tagline:"ย่านโบฮีเมียน ศิลปะ — Milan จริงๆ", time:"15:00–17:30", why:"ย่าน bohemian เต็มไปด้วย art gallery ร้านกาแฟ vintage shop และ Pinacoteca di Brera หอศิลป์ระดับโลก", mustgo:"ถ้าอยากเห็น Milan จริงๆ ไม่ใช่แค่ tourist zone — Brera คือคำตอบ local vibe จัดมาก", besttime:"บ่าย 14:00–17:00", duration:"2 ชั่วโมง", cost:"เดินฟรี / พิพิธภัณฑ์ ~€15", tip:"แค่เดินในย่านก็สวยมาก ไม่ต้องเข้าพิพิธภัณฑ์ก็ได้" },
+    { name:"Navigli — คลองเก่า Milan", tagline:"Aperitivo ยามเย็น — vibe local สุดๆ", time:"18:00–21:00", why:"ย่านคลองที่ตอนเย็นกลายเป็น bar scene เต็มรูปแบบ ร้านอาหาร aperitivo มีทุกแบบ บรรยากาศ local มาก", mustgo:"Aperitivo ของ Milan คือ culture ที่ต้องลอง — จ่าย Spritz แล้วได้กินของว่างฟรี เป็น ritual ของ Milanese", besttime:"18:00–20:00 ก่อน sunset และช่วง golden hour", duration:"2–3 ชั่วโมง", cost:"Aperitivo ~€8–12/คน", tip:"ร้านที่ดี: El Brellin หรือ Upcycle แนะนำ" },
+  ],
+  day2: [
+    { name:"Arena di Verona", tagline:"Amphitheater โรมัน 2,000 ปี — ยังใช้งานอยู่", time:"10:00–11:00", why:"โรงละครกลางแจ้งโรมันที่ยังสมบูรณ์ที่สุดในโลก จุ 30,000 คน ยังจัด opera concert อยู่ทุกปี", mustgo:"ดูจากข้างนอกก็ wow มาก เข้าข้างในเห็น scale จริงๆ", besttime:"เช้า 9:30–11:00 คนน้อย", duration:"45 นาที–1 ชั่วโมง", cost:"เข้าข้างใน ~€10 / ข้างนอกฟรี", tip:"เปิด 8:30 ไปเช้าคนน้อย — หลังจากนั้น tour groups เต็มไปหมด" },
+    { name:"Casa di Giulietta", tagline:"ระเบียงที่ Romeo ยืนกู่ — สัญลักษณ์รักโลก", time:"11:00–11:45", why:"ระเบียงที่เชื่อกันว่าเป็นฉากใน Romeo & Juliet ของ Shakespeare กำแพงด้านล่างเต็มกุญแจและจดหมายรัก", mustgo:"ถ้าไป Verona ไม่แวะนี่ เพื่อนจะหาว่าพลาด — ใช้เวลาแค่ 30 นาที", besttime:"ช่วงสาย หลัง Arena", duration:"30 นาที", cost:"ลานฟรี / ขึ้นระเบียง €6", tip:"ระวังกระเป๋าในฝูงชน แต่ก็สนุกดี" },
+    { name:"Piazza delle Erbe", tagline:"จัตุรัสตลาดยุคกลาง — ใจกลาง Verona เก่า", time:"11:45–12:30", why:"จัตุรัสเก่าแก่ที่มีตลาดสด อาคารยุคกลางจิตรกรรมฝาผนัง และน้ำพุ ล้อมด้วยร้านกาแฟ", mustgo:"ติดกับ Casa di Giulietta เดินได้เลย เป็น heart ของ Verona เก่า", besttime:"ช่วงสาย 11:30–13:00", duration:"30–45 นาที", cost:"ฟรี", tip:"กิน Gelato ก่อนออกเดินทางต่อ แนะนำ Gelateria Ponte Pietra" },
+    { name:"Scaliger Tombs (Arche Scaligere)", tagline:"สุสาน Gothic ศตวรรษ 14 — hidden gem", time:"ระหว่างเดินใน old town", why:"สุสานตระกูล Scaligeri ปกครอง Verona ศตวรรษ 14 สไตล์ Gothic ornate มาก เป็น hidden gem ที่คนเดินผ่านโดยไม่รู้", mustgo:"อยู่ใจกลาง old town ผ่านไปได้เลย ใช้เวลาแค่ 15 นาที", besttime:"ระหว่างเดิน old town", duration:"15–20 นาที", cost:"ดูจากนอกฟรี / เข้าใน €4", tip:"ไม่ต้องเข้า ดูจากรั้วก็สวยมากแล้ว" },
+    { name:"Sirmione — ปราสาท Scaligero", tagline:"เมืองบนคาบสมุทร กลาง Lake Garda", time:"15:30–sunset", why:"เมืองเล็กบนคาบสมุทรแคบๆ กลาง Lake Garda มีปราสาท medieval ล้อมด้วยน้ำ ตอนเย็น golden hour สวยมาก", mustgo:"นี่คือ highlight ของวัน — Sirmione ตอน golden hour ทอแสงทองลงน้ำ สวยมากจริงๆ", besttime:"15:30 เป็นต้นไป จนพระอาทิตย์ตก", duration:"2–3 ชั่วโมง", cost:"เข้าปราสาท €6", tip:"ศูนย์เมืองห้ามรถ — จอด parking นอกเมืองแล้วเดินเข้า ระยะแค่ 5 นาที" },
+  ],
+  day3: [
+    { name:"Seceda Cable Car — ถ้าเปิด", tagline:"วิวที่สวยที่สุดของ Dolomites 2,500 ม.", time:"14:00–17:00", why:"กระเช้าขึ้นบน ridge สูง 2,500 ม. วิว Geisler peaks ฉากหน้าหญ้าเขียว ฉากหลังหินเหลือง เป็นภาพ Instagram ทุกคน", mustgo:"ถ้าเปิด — นี่คือ must do อันดับ 1 ของทริป เช็กก่อน seceda.it", besttime:"บ่าย 13:00–16:00 แสงดีสุด", duration:"2.5–3 ชั่วโมง", cost:"กระเช้า ~€35–40/คน", tip:"ปี 2026 ต้องจอง time slot ออนไลน์! บันทึกค่าตั๋ว 5% และข้ามคิวได้เลย → seceda.it" },
+    { name:"Val di Funes — โบสถ์กลางทุ่ง", tagline:"หุบเขา + โบสถ์ที่สวยที่สุดในโลก", time:"14:30–17:30", why:"หุบเขาเล็กที่มีโบสถ์ St. Johann in Ranui กลางทุ่งหญ้า ฉากหลังเป็นหิน Odle peaks สีเหลืองส้ม เป็นภาพ Dolomites คลาสสิกที่สุด", mustgo:"ไม่ต้องกระเช้า ไม่ต้องปีน แค่ขับรถและเดินเล็กน้อย วิวระดับ 10/10 ทุกฤดู", besttime:"บ่าย–เย็น แสงตกลงหิน", duration:"2 ชั่วโมง", cost:"ฟรี (ที่จอดรถ ~€3–5)", tip:"Parking เต็มเร็ว ไปก่อน 14:00 หรือหลัง 16:00" },
+    { name:"Lago di Braies (Pragser Wildsee)", tagline:"ทะเลสาบมรกตใน Alps — fairy tale จริงๆ", time:"แวะระหว่างทาง", why:"ทะเลสาบสีเขียวมรกตล้อมรอบด้วยหินปูน น้ำใสมาก มีเรือไม้ classic ให้เช่าพาย บรรยากาศ fairy tale", mustgo:"ถ้าเส้นทางผ่าน แวะ 1 ชั่วโมงก็คุ้มมาก", besttime:"เช้าตรู่ 7–9 น. คนน้อยสุด หรือเย็น", duration:"1–1.5 ชั่วโมง", cost:"ที่จอด ~€8 / เรือพาย ~€15/ชม.", tip:"เช้า 7–9 น. สวยและคนน้อยมาก ตอนกลางวันคนแน่นมาก" },
+    { name:"Santa Maddalena Village", tagline:"หมู่บ้านที่ปรากฏในหนังสือ Dolomites ทุกเล่ม", time:"เย็น", why:"หมู่บ้านเล็กในหุบเขา Val di Funes มีโบสถ์สีขาวกลางทุ่งหญ้าเขียว ฉากหลัง Geisler — ภาพโปสการ์ด Dolomites ที่โด่งดังที่สุด", mustgo:"ถ้าเวลาพอ แวะก่อนเข้า Ortisei บรรยากาศงดงามมาก", besttime:"ช่วงเย็น แสงทอง", duration:"30–45 นาที", cost:"ฟรี", tip:"Viewpoint หลักอยู่บนเนิน ขับขึ้นไปได้ มองลงมาที่หมู่บ้านและวัด" },
+    { name:"Ortisei — เดินเย็น", tagline:"หมู่บ้าน Ladin น่ารักกลาง Dolomites", time:"18:00–19:30", why:"หมู่บ้านสไตล์ Alpine เป็น base สำหรับ Dolomites ร้านอาหาร ร้านกาแฟ และ vibe ชิลมาก ซื้อของที่ระลึก local ได้", mustgo:"หาร้านอาหารคืนนี้และ recharge พลังสำหรับพรุ่งนี้", besttime:"เย็น 18:00–20:00", duration:"1–1.5 ชั่วโมง", cost:"ฟรี", tip:"ลองกิน Speck (เนื้อรมควัน local) กับ Canederli (Dumpling) อาหาร Ladin authentic" },
+  ],
+  day4: [
+    { name:"Alpe di Siusi (Seiser Alm)", tagline:"ทุ่งหญ้า Alpine ที่ใหญ่ที่สุดใน Europe — 56 ตร.กม.", time:"09:00–12:00", why:"ทุ่งหญ้า Alpine ที่ใหญ่ที่สุดในยุโรป มองเห็น Sassolungo และ Plattkofel ฉากหลัง ทั้ง scale และวิวทำให้ปากอ้าค้าง", mustgo:"เปิดถึง 2 Nov 2026 (ยืนยันจากเว็บทางการ seiser-alm.it) — ไปได้ปกติ!", besttime:"เช้า 8:30–11:00 ก่อนเมฆขึ้น", duration:"2.5–3 ชั่วโมง", cost:"Cable car ~€25/คน", tip:"รถยนต์ส่วนตัวห้ามขึ้นได้ช่วง 9:00–17:00 ต้องขึ้น cable car หรือ bus เท่านั้น" },
+    { name:"Passo Gardena — ช่องเขา Cinematic", tagline:"Scenic drive ระดับ cinematic มาก", time:"12:30–14:00", why:"ถนนทอดผ่านหินปูนยักษ์ทั้งสองข้าง เป็น scenic drive ที่ระดับ cinematic มาก แค่ขับผ่านก็ wow ไม่ต้องจอด", mustgo:"อยู่ระหว่าง Ortisei และ Corvara ผ่านไปได้เลย ไม่เสียเวลา", besttime:"กลางวัน แสงตรง ฟ้าเปิด", duration:"1–1.5 ชั่วโมง รวมแวะถ่ายรูป", cost:"ฟรี", tip:"มี viewpoint หลายจุดระหว่างทาง จอดเองได้ตลอด" },
+    { name:"Cinque Torri — 5 เสาหินโบราณ", tagline:"5 เสาหินปูน + trenches สงครามโลก WW1", time:"14:00–16:30", why:"กลุ่มหินปูน 5 ต้นตั้งอยู่กลางทุ่งหญ้า ใกล้ Cortina มี trench ของ WW1 ให้เดินสำรวจจริงๆ มีประวัติศาสตร์มากกว่า spot อื่น", mustgo:"ต่างจาก spot อื่น — มีประวัติศาสตร์สงครามโลกให้เรียนรู้ควบคู่กับวิวสวย", besttime:"บ่าย 13:00–16:00", duration:"2 ชั่วโมง", cost:"Cable car ขึ้น ~€15 หรือเดินขึ้น 40 นาที", tip:"ถ้าแข็งแรง เดินขึ้นเองจาก parking วิวระหว่างทางดีมาก" },
+    { name:"Lago di Carezza (Rainbow Lake)", tagline:"ทะเลสาบสะท้อน Dolomites แบบ mirror", time:"แวะระหว่างทาง", why:"ทะเลสาบสีเขียวมรกตสะท้อนภาพ Catinaccio peaks สมบูรณ์แบบ มักมีสีหลากหลายจนได้ชื่อว่า Rainbow Lake", mustgo:"แวะได้ระหว่างเดินทาง ไม่ต้องเบี่ยงเส้น ใช้เวลาแค่ 30 นาที", besttime:"เช้าตรู่หรือบ่ายแก่ๆ น้ำนิ่งสะท้อนดีที่สุด", duration:"30–45 นาที", cost:"ที่จอด ~€5", tip:"หลีกเลี่ยง 10:00–14:00 คนแน่นมาก น้ำอาจไม่นิ่งพอ" },
+    { name:"Enrosadira Sunset — Magic ของ Dolomites", tagline:"หินเปลี่ยนสีเป็นส้มทอง — 30 นาทีที่ไม่มีที่ไหนเหมือน", time:"17:00–18:30", why:"ปรากฏการณ์ที่หิน Odle peaks เปลี่ยนสีเป็นส้มทองแดง (Enrosadira) เกิดช่วง 30 นาทีก่อน/หลัง sunset เป็น magic ของ Dolomites", mustgo:"Enrosadira คือเหตุผลที่ Dolomites โด่งดังระดับโลก ถ้าพลาดนี่เสียดายมาก", besttime:"30 นาทีก่อน sunset — ปลาย ต.ค. ประมาณ 17:30–18:00", duration:"1 ชั่วโมง", cost:"ฟรี", tip:"เช็ก sunset time วันนั้นที่ timeanddate.com/sun/italy/ortisei" },
+  ],
+  day5: [
+    { name:"Cortina d'Ampezzo — กาแฟเช้า", tagline:"เมือง ski resort หรู — Winter Olympics 1956 + 2026", time:"08:30–10:00", why:"เมืองหรูที่เคยจัด Winter Olympics 1956 และจะจัด 2026 ด้วย ตัวเมืองสวย มีร้านกาแฟ local และ backdrop เป็น Dolomites", mustgo:"ถ้าเส้นทางผ่าน แวะกินกาแฟเช้าแทนที่จะกินที่ Ortisei — vibe ต่างกันมาก", besttime:"เช้า 8:00–10:00", duration:"1–1.5 ชั่วโมง", cost:"กาแฟ ~€3–4", tip:"Caffe Alvera หรือ Pasticceria C'era una Volta แนะนำ" },
+    { name:"คืนรถที่ Mestre", tagline:"Logistics สำคัญที่สุดของวัน — ทำก่อน 13:00", time:"13:00–14:00", why:"Mestre เป็นเมืองบนแผ่นดินใหญ่ติดกับ Venice Island มีสถานีรถไฟและที่คืนรถสะดวก ใกล้กว่า Venice Airport", mustgo:"ต้องทำก่อนเข้า Venice ไม่มีทางเลือกอื่น", besttime:"คืนรถก่อน 13:00 มีเวลา Venice ช่วงบ่าย", duration:"45 นาที–1 ชั่วโมง", cost:"ตามสัญญาเช่า", tip:"จาก Mestre นั่งรถไฟ 12 นาที หรือ bus 30 นาที ไปถึง Venezia Santa Lucia" },
+    { name:"Vaporetto ข้าม Lagoon", tagline:"เรือ Bus เข้า Venice — experience ในตัวเอง", time:"14:00–15:30", why:"การเดินทางข้าม lagoon บน Vaporetto คือ experience ในตัวเอง เห็น skyline Venice ค่อยๆ ปรากฏ", mustgo:"ซื้อ 24h/48h pass ที่นี่เลย คุ้มกว่า single ticket", besttime:"บ่าย 14:00–15:00", duration:"45 นาที", cost:"Vaporetto 24h pass ~€25/คน", tip:"นั่ง Line 1 ช้าที่สุด แต่เห็น Grand Canal ครบทุกจุด" },
+    { name:"Piazza San Marco ยามเย็น", tagline:"'Drawing room of Europe' — Napoleon", time:"17:00–19:00", why:"จัตุรัสหลักของ Venice ล้อมด้วย Basilica ทองคำ Doge's Palace และ Bell tower สูง 99 ม. ตอนเย็นแสงดีและคนน้อยกว่า", mustgo:"ต้องมาอย่างน้อยหนึ่งครั้ง — เว้นไว้เย็นแรกที่ถึง แสงทองสวยมาก", besttime:"17:00–19:00 แสงทอง", duration:"1.5–2 ชั่วโมง", cost:"ฟรี (เข้า Basilica ~€3)", tip:"Florian Cafe อายุ 300+ ปีอยู่ในจัตุรัส แพงมากแต่คุ้มสักครั้ง" },
+    { name:"Cicchetti ย่าน Cannaregio", tagline:"Tapas Venice ราคา local — ไม่ใช่ tourist trap", time:"19:30–21:30", why:"Cicchetti คือ small snack บนขนมปังของ Venice ราคาถูก อร่อย และ local มาก ย่าน Cannaregio มีบาร์ท้องถิ่นที่ไม่ใช่ tourist", mustgo:"ถ้ากิน Cicchetti ไม่ได้ที่ Venice ถือว่าพลาด culture อาหารสำคัญ", besttime:"18:00–21:00", duration:"2 ชั่วโมง", cost:"~€15–20/คน อิ่มสบาย", tip:"All'Arco หรือ Cantina Do Mori — ไปก่อน 19:00 ก่อนที่นั่งเต็ม" },
+  ],
+  day6: [
+    { name:"Basilica di San Marco — เช้า", tagline:"วิหารโมเสคทอง 8,000 ตร.ม. บนเพดาน", time:"08:00–09:30", why:"วิหาร Byzantine ที่มีโมเสคทองคำกว่า 8,000 ตร.ม. บนเพดานและผนัง ใช้เวลาสร้างและตกแต่ง 800 ปี", mustgo:"ต้องไปตอนเช้าก่อน 9:00 เพราะหลังจากนั้นคิวยาวมาก ต้องจองล่วงหน้า!", besttime:"08:00–09:30 ก่อนทัวร์เข้า", duration:"1.5 ชั่วโมง", cost:"ฟรี (จอง time slot ออนไลน์)", tip:"จองเวลาเข้าล่วงหน้าฟรีที่ basilicasanmarco.it ไม่งั้นรอ 90 นาที" },
+    { name:"Doge's Palace", tagline:"พระราชวัง Venice 1,000 ปี + คุก Bridge of Sighs", time:"10:00–12:00", why:"พระราชวัง Gothic เป็นศูนย์กลางอำนาจ Venetian Republic Bridge of Sighs และ prison ด้านในเดินสำรวจได้จริง", mustgo:"ถ้าดูแค่ข้างนอก Venice จะเหมือนเดินผ่านฉาก เข้าในแล้วถึงจะเข้าใจ", besttime:"เช้า ก่อน 11:00", duration:"2 ชั่วโมง", cost:"~€30 (รวม San Marco Museum)", tip:"จองออนไลน์ที่ palazzoducale.visitmuve.it ข้ามคิวได้เลย" },
+    { name:"เดินหลงใน Dorsoduro", tagline:"Venice จริงๆ อยู่ในซอยเล็ก ห่างจาก San Marco", time:"13:00–15:30", why:"ย่าน Dorsoduro เป็น local มากกว่า San Marco และ Rialto บรรยากาศ Venice ที่คนท้องถิ่นยังอาศัยจริง", mustgo:"นี่คือ Venice จริงๆ เดินหลงโดยไม่มีแผนคือ experience สุดยอด", besttime:"หลังกลางวัน", duration:"2–3 ชั่วโมง", cost:"ฟรี", tip:"Campo Santa Margherita ย่าน Dorsoduro มีร้านกาแฟสวยและ vibe local มาก" },
+    { name:"Rialto Bridge & ตลาด", tagline:"สะพาน Renaissance 1591 + วิว Grand Canal", time:"15:30–16:30", why:"สะพานที่เก่าแก่ที่สุดบน Grand Canal วิว Grand Canal จากสะพานสวยมาก ด้านล่างมีตลาด Rialto", mustgo:"ตลาดปลาด้านล่างเช้า (ปิดบ่าย) แต่สะพานดูได้ตลอด", besttime:"บ่าย 15:00–17:00 สำหรับสะพาน", duration:"1 ชั่วโมง", cost:"ฟรี", tip:"ถ้าอยากดูตลาดปลา ต้องไปก่อน 12:00" },
+    { name:"Murano Island — เกาะแก้ว Venetian", tagline:"ช่างแก้ว Venetian ย้ายมาอยู่ที่นี่ 700 ปีแล้ว", time:"ครึ่งวัน (Optional)", why:"เกาะที่รัฐบาล Venice ให้ช่างแก้วย้ายมาอยู่ปี 1291 มีโรงงานแก้วให้ดูสาธิต ของแท้ไม่ใช่ made in China", mustgo:"ถ้าอยากซื้อ Venetian glass ของแท้ ต้องมาซื้อจากโรงงานที่นี่โดยตรง", besttime:"เช้าหรือบ่ายต้น", duration:"2–3 ชั่วโมง รวมเดินทาง", cost:"Vaporetto รวม pass แล้ว / เข้าดูโรงงานฟรี", tip:"หลีกเลี่ยงร้านที่ติดป้าย 'Murano Glass' ในเกาะ Venice — ซื้อจาก Murano โดยตรง" },
+  ],
+  day7: [
+    { name:"Burano Island — เช้า", tagline:"เกาะบ้านสีสด ถ่ายรูปสวยที่สุด", time:"08:00–10:00", why:"เกาะที่บ้านทาสีสดใส ถนนสีชมพู เหลือง ฟ้า ทุกหลังต่างสี บรรยากาศ cheerful มาก ประวัติว่าสีช่วยชาวประมงเห็นบ้านในหมอก", mustgo:"ภาพถ่ายที่ contrast กับ Venice มากที่สุด — ต้องไปก่อน 10:00 ก่อนนักท่องเที่ยวล้น", besttime:"เช้า 8:00–10:00 คนน้อยแสงสวย", duration:"1.5–2 ชั่วโมง รวมเดินทาง", cost:"Vaporetto รวม pass", tip:"กลับถึง Venezia Santa Lucia ก่อน 12:00 เพื่อนั่งรถไฟต่อ" },
+    { name:"รถไฟ Venice → La Spezia", tagline:"Frecciarossa ~3.5 ชั่วโมง ผ่าน Bologna", time:"12:00–15:30", why:"รถไฟสายหลักจาก Venezia Santa Lucia → La Spezia Centrale ต้องเปลี่ยนรถไฟที่ Bologna หรือ Milano", mustgo:"จองตั๋วล่วงหน้า 2–4 สัปดาห์ ราคาต่างกัน 3–5x", besttime:"รถไฟสาย 11:00–12:30 จาก Venice", duration:"3.5–4 ชั่วโมง", cost:"~€25–60/คน ขึ้นกับจองเมื่อไหร่", tip:"จองที่ trenitalia.com เลือก Frecciarossa เร็วสุด เปลี่ยนที่ Bologna หรือ Milano Centrale" },
+    { name:"La Spezia — เมืองท่า", tagline:"Base camp Cinque Terre + ตลาดสดท่าเรือ", time:"16:00–18:30", why:"La Spezia เป็นเมืองท่าทหารเรือมีตลาดสด ร้านอาหาร seafood ราคาถูก และ Gulf view สวยงาม", mustgo:"ซื้อ Cinque Terre Card ที่สถานีได้เลย และดูตารางรถไฟพรุ่งนี้", besttime:"เย็น", duration:"2 ชั่วโมง", cost:"ฟรี", tip:"ซื้อ Cinque Terre Card ล่วงหน้าที่ La Spezia Centrale ประหยัดเวลาพรุ่งนี้" },
+    { name:"Il Mercato Centrale La Spezia", tagline:"Seafood สด + Farinata — อาหาร Ligurian แท้", time:"18:30–20:00", why:"ตลาดสดที่มีร้านอาหารทะเล ปลาหมึก กุ้ง และ Farinata (แพนเค้กถั่วชิกพี) อาหาร Ligurian ราคาถูก อร่อย", mustgo:"La Spezia มีอาหาร Ligurian authentic ที่ Cinque Terre แพงกว่าสองเท่า — กินที่นี่คุ้มกว่า", besttime:"เย็น 18:00–20:00", duration:"1.5 ชั่วโมง", cost:"~€15–20/คน อิ่มสบาย", tip:"ลอง Farinata di Ceci — เป็นของ Liguria โดยเฉพาะ หาได้ยากที่อื่น" },
+    { name:"วางแผน Cinque Terre พรุ่งนี้", tagline:"Prep session สำคัญ — เช็กก่อนนอน", time:"20:30–21:30", why:"เช็กสถานะ Sentiero Azzurro (หลายส่วนยังปิด) เช็กตารางรถไฟ และตัดสินใจว่าจะ 3 หมู่บ้านไหน", mustgo:"Cinque Terre ต้องวางแผน — Manarola–Corniglia trail ยังปิด ต้องรู้ก่อน", besttime:"คืนก่อน", duration:"1 ชั่วโมง", cost:"ฟรี", tip:"เช็กที่ parconazionale5terre.it สถานะเส้นทางอัปเดตทุกวัน" },
+  ],
+  day8: [
+    { name:"Vernazza — หมู่บ้านที่สวยที่สุด", tagline:"ท่าเรือเล็ก + ป้อม Doria Castle", time:"09:00–11:30", why:"หมู่บ้านที่ได้รับการโหวตว่าสวยที่สุดใน Cinque Terre มีท่าเรือตรงกลาง ล้อมด้วยบ้านสี Doria Castle บนเขา", mustgo:"ขึ้นไปดูจาก Doria Castle วิว 360° ของหมู่บ้านและทะเล สวยมาก", besttime:"เช้า ก่อน 10:00 คนน้อยกว่ามาก", duration:"2 ชั่วโมง", cost:"Castle ~€1.5", tip:"กิน Focaccia เช้าที่ร้าน local ก่อนนักท่องเที่ยวตื่น" },
+    { name:"Manarola — ภาพโปสการ์ดที่โด่งดังที่สุด", tagline:"บ้านสีสดบนหน้าผา — ถ่ายจาก viewpoint", time:"12:00–14:00", why:"หมู่บ้านที่มีบ้านสีสดเรียงบนหน้าผา มองจาก viewpoint ฝั่ง Riomaggiore ได้ภาพที่ทุกคนรู้จักทันที", mustgo:"ขึ้น viewpoint ทิศใต้ของหมู่บ้านก่อน แล้วค่อยลงมาเดินในหมู่บ้าน", besttime:"กลางวัน แสงสว่างเต็ม หรือ sunset", duration:"2 ชั่วโมง", cost:"ฟรี", tip:"Nessun Dorma bar มีวิวดีที่สุด สั่งไวน์ Sciacchetrà นั่งชมวิว" },
+    { name:"Riomaggiore — สีสดสุด compact มาก", tagline:"บ้านเรียงสูงๆ ลงมาถึงท่าเรือเล็ก", time:"14:30–16:30", why:"หมู่บ้านที่เล็กที่สุดและ compact ที่สุด บ้านเรียงลงมาจากเขาถึงท่าเรือ สีสดมาก ตรอกแคบ บรรยากาศ Mediterranean", mustgo:"เดินลงไปถึงท่าเรือเล็กๆ แล้วมองกลับขึ้นมาที่หมู่บ้าน — มุมนั้นสวยมาก", besttime:"บ่าย–เย็น", duration:"1.5–2 ชั่วโมง", cost:"ฟรี", tip:"Via dell'Amore (Riomaggiore–Manarola) เปิดแล้ว แต่ต้องจองล่วงหน้า viadellamore.info" },
+    { name:"Sentiero Azzurro Trail", tagline:"เส้นทางบน cliff — Vernazza–Monterosso", time:"ระหว่างหมู่บ้าน", why:"เส้นทางเดินบน cliff เชื่อมทุกหมู่บ้าน วิวทะเลด้านซ้าย สวนมะกอกด้านขวา Vernazza–Monterosso สวยที่สุด", mustgo:"ต้องเช็กว่าเปิดไหมก่อน — Manarola–Corniglia trail ยังปิดระยะยาว", besttime:"เช้า–บ่าย", duration:"1–2 ชั่วโมง ต่อ segment", cost:"Cinque Terre Card ~€7.5", tip:"เช็กสถานะที่ parconazionale5terre.it ก่อนไปทุกครั้ง" },
+    { name:"Monterosso al Mare", tagline:"หาดทรายที่ใหญ่สุดใน Cinque Terre", time:"Optional บ่าย", why:"หมู่บ้านเหนือสุด มีหาดทรายที่ยาวที่สุด บรรยากาศผ่อนคลายกว่าหมู่บ้านอื่น ร้านอาหาร seafood ดีๆ", mustgo:"ถ้าอยากพักผ่อนชายหาดช่วงบ่าย ปลาย ต.ค. อากาศยังพอได้", besttime:"บ่าย 14:00–16:30", duration:"2 ชั่วโมง", cost:"ฟรี", tip:"ร้าน Miky มีอาหารทะเล fresh ที่ดีที่สุดในเมือง" },
+  ],
+  day9: [
+    { name:"เช้าสุดท้าย La Spezia", tagline:"Focaccia Ligurian + กาแฟ local สุดท้าย", time:"07:00–08:30", why:"Liguria มี Focaccia di Recco (ขนมปังชีส) และ Farinata ที่ไม่มีที่ไหนเหมือน กินมื้อสุดท้ายแบบ local ก่อนจากไป", mustgo:"กินของดีก่อนกลับ — Milan airport มีแต่ sandwich ราคาแพง", besttime:"เช้า 7:00–8:30", duration:"1 ชั่วโมง", cost:"~€5–10/คน", tip:"Bakery ที่ถนนสายหลักตลาดสดเปิดแต่เช้า" },
+    { name:"รถไฟ La Spezia → Milan", tagline:"Frecciarossa 2.5 ชั่วโมง กลับฐาน", time:"09:00–12:00", why:"รถไฟ Frecciarossa จาก La Spezia Centrale → Milano Centrale ใช้เวลา ~2.5 ชั่วโมง ถ้าบินตอนเย็นมีเวลา Milan", mustgo:"จองล่วงหน้าเสมอ — ตั๋ว last minute แพงมาก", besttime:"รถไฟสาย 8:30–9:30 จาก La Spezia", duration:"2.5 ชั่วโมง", cost:"~€25–50/คน ขึ้นกับจองเมื่อไหร่", tip:"Milan มีสองสนามบิน เช็กว่าบินจาก Malpensa (MXP) หรือ Linate (LIN)" },
+    { name:"มื้อสุดท้าย Milan — Risotto alla Milanese", tagline:"สีเหลืองทอง จาก Saffron — iconic Milan", time:"12:30–14:00", why:"Risotto alla Milanese สีเหลืองทอง (จาก saffron) เป็นอาหาร iconic ของ Milan ที่ต้องลองสักครั้ง", mustgo:"ถ้าเวลาพอ แวะกิน 1 ชั่วโมงใกล้ Centrale คุ้มมาก", besttime:"12:00–14:00", duration:"1 ชั่วโมง", cost:"~€18–25/คน", tip:"ร้านแนะนำ: Trattoria Milanese หรือ Osteria dell'Acquabella ใกล้ station" },
+    { name:"Milan Airport — Malpensa vs Linate", tagline:"เช็กว่าบินจากสนามบินไหน!", time:"ตามเวลาบิน", why:"Malpensa (MXP) ห่าง 50 กม. ใช้เวลา 45–60 นาที / Linate (LIN) ใกล้กว่า 20 นาที ด้วย M4 metro", mustgo:"เผื่อเวลาให้พอ ไม่ควรถึง airport น้อยกว่า 2.5 ชั่วโมงก่อนบิน", besttime:"ตามเวลาบิน", duration:"45–60 นาที จาก Centrale", cost:"Malpensa Express ~€13 / Metro ~€2", tip:"Malpensa Express ออกทุก 30 นาที จาก Milano Centrale" },
+    { name:"Duty Free & ของฝากอิตาลี", tagline:"Pasta · Truffle oil · Parmigiano · Grappa · Limoncello", time:"ที่ airport หรือก่อนหน้า", why:"สินค้าอิตาลีคุณภาพดีควรซื้อจากซุปเปอร์มาร์เก็ตท้องถิ่นก่อน ถูกกว่าและตัวเลือกมากกว่า airport", mustgo:"ของฝากจาก Esselunga ในเมือง ราคาดีกว่า airport duty free เยอะมาก", besttime:"ก่อนถึง airport", duration:"30–45 นาที", cost:"ขึ้นอยู่กับงบ", tip:"Parmigiano Reggiano, Truffle paste, Pasta handmade — ของฝากอิตาลีที่ดีที่สุด" },
+  ],
+};
+
+function renderSpots(dayKey, containerId) {
+  const spots = data[dayKey];
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = spots.map((s, i) => `
+    <div class="spot-card" id="${dayKey}-spot-${i}">
+      <div class="spot-card-header">
+        <div class="spot-num">${i + 1}</div>
+        <div class="spot-main">
+          <div class="spot-name">${s.name}</div>
+          <div class="spot-tagline">${s.tagline}</div>
+        </div>
+        <div class="spot-time-badge">${s.time}</div>
+      </div>
+      <div class="spot-footer">
+        <button class="spot-expand-btn" id="btn-${dayKey}-${i}" onclick="toggleSpot('${dayKey}',${i})">
+          ดูรายละเอียด <span class="arrow">▼</span>
+        </button>
+        <span style="font-size:0.78rem;color:var(--muted);">${s.cost}</span>
+      </div>
+      <div class="spot-body" id="body-${dayKey}-${i}">
+        <div class="photo-strip-wrap">
+          <div class="photo-strip-label">📷 รูปภาพ</div>
+          <div class="photo-strip" id="strip-${dayKey}-${i}">
+            <div class="photo-skeleton"></div><div class="photo-skeleton"></div><div class="photo-skeleton"></div>
+          </div>
+        </div>
+        <div class="spot-divider"></div>
+        <div class="spot-detail-grid">
+          <div class="spot-detail-box">
+            <div class="detail-label">เวลาที่ดีสุด</div>
+            <div class="detail-val">${s.besttime}</div>
+          </div>
+          <div class="spot-detail-box">
+            <div class="detail-label">ระยะเวลา</div>
+            <div class="detail-val">${s.duration}</div>
+          </div>
+        </div>
+        <div class="spot-section-label">ทำไมน่าสนใจ</div>
+        <p class="spot-text">${s.why}</p>
+        <div class="spot-section-label">ทำไมต้องไป</div>
+        <p class="spot-text">${s.mustgo}</p>
+        <div class="spot-tip">💡 <span>${s.tip}</span></div>
+        <div style="height:0.5rem;"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleSpot(day, i) {
+  const body = document.getElementById(`body-${day}-${i}`);
+  const btn = document.getElementById(`btn-${day}-${i}`);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  btn.classList.toggle('open');
+  btn.innerHTML = isOpen ? 'ดูรายละเอียด <span class="arrow">▼</span>' : 'ซ่อน <span class="arrow">▼</span>';
+  // Load photos on first open
+  if (!isOpen) {
+    const allDays = Object.keys(data);
+    const spots = data[day];
+    if (spots && spots[i]) {
+      const spotName = spots[i].name;
+      const stripId = `strip-${day}-${i}`;
+      const strip = document.getElementById(stripId);
+      if (strip && !strip.dataset.loaded) {
+        strip.dataset.loaded = '1';
+        fetchWikiPhotos(spotName, stripId);
+      }
+    }
+  }
+}
+
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget?.classList.add('active');
+}
+
+// Render all spots
+Object.entries(data).forEach(([key]) => {
+  renderSpots(key, `spots-${key}`);
+});
+
+// Intersection observer for fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Nav active state on scroll
+const sections = ['overview','alerts','day1','day2','day3','day4','day5','day6','day7','day8','day9','checklist'];
+const navBtns = document.querySelectorAll('.nav-btn');
+
+window.addEventListener('scroll', () => {
+  let current = 'overview';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  navBtns.forEach((btn, i) => {
+    btn.classList.toggle('active', sections[i] === current);
+  });
+}, { passive: true });
+
+// ─── PHOTO GALLERY ───────────────────────────────────────────────────────
+
+const wikiSearchTerms = {
+  "Piazza del Duomo": ["Milan Cathedral facade", "Piazza del Duomo Milan panorama", "Duomo di Milano spires"],
+  "Galleria Vittorio Emanuele II": ["Galleria Vittorio Emanuele II Milan", "Galleria Vittorio Emanuele dome interior", "Galleria Vittorio Emanuele floor"],
+  "Castello Sforzesco": ["Castello Sforzesco Milan", "Castello Sforzesco tower", "Parco Sempione Milan castle"],
+  "Brera District": ["Brera district Milan", "Pinacoteca di Brera", "Via Brera cobblestone Milan"],
+  "Navigli — คลองเก่า Milan": ["Naviglio Grande Milan", "Navigli canal Milan evening", "Navigli district bar"],
+  "Arena di Verona": ["Arena di Verona Roman amphitheatre", "Arena di Verona interior stage", "Arena Verona aerial"],
+  "Casa di Giulietta": ["Casa di Giulietta Verona balcony", "Juliet balcony Verona Italy", "Casa Giulietta courtyard statue"],
+  "Piazza delle Erbe": ["Piazza delle Erbe Verona market", "Verona old town square buildings", "Piazza delle Erbe fountain"],
+  "Scaliger Tombs (Arche Scaligere)": ["Arche Scaligere Verona", "Scaliger tombs Gothic Verona", "Verona medieval Gothic architecture"],
+  "Sirmione — ปราสาท Scaligero": ["Sirmione castle Lake Garda", "Rocca Scaligera Sirmione", "Sirmione peninsula sunset lake"],
+  "Seceda Cable Car — ถ้าเปิด": ["Seceda ridgeline Dolomites", "Seceda Odle peaks viewpoint", "Ortisei Seceda cable car valley"],
+  "Val di Funes — โบสถ์กลางทุ่ง": ["Val di Funes church Dolomites", "St Johann Ranui church meadow", "Val di Funes Geisler Odle peaks"],
+  "Lago di Braies (Pragser Wildsee)": ["Lago di Braies rowboat", "Pragser Wildsee turquoise Dolomites", "Lake Braies mountain reflection"],
+  "Santa Maddalena Village": ["Santa Maddalena Val di Funes Dolomites", "Santa Maddalena church village view", "Val di Funes autumn colors Dolomites"],
+  "Ortisei — เดินเย็น": ["Ortisei town Val Gardena", "St Ulrich Groden village alpine", "Val Gardena Ortisei street"],
+  "Alpe di Siusi (Seiser Alm)": ["Seiser Alm Alpe di Siusi plateau", "Alpe di Siusi Sassolungo backdrop", "Seiser Alm meadow Dolomites panorama"],
+  "Passo Gardena — ช่องเขา Cinematic": ["Passo Gardena Dolomites mountain pass", "Grödner Joch mountain panorama", "Passo Gardena road Dolomites"],
+  "Cinque Torri — 5 เสาหินโบราณ": ["Cinque Torri rock towers Dolomites", "Cinque Torri Cortina d Ampezzo", "Cinque Torri WW1 open air museum"],
+  "Lago di Carezza (Rainbow Lake)": ["Lago di Carezza rainbow lake", "Karersee reflection Dolomites", "Lake Carezza turquoise forest"],
+  "Enrosadira Sunset — Magic ของ Dolomites": ["Enrosadira Dolomites alpenglow", "Dolomites sunset orange peaks", "Odle Geisler peaks golden sunset"],
+  "Cortina d\'Ampezzo — กาแฟเช้า": ["Cortina d Ampezzo main street", "Cortina d Ampezzo Dolomites skyline", "Cortina d Ampezzo town center"],
+  "คืนรถที่ Mestre": ["Venice Mestre station Italy", "Venice train station Santa Lucia"],
+  "Vaporetto ข้าม Lagoon": ["Venice vaporetto waterbus lagoon", "Venice Grand Canal boat", "Venice lagoon aerial"],
+  "Piazza San Marco ยามเย็น": ["Piazza San Marco Venice sunset", "Saint Marks Square Venice night", "Venice San Marco Campanile"],
+  "Cicchetti ย่าน Cannaregio": ["Cannaregio Venice canal", "Venice cicchetti wine bar", "Cannaregio neighborhood street"],
+  "Basilica di San Marco — เช้า": ["Basilica San Marco Venice exterior gold", "San Marco Basilica interior mosaic ceiling", "Saint Marks Basilica portal facade"],
+  "Doge\'s Palace": ["Doges Palace Venice Gothic", "Palazzo Ducale Venice interior", "Bridge of Sighs Ponte dei Sospiri Venice"],
+  "เดินหลงใน Dorsoduro": ["Dorsoduro Venice canal", "Campo Santa Margherita Venice locals", "Dorsoduro Venice narrow street"],
+  "Rialto Bridge & ตลาด": ["Rialto Bridge Venice Grand Canal", "Ponte di Rialto Venice", "Venice Rialto market fish"],
+  "Murano Island — เกาะแก้ว Venetian": ["Murano island Venice canal", "Murano glass blowing artisan", "Murano island colorful"],
+  "Burano Island — เช้า": ["Burano island colorful houses Venice", "Burano fishing village canal", "Burano Venice painted houses"],
+  "รถไฟ Venice → La Spezia": ["Venice Santa Lucia railway station", "Frecciarossa high speed train Italy", "Italian railway landscape"],
+  "La Spezia — เมืองท่า": ["La Spezia port city Italy", "La Spezia old town piazza", "La Spezia Gulf of Poets"],
+  "Il Mercato Centrale La Spezia": ["La Spezia covered market", "Liguria farinata chickpea flatbread", "Italian seafood market Liguria"],
+  "วางแผน Cinque Terre พรุ่งนี้": ["Cinque Terre five villages aerial", "Cinque Terre National Park coast", "Cinque Terre map villages"],
+  "Vernazza — หมู่บ้านที่สวยที่สุด": ["Vernazza Cinque Terre harbor colorful", "Vernazza aerial clifftop view", "Vernazza Doria Castle tower"],
+  "Manarola — ภาพโปสการ์ดที่โด่งดังที่สุด": ["Manarola Cinque Terre night reflection", "Manarola viewpoint colorful houses cliffs", "Manarola sunset sea"],
+  "Riomaggiore — สีสดสุด compact มาก": ["Riomaggiore Cinque Terre village", "Riomaggiore harbor boats colorful", "Riomaggiore narrow street"],
+  "Sentiero Azzurro Trail": ["Sentiero Azzurro Blue Trail Cinque Terre", "Cinque Terre coastal hiking path", "Blue trail Vernazza Monterosso view"],
+  "Monterosso al Mare": ["Monterosso al Mare beach Cinque Terre", "Monterosso seafront promenade", "Monterosso Old Town Cinque Terre"],
+  "เช้าสุดท้าย La Spezia": ["La Spezia morning harbor Italy", "Ligurian focaccia bakery", "Italian espresso morning bar"],
+  "รถไฟ La Spezia → Milan": ["Italian high speed train Frecciarossa", "Milan Centrale station grand hall", "Train journey Italian countryside"],
+  "มื้อสุดท้าย Milan — Risotto alla Milanese": ["Risotto alla Milanese saffron dish", "Milan restaurant traditional Italian", "Risotto Milanese plated food"],
+  "Milan Airport — Malpensa vs Linate": ["Milan Malpensa airport terminal", "Malpensa Express train Milan airport", "Milan Linate airport"],
+  "Duty Free & ของฝากอิตาลี": ["Italian parmigiano reggiano cheese market", "Italian pasta truffle oil products", "Italian food souvenir market"],
+};
+
+const wikiCache = {};
+let lbImgs = [], lbIdx = 0;
+
+async function fetchWikiPhotos(spotName, containerId) {
+  const terms = wikiSearchTerms[spotName];
+  if (!terms) return;
+  const stripEl = document.getElementById(containerId);
+  if (!stripEl) return;
+
+  // show skeletons
+  stripEl.innerHTML = terms.map(() => '<div class="photo-skeleton"></div>').join('');
+
+  const results = [];
+  for (const term of terms) {
+    if (wikiCache[term]) {
+      results.push(wikiCache[term]);
+      continue;
+    }
+    try {
+      const q = encodeURIComponent(term);
+      const url = `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${q}&gsrnamespace=6&gsrlimit=2&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&format=json&origin=*`;
+      const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      const data = await res.json();
+      const pages = data?.query?.pages;
+      if (pages) {
+        const imgs = Object.values(pages)
+          .filter(p => p.imageinfo?.[0]?.url)
+          .map(p => ({
+            url: p.imageinfo[0].thumburl || p.imageinfo[0].url,
+            caption: p.imageinfo[0].extmetadata?.ImageDescription?.value?.replace(/<[^>]+>/g,'') || term,
+            title: p.title?.replace('File:','') || ''
+          }))
+          .filter(img => /\.(jpg|jpeg|png|webp)/i.test(img.url));
+        if (imgs.length) {
+          wikiCache[term] = imgs[0];
+          results.push(imgs[0]);
+        }
+      }
+    } catch(e) {
+      // silently skip failed queries
+    }
+  }
+
+  if (!results.length) {
+    stripEl.innerHTML = '<span style="font-size:0.75rem;color:var(--muted);padding:0.5rem 0;">ไม่พบรูปภาพ</span>';
+    return;
+  }
+
+  stripEl.innerHTML = '';
+  stripEl.dataset.images = JSON.stringify(results);
+  results.forEach((img, i) => {
+    const el = document.createElement('img');
+    el.className = 'photo-thumb';
+    el.src = img.url;
+    el.alt = img.caption || '';
+    el.loading = 'lazy';
+    el.onerror = function() { this.style.display='none'; };
+    el.onclick = () => openLightbox(stripEl, i);
+    stripEl.appendChild(el);
+  });
+}
+
+function openLightbox(stripEl, idx) {
+  try { lbImgs = JSON.parse(stripEl.dataset.images || '[]'); } catch(e) { lbImgs = []; }
+  lbIdx = idx;
+  showLb();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLb() {
+  if (!lbImgs.length) return;
+  const img = lbImgs[lbIdx];
+  document.getElementById('lb-img').src = img.url;
+  document.getElementById('lb-caption').textContent = img.caption || '';
+  document.getElementById('lb-prev').style.display = lbIdx > 0 ? '' : 'none';
+  document.getElementById('lb-next').style.display = lbIdx < lbImgs.length - 1 ? '' : 'none';
+}
+
+function lbNav(dir) {
+  lbIdx = Math.max(0, Math.min(lbImgs.length - 1, lbIdx + dir));
+  showLb();
+}
+
+function lbClose() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') lbClose();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+</script>
+</body>
+</html>
