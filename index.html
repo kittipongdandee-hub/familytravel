@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italy · Oct 2026</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200;300;400;500;600;700;800;900&family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --surface2: #1e1e1e;
+  --border: rgba(255,255,255,0.08);
+  --text: #f0ece4;
+  --muted: #7a7670;
+  --accent: #c8923a;
+  --accent2: #e8b84a;
+  --green: #3a6e50;
+  --red: #8b2a2a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── CURSOR ── */
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 3rem;
+  background: rgba(14,14,14,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem; font-weight: 300;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--text); text-decoration: none;
+}
+.nav-links {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+.nav-links a {
+  color: rgba(240,236,228,0.55);
+  text-decoration: none; font-size: 0.75rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--text); }
+@media(max-width:768px) { nav { padding: 1.25rem 1.5rem; } .nav-links { display: none; } }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 65svh; min-height: 480px;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Drei_Zinnen_Abend.jpg/1600px-Drei_Zinnen_Abend.jpg');
+  background-size: cover; background-position: center;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  filter: brightness(0.45) saturate(0.8);
+}
+.hero:hover .hero-bg { transform: scale(1.0); }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(14,14,14,0.95) 0%, rgba(14,14,14,0.2) 60%, transparent 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 3rem 4rem;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--accent);
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 300; line-height: 0.95;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.hero-title em { font-style: italic; color: rgba(240,236,228,0.6); }
+.hero-sub {
+  font-size: 0.9rem; color: rgba(240,236,228,0.5);
+  letter-spacing: 0.1em; margin-bottom: 3rem;
+  max-width: 480px; line-height: 1.8;
+}
+.hero-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+}
+.hero-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem; font-weight: 300; line-height: 1;
+  color: var(--accent2);
+}
+.hero-stat-label {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-top: 0.25rem;
+}
+.scroll-hint {
+  position: absolute; bottom: 2rem; right: 3rem;
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); writing-mode: vertical-rl;
+  display: flex; align-items: center; gap: 0.75rem;
+  animation: fadeUp 2s ease 1s both;
+}
+.scroll-hint::after {
+  content: ''; display: block; width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width:768px) { .hero-content { padding: 0 1.5rem 3rem; } .scroll-hint { display: none; } }
+
+/* ── NAV SEARCH ── */
+.nav-search {
+  position: relative;
+  margin-left: 2rem;
+}
+.nav-search #searchBox {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 0.3rem 0.3rem 0.3rem 1.4rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.75rem;
+  width: 180px;
+  outline: none;
+  transition: border-color 0.3s, width 0.3s;
+}
+.nav-search #searchBox:focus { border-color: var(--accent); width: 240px; }
+.nav-search #searchBox::placeholder { color: var(--muted); }
+.nav-search .search-icon { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.75rem; }
+@media(max-width:768px) { .nav-search { display: none; } }
+
+/* ── FLIGHT STRIP ── */
+.flight-strip {
+  overflow: hidden;
+}
+.flight-ticker {
+  display: flex; gap: 0;
+  animation: ticker 30s linear infinite;
+  white-space: nowrap;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.flight-item {
+  display: inline-flex; align-items: center; gap: 1rem;
+  padding: 1rem 3rem;
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  border-right: 1px solid var(--border); white-space: nowrap;
+  color: var(--muted);
+}
+.flight-item strong { color: var(--accent2); }
+.flight-sep { color: var(--border); }
+
+/* ── SECTION ── */
+.section { padding: 7rem 3rem; }
+.section-label {
+  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--accent); }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300; line-height: 1.1;
+  letter-spacing: -0.02em; margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--muted); }
+@media(max-width:768px) { .section { padding: 4rem 1.5rem; } }
+
+/* ── SEARCH ── */
+.search-wrap {
+  position: relative; max-width: 520px; margin-bottom: 5rem;
+}
+#searchBox {
+  width: 100%; padding: 1rem 1rem 1rem 3rem;
+  background: transparent;
+  border: none; border-bottom: 1px solid var(--border);
+  color: var(--text); font-family: 'Inter', sans-serif;
+  font-size: 0.9rem; outline: none; transition: border-color 0.3s;
+}
+#searchBox::placeholder { color: var(--muted); }
+#searchBox:focus { border-color: var(--accent); }
+.search-icon { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; }
+
+/* ── DAY GRID ── */
+.days-grid { display: block; }
+
+/* ── DAY ACCORDION ITEMS ── */
+.day-acc-item { border-top: 1px solid var(--border); }
+.day-acc-hdr:hover .day-acc-name { color: var(--accent2); }
+.day-acc-hdr {
+  padding: 0.85rem 3rem;
+  cursor: pointer; user-select: none;
+  display: flex; align-items: center; gap: 1rem;
+}
+.day-acc-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.18em; color: var(--accent2); min-width: 2.2rem;
+}
+.day-acc-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; font-size: 1rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text); transition: color 0.2s;
+}
+.day-acc-meta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300; font-size: 0.68rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-left: auto; white-space: nowrap;
+}
+.day-acc-body-info { display: flex; flex-direction: column; }
+.day-acc-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300; font-size: 0.72rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); margin-top: 0.15rem;
+}
+.day-acc-tags { display: flex; gap: 0.4rem; margin-top: 0.3rem; flex-wrap: wrap; }
+.day-acc-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--border);
+  padding: 0.1rem 0.45rem; border-radius: 3px;
+}
+.day-acc-body { }
+.sub-day-list { }
+.sub-day-body { padding: 0.5rem 3rem 1.5rem; }
+@media(max-width:768px) { .sub-day-body { padding: 0.5rem 1.5rem 1.5rem; } }
+.day-acc-inner {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: 0;
+  padding: 0 3rem 3rem;
+}
+.day-acc-photos {
+  height: 360px;
+  position: relative;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.day-acc-photos .slideshow { position: absolute; inset: 0; }
+.day-acc-content {
+  padding: 0 0 0 2.5rem;
+  overflow-y: auto;
+  max-height: 360px;
+}
+@media(max-width:768px) {
+  .day-acc-hdr { padding: 0.85rem 1.5rem; }
+  .day-acc-inner { grid-template-columns: 1fr; gap: 1rem; padding: 0 1.5rem 2rem; }
+  .day-acc-photos { height: 220px; }
+  .day-acc-content { max-height: none; padding: 0; }
+}
+
+.day-card {
+  background: #0e0e0e;
+  border-radius: 16px;
+  position: relative; overflow: hidden;
+  aspect-ratio: 16/9;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 42px 1fr 52%;
+  text-decoration: none; color: inherit;
+  border: none;
+  transition: box-shadow 0.3s;
+}
+.day-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.14); }
+
+.card-vert {
+  display: flex; align-items: center; justify-content: center;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 0.8rem 0; overflow: hidden;
+}
+.card-vert span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 0.78rem;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  writing-mode: vertical-rl; text-orientation: mixed;
+  transform: rotate(180deg); white-space: nowrap;
+}
+.card-text {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 1rem 1.15rem; min-width: 0;
+}
+.card-top { display: flex; flex-direction: column; gap: 0.18rem; }
+.card-cat {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300; font-size: 0.72rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); line-height: 1.3;
+}
+.card-cat.primary { font-weight: 600; color: var(--accent2); }
+.card-mid { display: flex; flex-direction: column; gap: 0.28rem; }
+.card-obj {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 200; font-size: 0.65rem;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted);
+}
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; font-size: 1.8rem;
+  letter-spacing: 0.03em; text-transform: uppercase;
+  color: var(--text); line-height: 0.95;
+}
+.card-cdots { display: flex; gap: 0.35rem; align-items: center; }
+.card-cdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(122,118,112,0.4); }
+.card-cdot.fill { background: var(--accent2); }
+.card-bot { display: flex; flex-direction: column; gap: 0.15rem; }
+.card-bot-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300; font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+}
+.card-bot-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.card-arrow-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300; font-size: 0.65rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); margin-top: 0.2rem; transition: color 0.2s;
+}
+.day-card:hover .card-arrow-label { color: var(--text); }
+.card-photo { position: relative; overflow: hidden; }
+.card-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0.88) brightness(0.97);
+  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s;
+}
+.day-card:hover .card-photo img { transform: scale(1.05); filter: saturate(1) brightness(1); }
+
+
+/* ── SECTION MODAL ── */
+.section-modal {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: var(--bg); overflow-y: auto;
+  animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.section-modal.open { display: block; }
+.section-modal-inner {
+  max-width: 900px; margin: 0 auto;
+  padding: 5rem 3rem 4rem;
+}
+.section-modal-header { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+@media(max-width:768px) { .section-modal-inner { padding: 4rem 1.5rem 3rem; } }
+
+/* ── DAY DETAIL PANELS ── */
+.day-detail { display: none; position: fixed; inset: 0; z-index: 500; background: var(--bg); animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1); }
+.day-detail.open { display: block; }
+@keyframes modalIn { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform:translateY(0); } }
+.detail-inner { display: grid; grid-template-columns: 55% 45%; height: 100vh; height: 100dvh; }
+@media(max-width:768px) {
+  .detail-inner { display: block; height: 100dvh; overflow-y: auto; }
+  .detail-image {
+    height: 72px;
+    min-height: unset;
+    max-height: unset;
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.16,1,0.3,1);
+    cursor: pointer;
+  }
+  .detail-image.expanded { height: 56vw; min-height: 220px; }
+  .detail-content { overflow-y: visible; border-left: none; border-top: 1px solid var(--border); }
+}
+
+
+/* ── SLIDESHOW ── */
+.slideshow { position: relative; width: 100%; height: 100%; }
+.slide {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: contain;
+  filter: brightness(0.92) saturate(0.9);
+  opacity: 0; transition: opacity 0.7s ease;
+}
+.slide.active { opacity: 1; }
+.slide-dots {
+  position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 0.5rem; z-index: 3;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.35); cursor: pointer;
+  transition: background 0.3s; border: none; padding: 0;
+}
+.dot.active { background: var(--accent2); }
+.detail-image {
+  position: relative; overflow: hidden; min-height: 280px;
+}
+/* .detail-image img handled by .slide */
+.detail-content { padding: 3rem; overflow-y: auto; display: flex; flex-direction: column; border-left: 1px solid var(--border); }
+.detail-temp-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  letter-spacing: 0.12em;
+}
+.detail-close {
+  position: fixed; top: 1.5rem; right: 1.5rem; z-index: 600;
+  width: 42px; height: 42px;
+  border: 1px solid var(--border); border-radius: 50%;
+  background: rgba(14,14,14,0.8);
+  color: var(--muted); font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 2; transition: all 0.2s;
+}
+.detail-close:hover { border-color: var(--accent); color: var(--accent); }
+
+/* timeline in detail */
+.tl { padding-left: 1.25rem; border-left: 1px solid var(--border); margin-top: 1.5rem; }
+.tl-row { padding: 0.65rem 0 0.65rem 1.25rem; position: relative; }
+.tl-row::before {
+  content: ''; position: absolute; left: -0.3rem; top: 1rem;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--border);
+}
+.tl-row.highlight::before { background: var(--accent); }
+.tl-time { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.2rem; }
+.tl-place { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+.tl-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.5; }
+
+/* accom + map links */
+.detail-meta {
+  margin-top: 2rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+@media(max-width:500px) { .detail-meta { grid-template-columns: 1fr; } }
+.meta-block {}
+.meta-label {
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.5rem;
+}
+.meta-value { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
+.meta-price { font-size: 1.1rem; color: var(--accent2); margin-top: 0.25rem; }
+.map-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.map-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 99px; font-size: 0.72rem;
+  color: var(--muted); text-decoration: none;
+  transition: all 0.2s; letter-spacing: 0.05em;
+}
+.map-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+
+/* ── SECTIONS ACCORDION ── */
+.sections-wrap { display: block; }
+.sections-sidebar { display: none; }
+.sections-content { display: block; padding: 0; }
+.sp-panel {
+  display: block;
+  border-top: 1px solid var(--border);
+  padding: 2rem 3rem;
+}
+.sp-panel .section-title {
+  cursor: pointer;
+  user-select: none;
+  transition: color .2s;
+}
+.sp-panel .section-title:hover { color: var(--accent2); }
+.sp-panel .section-title:hover em { color: var(--text); }
+.days-toggle:hover { color: var(--accent2); }
+.days-toggle:hover em { color: var(--text); }
+.toggle-arrow { display: none; }
+@media(max-width:768px) { .sp-panel { padding: 1.5rem; } }
+
+/* ── OVERVIEW TABLE ── */
+.overview-section { background: var(--surface); }
+.overview-table { width: 100%; border-collapse: collapse; }
+.overview-table th {
+  text-align: left; padding: 1rem 1.5rem;
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 1px solid var(--border); font-weight: 400;
+}
+.overview-table td {
+  padding: 1.1rem 1.5rem; font-size: 0.85rem;
+  border-bottom: 1px solid var(--border); vertical-align: middle;
+}
+.overview-table tr:hover td { background: rgba(255,255,255,0.02); }
+.overview-table td:first-child {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+  color: var(--accent2); width: 60px;
+}
+.badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.badge-car { background: rgba(200,146,58,0.12); color: var(--accent); border: 1px solid rgba(200,146,58,0.25); }
+.badge-train { background: rgba(58,110,80,0.12); color: #5aaf80; border: 1px solid rgba(58,110,80,0.25); }
+.badge-boat { background: rgba(40,90,140,0.15); color: #6aadda; border: 1px solid rgba(40,90,140,0.3); }
+.badge-fly { background: rgba(139,42,42,0.12); color: #d07070; border: 1px solid rgba(139,42,42,0.25); }
+
+/* ── CAR SECTION ── */
+.car-section {
+  border-top: 1px solid var(--border);
+  padding: 5rem 3rem;
+}
+.car-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+@media(max-width:768px) { .car-grid { grid-template-columns: 1fr; gap: 2rem; } }
+.car-block {}
+.car-block-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+.car-block-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; line-height: 1.3; color: var(--text); }
+.car-block-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; line-height: 1.6; }
+.warn-bar {
+  margin-top: 2.5rem; padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--accent);
+  background: rgba(200,146,58,0.04);
+  font-size: 0.82rem; color: var(--muted); line-height: 1.75;
+}
+.warn-bar strong { color: var(--accent2); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em;
+}
+footer .footer-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+  color: rgba(240,236,228,0.3); letter-spacing: 0.2em;
+}
+
+
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--accent); border: none;
+  color: var(--bg); font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 200;
+  box-shadow: 0 0 0 0 rgba(200,146,58,0.4);
+  animation: pulse 2.5s ease infinite;
+  transition: transform 0.2s, background 0.2s;
+}
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(200,146,58,0.4); } 50% { box-shadow: 0 0 0 12px rgba(200,146,58,0); } }
+
+.tl-item-row {
+  display: flex; align-items: baseline; gap: 0.5rem;
+  padding: 0.2rem 0; font-size: 0.78rem; color: var(--muted); line-height: 1.5;
+}
+.tl-item-text { flex: 1; }
+.tl-map-dot {
+  flex-shrink: 0; font-size: 0.75rem;
+  text-decoration: none; opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.tl-map-dot:hover { opacity: 1; }
+
+
+/* ── NAV DROPDOWNS ── */
+.nav-dropdown-wrap { position: relative; }
+.nav-dropdown { position: absolute; top: calc(100% + .75rem); right: 0; min-width: 220px; background: #111; border: 1px solid rgba(255,255,255,0.1); padding: .5rem 0; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .2s, transform .2s; mix-blend-mode: normal; z-index: 200; }
+.nav-dropdown.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+.nav-dropdown a { display: flex; align-items: baseline; gap: .75rem; padding: .55rem 1.25rem; font-size: .72rem; letter-spacing: .1em; color: rgba(240,236,228,.55); text-decoration: none; text-transform: uppercase; transition: color .2s, background .2s; mix-blend-mode: normal; }
+.nav-dropdown a:hover { color: var(--text); background: rgba(255,255,255,.04); }
+.dd-num { color: var(--accent); font-family: 'Bebas Neue',sans-serif; font-size: .9rem; min-width: 1.5rem; }
+
+/* ── HOTEL GRID ── */
+.hotel-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 3rem 4rem; margin-top: 3rem; }
+@media (max-width:900px) { .hotel-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width:560px) { .hotel-grid { grid-template-columns: 1fr; } }
+.hotel-block {}
+.hotel-day-label { font-family: 'Bebas Neue',sans-serif; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.35rem; }
+.parking-card-label { font-family: 'Bebas Neue',sans-serif; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(232,184,74,0.45); margin-bottom: 0.35rem; }
+.hotel-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; line-height: 1.2; color: var(--text); margin-bottom: 0.5rem; }
+.hotel-links { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.hotel-link-btn { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 99px; font-size: 0.68rem; color: var(--muted); text-decoration: none; transition: all 0.2s; letter-spacing: 0.05em; }
+.hotel-link-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── HERO MAP ── */
+.hero { flex-direction: row !important; align-items: stretch !important; }
+.hero-content { align-self: flex-end; flex: 0 0 480px; }
+.hero-map-wrap { flex: 1; position: relative; overflow: hidden; z-index: 1; }
+#heroMap { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-map-wrap::after {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(to right, #0e0e0e 0%, rgba(14,14,14,0.85) 18%, transparent 45%, rgba(14,14,14,0.5) 80%, #0e0e0e 100%),
+    linear-gradient(to bottom, #0e0e0e 0%, transparent 18%, transparent 75%, #0e0e0e 100%);
+}
+.map-pin-label { background: #c8923a !important; color: #000 !important; font-family: 'Bebas Neue',sans-serif !important; font-size: .72rem !important; letter-spacing: .1em !important; padding: 2px 6px !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; white-space: nowrap; pointer-events: none; }
+.map-pin-label::before { display: none !important; }
+@media (max-width: 900px) {
+  .hero { display: block !important; height: auto !important; min-height: unset !important; overflow: hidden !important; padding: 0 !important; }
+  .hero-bg, .hero-overlay { display: none; }
+  .hero-content { display: block; padding: 6rem 1.5rem 1.5rem; background: var(--bg); position: relative; z-index: 2; }
+  .hero-map-wrap { display: block !important; position: relative !important; inset: unset !important; left: 0 !important; transform: none !important; width: 100vw !important; margin-left: 0 !important; height: 70vw; min-height: 280px; max-height: 400px; z-index: 1; }
+  #heroMap { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; }
+  .hero-map-wrap::after { background: linear-gradient(to bottom, #0e0e0e 0%, transparent 20%, transparent 80%, #0e0e0e 100%); }
+  .scroll-hint { display: none; }
+}
+
+/* ── PARKING SECTION ── */
+.parking-day { margin-bottom: 3rem; }
+.parking-day-title { font-family: 'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--text); margin-bottom:.35rem; }
+.parking-day-sub { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem; }
+.parking-slots { display:flex; flex-direction:column; gap:.75rem; }
+.parking-slot-group { border-left:2px solid var(--border); padding-left:1.25rem; margin-bottom:1rem; }
+.parking-slot-group-label { font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:.6rem; }
+.parking-spot { background:var(--surface); border:1px solid var(--border); padding:1rem 1.25rem; display:grid; grid-template-columns:1fr auto; gap:.5rem .75rem; align-items:start; margin-bottom:.5rem; }
+.parking-spot-name { font-weight:500; font-size:.88rem; color:var(--text); display:flex; align-items:center; gap:.4rem; }
+.parking-spot-name a { color:var(--accent); text-decoration:none; font-size:.72rem; }
+.parking-spot-name a:hover { color:var(--accent2); }
+.parking-spot-notes { font-size:.78rem; color:var(--muted); line-height:1.5; grid-column:1/-1; margin-top:.15rem; }
+.parking-spot-meta { display:flex; gap:1.5rem; flex-wrap:wrap; grid-column:1/-1; margin-top:.4rem; }
+.parking-spot-meta span { font-size:.72rem; color:var(--muted); }
+.parking-spot-meta .p-cost { color:var(--accent2); font-weight:500; }
+.parking-warn { font-size:.78rem; color:var(--accent); margin-top:.5rem; padding:.5rem .75rem; border-left:2px solid var(--accent); background:rgba(200,146,58,.05); }
+@media(max-width:768px){ .parking-spot { grid-template-columns:1fr; } }
+
+/* ── FAB (mobile only) ── */
+.fab {
+  position: fixed; bottom: 2rem; right: 2rem;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--accent); border: none; cursor: pointer;
+  font-size: 1.2rem; display: none; align-items: center; justify-content: center;
+  z-index: 300; box-shadow: 0 4px 16px rgba(0,0,0,0.4); transition: transform 0.2s, background 0.2s;
+}
+.fab:hover { transform: scale(1.1); background: var(--accent2); }
+.fab-menu {
+  position: fixed; bottom: 5.5rem; right: 2rem;
+  background: #111; border: 1px solid rgba(255,255,255,0.1);
+  min-width: 200px; display: none; z-index: 300;
+  padding: .5rem 0;
+}
+.fab-menu.open { display: block; }
+.fab-item {
+  display: block; width: 100%; text-align: left;
+  padding: .55rem 1.25rem; font-size: .72rem; letter-spacing: .1em;
+  color: rgba(240,236,228,.55); background: none; border: none;
+  cursor: pointer; text-transform: uppercase; transition: color .2s, background .2s;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.fab-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+@media(max-width:768px) { .fab { display: flex; } }
+
+/* ── sub-accordion (parking / hotel inline expand) ── */
+.sub-acc-body{display:none;padding:.5rem 0 1rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,.015)}
+.sub-acc-body.open{display:block}
+.day-acc-item.sub-open .day-acc-hdr .day-acc-name{color:var(--accent2)}
+/* level-3 sub-category */
+.sub-cat-item{border-top:1px solid rgba(255,255,255,.06)}
+.sub-cat-hdr{display:flex;align-items:center;gap:.75rem;padding:.6rem 3rem;cursor:pointer;user-select:none}
+.sub-cat-hdr:hover .sub-cat-label{color:var(--text)}
+.sub-cat-icon{font-size:.8rem;min-width:1.2rem;text-align:center}
+.sub-cat-label{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;transition:color .2s}
+.sub-cat-label.open{color:var(--accent2)}
+.sub-cat-arrow{font-size:.6rem;color:var(--muted);margin-left:auto;transition:transform .2s}
+.sub-cat-item.open .sub-cat-arrow{transform:rotate(90deg)}
+.sub-cat-body{display:none;padding:.75rem 3rem 1.25rem 4.5rem}
+.sub-cat-body.open{display:block}
+</style>
+</head>
+<body>
+
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Italy &nbsp;·&nbsp; Oct 2026</a>
+  <ul class="nav-links">
+    <li class="nav-dropdown-wrap">
+      <a href="#days" onclick="toggleDD(event,'ddDays')">Days</a>
+      <div class="nav-dropdown" id="ddDays">
+        <a href="#" onclick="scrollToDay(1);return false;"><span class="dd-num">01</span><span class="dd-name">Milan</span></a>
+        <a href="#" onclick="scrollToDay(2);return false;"><span class="dd-num">02</span><span class="dd-name">Lake Como</span></a>
+        <a href="#" onclick="scrollToDay(3);return false;"><span class="dd-num">03</span><span class="dd-name">Sirmione · Verona</span></a>
+        <a href="#" onclick="scrollToDay(4);return false;"><span class="dd-num">04</span><span class="dd-name">West Dolomites</span></a>
+        <a href="#" onclick="scrollToDay(5);return false;"><span class="dd-num">05</span><span class="dd-name">Seceda · Braies</span></a>
+        <a href="#" onclick="scrollToDay(6);return false;"><span class="dd-num">06</span><span class="dd-name">Tre Cime 🎂</span></a>
+        <a href="#" onclick="scrollToDay(7);return false;"><span class="dd-num">07</span><span class="dd-name">Venice</span></a>
+        <a href="#" onclick="scrollToDay(8);return false;"><span class="dd-num">08</span><span class="dd-name">Venice Islands</span></a>
+        <a href="#" onclick="scrollToDay(9);return false;"><span class="dd-num">09</span><span class="dd-name">Bergamo → ✈</span></a>
+      </div>
+    </li>
+    <li><a href="#" onclick="openSectionModal('overview');return false">Overview</a></li>
+    <li><a href="#" onclick="openSectionModal('car');return false">Car</a></li>
+    <li><a href="#" href="#parking" onclick="jumpTo('parking');toggleSection('parking-body');return false">Parking</a></li>
+    <li><a href="#" href="#hotel" onclick="jumpTo('hotel');toggleSection('hotel-body');return false">Hotel</a></li>
+  </ul>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">17 — 27 October 2026</div>
+    <h1 class="hero-title">
+      Italia<br><em>Northern</em><br>Italy
+    </h1>
+    <p class="hero-sub">
+      Milan · Lake Como · Sirmione · Verona<br>
+      Dolomites · Venice · Bergamo
+    </p>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">9</div><div class="hero-stat-label">Days</div></div>
+      <div><div class="hero-stat-num">7</div><div class="hero-stat-label">People</div><div style="font-size:.55rem;color:var(--muted);letter-spacing:.1em;margin-top:.15rem">+ 8 Luggages</div></div>
+      <div><div class="hero-stat-num">QR</div><div class="hero-stat-label">Qatar Airways</div></div>
+    </div>
+  </div>
+  <div class="hero-map-wrap"><div id="heroMap"></div></div>
+<div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- FLIGHT TICKER -->
+<div class="flight-strip">
+  <div class="flight-ticker" id="ticker"></div>
+</div>
+
+<!-- SEARCH + DAYS -->
+<section class="section" id="days">
+  <div class="section-label">Itinerary</div>
+  <h2 class="section-title days-toggle" onclick="toggleDays()" style="cursor:pointer;user-select:none">9 Days<br><em>in the North</em></h2>
+  <div id="days-body" style="display:none">
+  <div class="days-grid" id="daysGrid"></div>
+  </div>
+</section>
+
+<!-- SECTIONS SIDEBAR -->
+<div class="sections-wrap" id="sections-wrap">
+  <div class="sections-sidebar">
+  <div class="sb-item active" onclick="openSectionModal('overview')" id="sb-overview">
+    <div class="sb-eyebrow">At a Glance</div>
+    <div class="sb-name">Overview</div>
+  </div>
+  <div class="sb-item" onclick="openSectionModal('car')" id="sb-car">
+    <div class="sb-eyebrow">Rental Car</div>
+    <div class="sb-name">Car</div>
+  </div>
+  <div class="sb-item" onclick="openSectionModal('parking')" id="sb-parking">
+    <div class="sb-eyebrow">Guide</div>
+    <div class="sb-name">Parking</div>
+  </div>
+  <div class="sb-item" onclick="openSectionModal('hotel')" id="sb-hotel">
+    <div class="sb-eyebrow">Stay</div>
+    <div class="sb-name">Hotel</div>
+  </div>
+  </div>
+  <div class="sections-content">
+  <div class="sp-panel active" id="panel-overview">
+    <div class="section-label">At a Glance</div>
+    <h2 class="section-title" onclick="openSectionModal('overview')" style="margin-bottom:2.5rem;cursor:pointer;user-select:none">Full<br><em>Overview</em></h2>
+    <div style="max-width:1100px"><span class="toggle-arrow">↓</span>
+</div>
+<div class="section-modal" id="modal-overview">
+  <button class="detail-close" onclick="closeSectionModal('overview')">✕</button>
+  <div class="section-modal-inner">
+    <div class="section-modal-header">
+      <div class="section-label">At a Glance</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:3rem;font-weight:400;line-height:1">Full<br><em style="font-style:italic;font-size:.55em;color:var(--muted)">Overview</em></h2>
+    </div>
+<div id="body-overview">
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -1.5rem;padding:0 1.5rem;">
+    <table class="overview-table" style="min-width:520px;">
+      <thead><tr><th>#</th><th>Date</th><th>Destination</th><th>Stay</th><th>Transport</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>17 Oct · Sat</td><td>✈ Bangkok → Doha (QR 835 BKK 20:00)</td><td>—</td><td><span class="badge badge-fly">✈ Depart</span></td></tr>
+        <tr><td>1</td><td>18 Oct · Sun</td><td>✈ ถึง Milan 07:10 · Duomo · Navigli</td><td>Milan City Chic</td><td><span class="badge badge-fly">✈ Arrive</span></td></tr>
+        <tr><td>2</td><td>19 Oct · Mon</td><td>Varenna → Bellagio → Balbianello → Como</td><td>Zeus Apt Como</td><td><span class="badge badge-car">🚗 รับรถ 08:00</span></td></tr>
+        <tr><td>3</td><td>20 Oct · Tue</td><td>Sirmione · Verona · Castel San Pietro</td><td>Arena on Foot</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>4</td><td>21 Oct · Wed</td><td>Lake Carezza → Alpe di Siusi → Ortisei</td><td>Apt Rainer</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>5</td><td>22 Oct · Thu</td><td>Seceda · Lago di Braies · Dobbiaco</td><td>Hotel Rosengarten</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>6</td><td>23 Oct · Fri</td><td>Tre Cime · Ra Gusela · Cortina 🎂</td><td>Cortina Lodge</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td>Venice Center</td><td><span class="badge badge-car">🚗 คืน 12:00</span></td></tr>
+        <tr><td>8</td><td>25 Oct · Sun</td><td>Murano · Burano · San Giorgio</td><td>Venice Center</td><td><span class="badge badge-boat">🚤 Vaporetto</span></td></tr>
+        <tr><td>9</td><td>26 Oct · Mon</td><td>Venice → Bergamo → Milan ✈ 22:10</td><td>—</td><td><span class="badge badge-train">🚂 Train</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+  </div>
+</div><!-- /modal-overview -->
+<!-- /sp-panel -->
+  <div class="sp-panel" id="panel-car">
+    <div class="section-label">Rental Car</div>
+    <h2 class="section-title" onclick="openSectionModal('car')" style="margin-bottom:2.5rem;cursor:pointer;user-select:none">Hyundai Staria<br><em>9 Seats</em></h2>
+    <div style="max-width:1100px"><span class="toggle-arrow">↓</span>
+</div>
+<div class="section-modal" id="modal-car">
+  <button class="detail-close" onclick="closeSectionModal('car')">✕</button>
+  <div class="section-modal-inner">
+    <div class="section-modal-header">
+      <div class="section-label">Rental Car</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:3rem;font-weight:400;line-height:1">Hyundai Staria<br><em style="font-style:italic;font-size:.55em;color:var(--muted)">9 Seats</em></h2>
+    </div>
+<div id="body-car">
+    <div class="car-grid">
+      <div class="car-block">
+        <div class="car-block-label">Car Pick-up</div>
+        <div class="car-block-val">Milano Centrale Railway Station</div>
+        <div class="car-block-sub">Galleria delle Carrozze 08:00–20:00</div>
+        <div class="car-block-val" style="font-size:1.1rem;color:var(--accent2);margin-top:.4rem">19 Oct · 08:00</div>
+        <a href="https://maps.app.goo.gl/bAdVQYqU3y3W3o8x5" target="_blank" class="map-btn" style="margin-top:.75rem">📍 Google Maps</a>
+      </div>
+      <div class="car-block">
+        <div class="car-block-label">Car Return</div>
+        <div class="car-block-val">Venice Marco Polo Airport</div>
+        <div class="car-block-sub">Car Rental Return Area 08:00–23:00</div>
+        <div class="car-block-val" style="font-size:1.1rem;color:var(--accent2);margin-top:.4rem">24 Oct · 12:00</div>
+        <a href="https://maps.app.goo.gl/4osF6Dufnk4XQCeY8" target="_blank" class="map-btn" style="margin-top:.75rem">📍 Google Maps</a>
+      </div>
+      <div class="car-block">
+        <div class="car-block-label">Route</div>
+        <div class="car-block-val">Milan → Como → Sirmione<br>→ Verona → Dolomites → Venice</div>
+      </div>
+      <div class="car-block">
+        <div class="car-block-label">Duration</div>
+        <div class="car-block-val">5 Days<br>19 — 24 October</div>
+      </div>
+    </div>
+    <div class="warn-bar">
+      🔴 <strong>ZTL ATTIVA / VARCO ATTIVO</strong> — เห็นป้ายนี้อย่าขับเข้าเด็ดขาด<br>
+      🚗 Venice ห้ามขับรถเข้าเกาะ — คืนรถที่ Marco Polo Airport แล้วนั่ง Water Bus เข้า
+    </div>
+
+  </div>
+
+</div>
+  </div>
+</div><!-- /modal-car -->
+<!-- /sp-panel -->
+<section class="section" id="parking">
+  <div class="section-label">Guide</div>
+  <h2 class="section-title days-toggle" onclick="toggleSection('parking-body')" style="cursor:pointer;user-select:none">Parking<br><em>Guide</em></h2>
+  <div id="parking-body" style="display:none">
+    <div class="days-grid">
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openParkDetail('02')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">02 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Lake Como</span><span class="day-acc-sub">Varenna · Como</span><span class="day-acc-tags"><span class="day-acc-tag">🅿 Daytime</span><span class="day-acc-tag">🌙 Evening</span></span></span>
+      <span class="day-acc-meta">19 Oct · Sun</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openParkDetail('03')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">03 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Sirmione → Verona</span><span class="day-acc-sub">Lake Garda · Arena di Verona</span><span class="day-acc-tags"><span class="day-acc-tag">🅿 Morning</span><span class="day-acc-tag">🅿 Afternoon</span><span class="day-acc-tag">🌙 Overnight</span></span></span>
+      <span class="day-acc-meta">20 Oct · Mon</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openParkDetail('04')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">04 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">West Dolomites</span><span class="day-acc-sub">Lake Carezza · Ortisei</span><span class="day-acc-tags"><span class="day-acc-tag">🅿 Daytime</span><span class="day-acc-tag">🌙 In-house</span></span></span>
+      <span class="day-acc-meta">21 Oct · Tue</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openParkDetail('05')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">05 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Seceda + Braies</span><span class="day-acc-sub">Ortisei · Dobbiaco</span><span class="day-acc-tags"><span class="day-acc-tag">🚡 Cable Car</span><span class="day-acc-tag">🌙 In-house</span></span></span>
+      <span class="day-acc-meta">22 Oct · Wed</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openParkDetail('06')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">06 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Tre Cime → Cortina</span><span class="day-acc-sub">Tre Cime di Lavaredo · Cortina d'Ampezzo</span><span class="day-acc-tags"><span class="day-acc-tag">⚠ Pre-book</span><span class="day-acc-tag">🌙 Overnight</span></span></span>
+      <span class="day-acc-meta">23 Oct · Thu</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openParkDetail('07')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">07 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Car Return</span><span class="day-acc-sub">Venice Marco Polo Airport</span><span class="day-acc-tags"><span class="day-acc-tag">✈ Drop-off</span></span></span>
+      <span class="day-acc-meta">24 Oct · Fri</span>
+    </div>
+  </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="hotel">
+  <div class="section-label">Hotel</div>
+  <h2 class="section-title days-toggle" onclick="toggleSection('hotel-body')" style="cursor:pointer;user-select:none">8 Nights<br><em>in the North</em></h2>
+  <div id="hotel-body" style="display:none">
+    <div class="days-grid">
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('01')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">01 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Milan</span><span class="day-acc-sub">Milan City Chic – Porta Venezia</span><span class="day-acc-tags"><span class="day-acc-tag">🏨 Hotel</span></span></span>
+      <span class="day-acc-meta">18 Oct · Sun</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('02')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">02 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Lake Como</span><span class="day-acc-sub">Zeus – Luxury Apartment, Como</span><span class="day-acc-tags"><span class="day-acc-tag">🏠 Apartment</span></span></span>
+      <span class="day-acc-meta">19 Oct · Mon</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('03')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">03 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Verona</span><span class="day-acc-sub">Arena on Foot – Parking, Verona</span><span class="day-acc-tags"><span class="day-acc-tag">🏨 Hotel</span></span></span>
+      <span class="day-acc-meta">20 Oct · Tue</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('04')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">04 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Ortisei</span><span class="day-acc-sub">Apartment Rainer – Garden, Ortisei</span><span class="day-acc-tags"><span class="day-acc-tag">🏠 Apartment</span></span></span>
+      <span class="day-acc-meta">21 Oct · Wed</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('05')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">05 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Dobbiaco</span><span class="day-acc-sub">Hotel Rosengarten, Dobbiaco</span><span class="day-acc-tags"><span class="day-acc-tag">🏨 Hotel</span></span></span>
+      <span class="day-acc-meta">22 Oct · Thu</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('06')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">06 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Cortina</span><span class="day-acc-sub">Cortina Lodge</span><span class="day-acc-tags"><span class="day-acc-tag">🏨 Hotel</span></span></span>
+      <span class="day-acc-meta">23 Oct · Fri</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('07')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">07 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Venice</span><span class="day-acc-sub">Venice Center · Night 1</span><span class="day-acc-tags"><span class="day-acc-tag">🏨 Hotel</span></span></span>
+      <span class="day-acc-meta">24 Oct · Sat</span>
+    </div>
+  </div>
+  <div class="day-acc-item">
+    <div class="day-acc-hdr" onclick="openHotelDetail('08')" style="cursor:pointer;user-select:none">
+      <span class="day-acc-num">08 —</span>
+      <span class="day-acc-body-info"><span class="day-acc-name">Venice</span><span class="day-acc-sub">Venice Center · Night 2</span><span class="day-acc-tags"><span class="day-acc-tag">🏨 Hotel</span></span></span>
+      <span class="day-acc-meta">25 Oct · Sun</span>
+    </div>
+  </div>
+    </div>
+  </div>
+</section>
+  </div>
+</div>
+
+
+
+<footer>
+  <span class="footer-logo">🇮🇹 Italy 2026</span>
+  <span>17–27 October · 7 People · Qatar Airways</span>
+</footer>
+<div class="day-detail" id="park-detail-02">
+  <button class="detail-close" onclick="closeParkDetail('02')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Parking · Day 02 — 19 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Lake Como</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🅿 Parking</div><div class="hotel-grid"><div class="hotel-block"><div class="parking-card-label">Daytime · Varenna</div><div class="hotel-name">⭐ Parcheggio Multipiano</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">สูงไม่เกิน 2.05 ม. · €3/ชม.<br>09:15–16:30 · €22.5 ≈ ฿853</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Parcheggio+Multipiano+Viale+Giovanni+Polvani+1+Varenna" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Evening · Como</div><div class="hotel-name">Autorimessa</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">สูงไม่เกิน 2 ม. · เปิด 24 ชม.<br>18:00–09:00 · €10.75 ≈ ฿420</div><div class="hotel-links"><a href="https://maps.app.goo.gl/iq3vouZiKPeyT4Ht9" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div>
+  </div>
+</div></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🚫 ZTL</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">Como มี ZTL ในใจกลางเมือง (Centro Storico) — ห้ามรถยนต์เข้าช่วงกลางวัน จอดนอก ZTL แล้วเดินเข้า หรือใช้ Autorimessa ที่ติดขอบ ZTL</p></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">📝 Notes</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">ควรออกเดินทางเช้า — ที่จอด Varenna เต็มเร็วมากช่วงฤดูท่องเที่ยว<br>Varenna → Como ~1 ชม. ผ่านถนนริมทะเลสาบ</p></div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="park-detail-03">
+  <button class="detail-close" onclick="closeParkDetail('03')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Parking · Day 03 — 20 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Sirmione → Verona</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🅿 Parking</div><div class="hotel-grid"><div class="hotel-block"><div class="parking-card-label">Morning · Sirmione ⭐</div><div class="hotel-name">Parcheggio Monte Baldo</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">ไม่จำกัดความสูง · €3.50/ชม.<br>€11–14 ≈ ฿430–550</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Parcheggio+Monte+Baldo+Sirmione" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Morning · Sirmione (alt)</div><div class="hotel-name">Parcheggio Grifo</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">⚠ เช็คโซนก่อน · €3.50/ชม.<br>€11–14 ≈ ฿430–550</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Grifo+Parking+Piazzale+Europa+Sirmione" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Afternoon · Verona ⭐</div><div class="hotel-name">Parcheggio Interrato Cittadella</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">สูงไม่เกิน 2.15 ม.<br>5 ชม. · €19 ≈ ฿760</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Parcheggio+Interrato+CITTADELLA+APCOA+Verona" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Afternoon · Verona (alt)</div><div class="hotel-name">Parcheggio Saba Arena</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">ใกล้ Arena di Verona</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Parcheggio+Saba+Arena+Verona" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Overnight · Verona</div><div class="hotel-name">Under Hotel (Arena on Foot)</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">แถบน้ำเงิน €1/ชม. · ฟรี 20:00–08:00</div></div><div class="hotel-block"><div class="parking-card-label">Overnight · Verona (alt)</div><div class="hotel-name">Viale Colonnello Galliano 12</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">เดิน 6 นาที · ฟรีตลอดเวลา</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Viale+Colonnello+Galliano+12+Verona" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div>
+  </div>
+</div></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🚫 ZTL</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0"><strong style="color:var(--accent)">Sirmione:</strong> เขตเมืองเก่าเป็น ZTL ทั้งหมด — จอดนอกปราสาทแล้วเดินข้ามสะพาน ~5 นาที<br><strong style="color:var(--accent)">Verona:</strong> ZTL รอบ Arena ทำงาน 08:00–22:00 · ที่จอด Cittadella อยู่ขอบ ZTL พอดี</p></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">📝 Notes</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">Sirmione ช่วงเช้าแน่นมาก แนะนำถึงก่อน 09:00<br>จอด Under Hotel สะดวกที่สุดสำหรับที่พักใกล้ Arena</p></div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="park-detail-04">
+  <button class="detail-close" onclick="closeParkDetail('04')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Parking · Day 04 — 21 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">West Dolomites</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🅿 Parking</div><div class="hotel-grid"><div class="hotel-block"><div class="parking-card-label">Daytime · Lake Carezza</div><div class="hotel-name">Parcheggio Lago di Carezza (P1)</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">เปิด 24/7 · €3/ชม. เหมาวัน €30<br>~45–60 นาที · €3–6</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Parcheggio+Lago+di+Carezza+Strada+Carezza+123+Nova+Levante" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Overnight · Ortisei</div><div class="hotel-name">Apartment Rainer — In-house</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">รองรับรถ 9 ที่นั่งได้ · ฟรี</div></div>
+  </div>
+</div></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🚫 ZTL</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">Ortisei ใจกลางมี ZTL ช่วงกลางวัน · ที่พัก Apartment Rainer มีที่จอดในบ้าน ไม่ต้องขับผ่าน ZTL</p></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">📝 Notes</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">Lake Carezza จ่ายเงินสดที่เครื่อง · แวะ 45–60 นาที<br>Carezza → Ortisei ~40 นาที ผ่านถนน Val Gardena</p></div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="park-detail-05">
+  <button class="detail-close" onclick="closeParkDetail('05')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Parking · Day 05 — 22 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Seceda + Braies</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🅿 Parking</div><div class="hotel-grid"><div class="hotel-block"><div class="parking-card-label">Morning · Seceda</div><div class="hotel-name">Park in Ortisei → Cable Car up</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">ไม่ระบุที่จอดรถแยก</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Ortisei+cable+car+parking+Seceda" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Overnight · Dobbiaco</div><div class="hotel-name">Hotel Rosengarten — In-house</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">รองรับรถ 9 ที่นั่งได้ · ฟรี</div></div>
+  </div>
+</div></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">📝 Notes</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">Ortisei → Braies ~1.5 ชม. · → Dobbiaco อีก ~30 นาที<br>Lago di Braies ถึงก่อน 09:00 ที่จอดเต็มเร็วมาก</p></div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="park-detail-06">
+  <button class="detail-close" onclick="closeParkDetail('06')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Parking · Day 06 — 23 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Tre Cime → Cortina</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🅿 Parking</div><div class="hotel-grid"><div class="hotel-block"><div class="parking-card-label">Morning · Tre Cime ⚠</div><div class="hotel-name">Rifugio Auronzo Parking</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">จองล่วงหน้า auronzo.info · ~€40/คัน</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Rifugio+Auronzo+parking+Tre+Cime+di+Lavaredo" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Overnight · Cortina ⭐</div><div class="hotel-name">Parcheggio Multipiano Pontechiesa</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">สูงไม่เกิน 2.49 ม. · 3 ชม.แรก €2 / €1 ต่อชม.</div><div class="hotel-links"><a href="https://maps.app.goo.gl/67X7LtKcUTJBTvMX6" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Overnight · Cortina ⭐</div><div class="hotel-name">Parcheggio Libero</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">09:00–20:00 · 4 ชม.แรก €1 / €0.50 · ฟรียามค่ำ</div><div class="hotel-links"><a href="https://maps.app.goo.gl/y5qCuorTXfCnBnkj6" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div><div class="hotel-block"><div class="parking-card-label">Overnight · Cortina (alt)</div><div class="hotel-name">Parcheggio Ex Mercato</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">€1–2/ชม.</div><div class="hotel-links"><a href="https://maps.app.goo.gl/9tHNqsbaU83uoNH66" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div>
+  </div>
+</div></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">📝 Notes</div><div style="font-size:.78rem;color:var(--accent);padding:.65rem .9rem;border-left:2px solid var(--accent);background:rgba(200,146,58,.05);margin-bottom:.75rem">⚠ จองที่จอด Tre Cime ล่วงหน้าก่อนออกเดินทาง!</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">ที่พัก Cortina Lodge ยังไม่ยืนยันว่ารองรับรถ 9 ที่นั่งได้มั้ย — ต้องถามเจ้าของก่อน</p></div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="park-detail-07">
+  <button class="detail-close" onclick="closeParkDetail('07')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Parking · Day 07 — 24 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Car Return</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🅿 Parking</div><div class="hotel-grid"><div class="hotel-block"><div class="parking-card-label">Venice Marco Polo Airport</div><div class="hotel-name">Car Rental Return Area</div><div style="font-size:.72rem;color:var(--muted);margin:.2rem 0;line-height:1.6">Viale Galileo Galilei · Drop-off 08:00–23:00<br>คืนรถที่นี่ · รวมในค่าเช่า</div><div class="hotel-links"><a href="https://maps.app.goo.gl/4osF6Dufnk4XQCeY8" target="_blank" class="hotel-link-btn">📍 Maps</a></div></div>
+  </div>
+</div></div><div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">📝 Notes</div><p style="font-size:.8rem;color:var(--muted);line-height:1.8;margin:0">เช็คเวลา drop-off กับบริษัทเช่ารถล่วงหน้า<br>Cortina → สนามบิน ~2 ชม.</p></div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-01">
+  <button class="detail-close" onclick="closeHotelDetail('01')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 01 — 18 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Milan</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏨 Hotel</div><div class="hotel-block"><div class="hotel-day-label">Day 01 · 18 Oct · Milan</div><div class="hotel-name">Milan City Chic – Porta Venezia</div><div class="hotel-links"><a href="https://maps.app.goo.gl/eFFCNn73nPHcTRS59" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-02">
+  <button class="detail-close" onclick="closeHotelDetail('02')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 02 — 19 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Lake Como</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏠 Apartment</div><div class="hotel-block"><div class="hotel-day-label">Day 02 · 19 Oct · Como</div><div class="hotel-name">Zeus – Luxury Apartment, Como</div><div class="hotel-links"><a href="https://maps.app.goo.gl/cJUmdWL6Eq1gQxKWA" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-03">
+  <button class="detail-close" onclick="closeHotelDetail('03')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 03 — 20 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Verona</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏨 Hotel</div><div class="hotel-block"><div class="hotel-day-label">Day 03 · 20 Oct · Verona</div><div class="hotel-name">Arena on Foot – Parking, Verona</div><div class="hotel-links"><a href="https://maps.app.goo.gl/cAfzRrH6dtmAeECJ6" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-04">
+  <button class="detail-close" onclick="closeHotelDetail('04')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 04 — 21 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Ortisei</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏠 Apartment</div><div class="hotel-block"><div class="hotel-day-label">Day 04 · 21 Oct · Ortisei</div><div class="hotel-name">Apartment Rainer – Garden, Ortisei</div><div class="hotel-links"><a href="https://maps.app.goo.gl/pR1zTUWP9S4LbQzB7" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-05">
+  <button class="detail-close" onclick="closeHotelDetail('05')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 05 — 22 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Dobbiaco</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏨 Hotel</div><div class="hotel-block"><div class="hotel-day-label">Day 05 · 22 Oct · Dobbiaco</div><div class="hotel-name">Hotel Rosengarten, Dobbiaco</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Rosengarten+Dobbiaco+Italy" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-06">
+  <button class="detail-close" onclick="closeHotelDetail('06')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 06 — 23 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Cortina</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏨 Hotel</div><div class="hotel-block"><div class="hotel-day-label">Day 06 · 23 Oct · Cortina</div><div class="hotel-name">Cortina Lodge</div><div class="hotel-links"><a href="https://www.google.com/maps/search/?api=1&query=Cortina+Lodge+Cortina+d+Ampezzo" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-07">
+  <button class="detail-close" onclick="closeHotelDetail('07')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 07 — 24 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Venice</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏨 Hotel</div><div class="hotel-block"><div class="hotel-day-label">Day 07 · 24 Oct · Venice</div><div class="hotel-name">Venice Center · Night 1</div><div class="hotel-links"><a href="https://maps.app.goo.gl/wmytJHiNu4ee4VFw7" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="day-detail" id="hotel-detail-08">
+  <button class="detail-close" onclick="closeHotelDetail('08')">✕</button>
+  <div style="max-width:720px;margin:0 auto;padding:5rem 3rem 4rem;overflow-y:auto;height:100dvh;box-sizing:border-box">
+
+      <div class="section-label" style="margin-bottom:.5rem">Hotel · Night 08 — 25 Oct</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;color:var(--text);line-height:1.1;margin:0 0 1.5rem">Venice</h3>
+      <div style="margin-bottom:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)">🏨 Hotel</div><div class="hotel-block"><div class="hotel-day-label">Day 08 · 25 Oct · Venice</div><div class="hotel-name">Venice Center · Night 2</div><div class="hotel-links"><a href="https://maps.app.goo.gl/wmytJHiNu4ee4VFw7" target="_blank" class="hotel-link-btn">📍 Google Maps</a><a href="#" target="_blank" class="hotel-link-btn">🌐 Website</a></div></div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+// ── HERO BG PARALLAX ────────────────────────────────────────────────────────
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  const s = window.scrollY;
+  if (heroBg) heroBg.style.transform = `scale(1.05) translateY(${s * 0.25}px)`;
+});
+
+// ── FLIGHT TICKER ───────────────────────────────────────────────────────────
+const flights = [
+  { no:'QR 835', route:'BKK 20:00 → DOH 22:55', date:'17 Oct' },
+  { no:'QR 123', route:'DOH 02:00 → MXP 07:10', date:'18 Oct' },
+  { no:'QR 118', route:'MXP 22:10 → DOH 05:55', date:'26 Oct' },
+  { no:'QR 828', route:'DOH 07:50 → BKK 18:25', date:'27 Oct' },
+];
+const tickerEl = document.getElementById('ticker');
+const tickerContent = flights.map(f =>
+  `<div class="flight-item"><strong>${f.no}</strong><span>✈</span>${f.route}<span class="flight-sep">·</span>${f.date}</div>`
+).join('');
+tickerEl.innerHTML = tickerContent.repeat(4); // repeat for seamless loop
+
+// ── DAY DATA ─────────────────────────────────────────────────────────────────
+const DAYS = [
+  {
+    num:1, date:'18 Oct · Sun', title:'Milan', sub:'Duomo · Galleria · Brera · Navigli',
+    tags:['Arrive','City Walk'], temp:'17°/9°C',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg/1200px-Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Galleria_Vittorio_Emanuele_II_from_top.jpg/800px-Galleria_Vittorio_Emanuele_II_from_top.jpg',
+    photos:['italy_photos/Milan%20Day_1-1.jpg','italy_photos/Milan%20Day_1-2.jpg','italy_photos/Milan%20Day_1-3.jpg'],
+    stay:'Milan City Chic – Porta Venezia',stayPrice:'฿18,628',
+    stayLink:'https://maps.app.goo.gl/eFFCNn73nPHcTRS59',
+    tl:[
+      {time:'07:10',place:'✈ ถึง Malpensa T1',h:false,items:[
+        {text:'รอกระเป๋า',map:'https://www.google.com/maps/search/?api=1&query=Milan+Malpensa+Airport+Terminal+1'},
+        {text:'เปลี่ยนชุด',map:''},
+      ]},
+      {time:'08:00–09:30',place:'🚆 Malpensa Express → Centrale',h:false,items:[
+        {text:'~€13/คน',map:'https://www.google.com/maps/search/?api=1&query=Milano+Centrale+Station'},
+        {text:'50 นาที',map:''},
+      ]},
+      {time:'11:00–13:30',place:'🏛 Duomo di Milano',h:true,items:[
+        {text:'Combo Lift €26',map:'https://www.google.com/maps/search/?api=1&query=Duomo+di+Milano'},
+        {text:'Rooftop + ภายใน',map:''},
+        {text:'⚠ จอง ticket.duomomilano.it ก่อน',map:''},
+      ]},
+      {time:'14:00–15:00',place:'🛍 Galleria Vittorio Emanuele II',h:false,items:[
+        {text:'☕ Biffi Caffe',map:'https://www.google.com/maps/search/?api=1&query=Biffi+Caffe+Galleria+Milan'},
+        {text:'🍽 Ristorante Cracco (Michelin)',map:'https://www.google.com/maps/search/?api=1&query=Ristorante+Cracco+Milan'},
+        {text:'🛍 Galleria Vittorio Emanuele II',map:'https://www.google.com/maps/search/?api=1&query=Galleria+Vittorio+Emanuele+II+Milan'},
+      ]},
+      {time:'15:15–17:00',place:'🎨 Brera District',h:false,items:[
+        {text:'Via Fiori Chiari',map:'https://www.google.com/maps/place/Via+Fiori+Chiari,+20121+Milano+MI,%E0%B8%AD%E0%B8%B4%E0%B8%95%E0%B8%B2%E0%B8%A5%E0%B8%B5/@45.472003,9.1856301,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4786c14cae1abd0f:0x66acc0d30e19a34e!8m2!3d45.472003!4d9.1856301!16s%2Fg%2F1tm8cw6x?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'Via Brera',map:'https://www.google.com/maps/place/Via+Brera,+20121+Milano+MI,%E0%B8%AD%E0%B8%B4%E0%B8%95%E0%B8%B2%E0%B8%A5%E0%B8%B5/@45.4710678,9.1875982,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4786c6b304bce3fd:0xb3b7ede7cf0e4135!8m2!3d45.4710678!4d9.1875982!16s%2Fg%2F122rd63z?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'Pinacoteca di Brera (ถ้าสนใจ)',map:'https://www.google.com/maps/search/?api=1&query=Pinacoteca+di+Brera+Milan'},
+      ]},
+      {time:'17:00–17:30',place:'🏰 Castello Sforzesco',h:false,items:[
+        {text:'Castello Sforzesco',map:'https://www.google.com/maps/search/?api=1&query=Castello+Sforzesco+Milan'},
+        {text:'ลานด้านหน้า',map:''},
+        {text:'🌳 Parco Sempione',map:'https://www.google.com/maps/search/?api=1&query=Parco+Sempione+Milan'},
+      ]},
+      {time:'18:00–20:30',place:'🌊 Navigli',h:true,items:[
+        {text:'Naviglio Grande',map:'https://www.google.com/maps/search/?api=1&query=Naviglio+Grande+Milan'},
+        {text:'Darsena',map:'https://www.google.com/maps/search/?api=1&query=Darsena+Milan'},
+        {text:'บรรยากาศดินเนอร์ริมคลอง',map:''},
+      ]},
+    ],
+    maps:[
+      {name:'Duomo',url:'https://www.google.com/maps/search/?api=1&query=Duomo+di+Milano'},
+      {name:'Galleria',url:'https://www.google.com/maps/search/?api=1&query=Galleria+Vittorio+Emanuele+II+Milan'},
+      {name:'Brera',url:'https://www.google.com/maps/search/?api=1&query=Brera+District+Milan'},
+      {name:'Navigli',url:'https://www.google.com/maps/search/?api=1&query=Naviglio+Grande+Milan'},
+    ]
+  },
+  {
+    num:2, date:'19 Oct · Mon', title:'Lake Como', sub:'Varenna · Bellagio · Balbianello · Como',
+    tags:['🚗 รับรถ','Ferry'], temp:'16°/8°C',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Bellagio_da_Varenna.jpg/1200px-Bellagio_da_Varenna.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Bellagio_da_Varenna.jpg/800px-Bellagio_da_Varenna.jpg',
+    photos:['italy_photos/Lake%20como%20Day_2-1.jpg','italy_photos/Lake%20como%20Day_2-2.jpg','italy_photos/Lake%20como%20Day_2-3.jpg'],
+    stay:'Zeus – Luxury Apartment, Como',stayPrice:'฿16,062',
+    stayLink:'https://maps.app.goo.gl/cJUmdWL6Eq1gQxKWA',
+    tl:[
+      {time:'08:00',place:'🚗 รับรถ Milano Centrale Railway Station',h:true,items:[
+        {text:'Galleria delle Carrozze',map:'https://maps.app.goo.gl/bAdVQYqU3y3W3o8x5'},
+        {text:'ออกเส้น SS36 ไม่เจอ ZTL',map:''},
+      ]},
+      {time:'09:15',place:'🅿 จอดรถ Varenna',h:false,items:[
+        {text:'Parcheggio Multipiano Varenna <2.05m',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+Multipiano+Varenna+Italy'},
+        {text:'€3/ชม.',map:''},
+      ]},
+      {time:'09:15–11:20',place:'📍 Varenna',h:false,items:[
+        {text:'Villa Monastero €15',map:'https://www.google.com/maps/search/?api=1&query=Villa+Monastero+Varenna+Italy'},
+        {text:'Passeggiata degli Innamorati',map:'https://www.google.com/maps/search/?api=1&query=Passeggiata+degli+Innamorati+Varenna'},
+        {text:'☕ Gelato Varenna',map:'https://www.google.com/maps/search/?api=1&query=gelato+Varenna+Italy'},
+      ]},
+      {time:'11:20',place:'🚤 เรือ Varenna → Bellagio',h:false,items:[
+        {text:'€4.60/คน',map:'https://www.google.com/maps/search/?api=1&query=Varenna+ferry+landing+Lake+Como'},
+        {text:'~15 นาที',map:''},
+        {text:'Ferry landing Varenna',map:''},
+      ]},
+      {time:'11:45–15:20',place:'📍 Bellagio',h:true,items:[
+        {text:'Waterfront Bellagio',map:'https://www.google.com/maps/search/?api=1&query=Bellagio+waterfront+Lake+Como'},
+        {text:'Salita Serbelloni',map:'https://www.google.com/maps/place/Salita+Serbelloni,+22021+Bellagio+CO,%E0%B8%AD%E0%B8%B4%E0%B8%95%E0%B8%B2%E0%B8%A5%E0%B8%B5/@45.9866236,9.261593,1056m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4784180175627959:0x40fc2f3372d8a700!8m2!3d45.9866236!4d9.261593!16s%2Fg%2F1q6401yv9?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'ร้านค้าซอยเล็ก',map:''},
+        {text:'🍝 กลางวัน 12:30',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Bellagio+Lake+Como'},
+        {text:'Punta Spartivento',map:'https://www.google.com/maps/search/?api=1&query=Punta+Spartivento+Bellagio'},
+        {text:'วิวสุดของแหลม',map:''},
+      ]},
+      {time:'15:45–16:30',place:'📸 Villa del Balbianello',h:true,items:[
+        {text:'ถ่ายด้านนอก (สวยที่สุดใน Lake Como)',map:'https://www.google.com/maps/search/?api=1&query=Villa+del+Balbianello+Lenno+Italy'},
+      ]},
+      {time:'18:30–21:00',place:'📍 Como',h:false,items:[
+        {text:'Como Cathedral',map:'https://www.google.com/maps/search/?api=1&query=Como+Cathedral+Italy'},
+        {text:'Piazza Cavour',map:'https://www.google.com/maps/search/?api=1&query=Piazza+Cavour+Como+Italy'},
+        {text:'ริมทะเลสาบ',map:''},
+        {text:'🍝 ดินเนอร์ริมทะเลสาบ',map:'https://www.google.com/maps/search/?api=1&query=restaurant+waterfront+Como+Italy'},
+      ]},
+    ],
+    maps:[
+      {name:'Varenna',url:'https://www.google.com/maps/search/?api=1&query=Varenna+Lake+Como'},
+      {name:'Bellagio',url:'https://www.google.com/maps/search/?api=1&query=Bellagio+Lake+Como'},
+      {name:'Balbianello',url:'https://www.google.com/maps/search/?api=1&query=Villa+del+Balbianello+Lenno'},
+      {name:'Como',url:'https://www.google.com/maps/search/?api=1&query=Como+Cathedral+Italy'},
+    ]
+  },
+  {
+    num:3, date:'20 Oct · Tue', title:'Sirmione → Verona', sub:'Lake Garda · Arena · Castel San Pietro Sunset',
+    tags:['🚗 Drive','Sunset ★'], temp:'18°/9°C',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Castello_Scaligero_di_Sirmione.jpg/1200px-Castello_Scaligero_di_Sirmione.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Arena_di_Verona_-_The_arena_%285975768516%29.jpg/800px-Arena_di_Verona_-_The_arena_%285975768516%29.jpg',
+    photos:['italy_photos/Verona%20Day%203-1.jpg','italy_photos/Verona%20Day%203-2.jpg','italy_photos/Verona%20Day%203-3.jpg'],
+    stay:'Arena on Foot – Parking, Verona',stayPrice:'฿12,283',
+    stayLink:'https://maps.app.goo.gl/cAfzRrH6dtmAeECJ6',
+    tl:[
+      {time:'10:00–12:00',place:'📍 Sirmione',h:false,items:[
+        {text:'🅿 Parcheggio Monte Baldo ไม่จำกัดความสูง €3.50/ชม.',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+Monte+Baldo+Sirmione'},
+        {text:'🏰 Castello Scaligero',map:'https://www.google.com/maps/search/?api=1&query=Castello+Scaligero+Sirmione+Italy'},
+        {text:'Piazza Porto Valentino',map:'https://www.google.com/maps/place/Piazza+Porto+Valentino/@45.4934879,10.6041581,1065m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478193dc92bc804b:0x100160d7305a1416!8m2!3d45.4934879!4d10.606733!16s%2Fg%2F11j5cn06x_?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'เดินเล่น Old Town',map:''},
+        {text:'🍦 Gelato Sirmione',map:'https://www.google.com/maps/search/?api=1&query=gelato+Sirmione+Italy'},
+      ]},
+      {time:'13:30',place:'🅿 จอดรถ Verona',h:false,items:[
+        {text:'Parcheggio Interrato Cittadella <2.15m',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+Interrato+Cittadella+Verona'},
+        {text:'€1/ชม. ฟรี 20:00–08:00',map:''},
+      ]},
+      {time:'14:00–14:45',place:'🏟 Arena di Verona',h:true,items:[
+        {text:'Amphitheatre โรมัน อายุ 2,000 ปี',map:'https://www.google.com/maps/search/?api=1&query=Arena+di+Verona+Italy'},
+      ]},
+      {time:'14:45–15:30',place:'📍 Piazza delle Erbe',h:false,items:[
+        {text:'Piazza delle Erbe',map:'https://www.google.com/maps/search/?api=1&query=Piazza+delle+Erbe+Verona'},
+        {text:'ตลาดเก่าใจกลางเมือง',map:''},
+        {text:'Torre dei Lamberti €6',map:'https://www.google.com/maps/search/?api=1&query=Torre+dei+Lamberti+Verona'},
+        {text:'วิว 360°',map:''},
+      ]},
+      {time:'16:00–16:30',place:'🌉 Ponte Pietra',h:false,items:[
+        {text:'สะพานโรมัน',map:'https://www.google.com/maps/place/Ponte+Pietra/@45.4478001,10.997456,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477f5f4b1f4a3c63:0x90a92c9d12dd53ba!8m2!3d45.4478001!4d11.0000309!16s%2Fm%2F028220k?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'วิวแม่น้ำ Adige',map:''},
+      ]},
+      {time:'16:30–18:45',place:'🌅 Castel San Pietro',h:true,items:[
+        {text:'Funicolare ขึ้น €3',map:'https://www.google.com/maps/search/?api=1&query=Castel+San+Pietro+Verona+Italy'},
+        {text:'Funicolare di Castel San Pietro ถ้ามีเวลา',map:'https://www.google.com/maps/place/Funicolare+di+Castel+San+Pietro/@45.4487851,10.9982051,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477f5f4b2adf4599:0xfa4c01d9eb28a361!8m2!3d45.4487851!4d11.00078!16s%2Fg%2F11bwdrw497?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'วิว panoramic Verona',map:''},
+        {text:'Golden Hour 16:00–17:30',map:''},
+        {text:'Sunset 18:20',map:''},
+        {text:'Blue Hour 18:45',map:''},
+      ]},
+      {time:'19:00',place:'🍝 ดินเนอร์ Verona',h:false,items:[
+        {text:'ร้านอาหารย่าน Piazza Bra',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Piazza+Bra+Verona'},
+      ]},
+    ],
+    maps:[
+      {name:'Sirmione',url:'https://www.google.com/maps/search/?api=1&query=Castello+Scaligero+Sirmione'},
+      {name:'Arena Verona',url:'https://www.google.com/maps/search/?api=1&query=Arena+di+Verona'},
+      {name:'Ponte Pietra',url:'https://www.google.com/maps/place/Ponte+Pietra/@45.4478001,10.997456,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477f5f4b1f4a3c63:0x90a92c9d12dd53ba!8m2!3d45.4478001!4d11.0000309!16s%2Fm%2F028220k?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+      {name:'Castel S.Pietro',url:'https://www.google.com/maps/search/?api=1&query=Castel+San+Pietro+Verona'},
+    ]
+  },
+  {
+    num:4, date:'21 Oct · Wed', title:'West Dolomites', sub:'Lake Carezza · Alpe di Siusi · Ortisei',
+    tags:['🚗 Drive','Gondola ★'], temp:'11°/3°C ❄',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Karersee_mit_Latemargruppe.jpg/1200px-Karersee_mit_Latemargruppe.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Alpe_di_Siusi.jpg/800px-Alpe_di_Siusi.jpg',
+    photos:['italy_photos/West%20Dolomites%20Day_4-1.jpg','italy_photos/West%20Dolomites%20Day_4-2.jpg','italy_photos/West%20Dolomites%20Day_4-3.jpg'],
+    stay:'Apartment Rainer – Garden, Ortisei',stayPrice:'฿31,511',
+    stayLink:'https://maps.app.goo.gl/pR1zTUWP9S4LbQzB7',
+    tl:[
+      {time:'09:30–11:00',place:'🏞 Lake Carezza (Karersee)',h:true,items:[
+        {text:'ทะเลสาบสีมรกต',map:'https://www.google.com/maps/search/?api=1&query=Lago+di+Carezza+Trentino+Italy'},
+        {text:'ป่าสน + Latemar',map:''},
+        {text:'เปิด 24/7 ฟรี',map:''},
+        {text:'🅿 ที่จอดรถ Lake Carezza',map:'https://www.google.com/maps/search/?api=1&query=parking+Lago+di+Carezza+Italy'},
+      ]},
+      {time:'12:15–14:00',place:'🍝 กลางวัน + เช็คอิน Ortisei',h:false,items:[
+        {text:'Apartment Rainer',map:'https://maps.app.goo.gl/pR1zTUWP9S4LbQzB7'},
+        {text:'ฝากกระเป๋าก่อนได้',map:''},
+        {text:'ร้านอาหาร Ortisei',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Ortisei+Val+Gardena'},
+      ]},
+      {time:'15:00–17:30',place:'🚡 Alpe di Siusi (Seiser Alm)',h:true,items:[
+        {text:'Mont Sëuc Ropeway',map:'https://www.google.com/maps/place/Seilbahnen+St.Ulrich+-+Seiser+Alm/@46.5729094,11.6687218,1045m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477812fe866cd589:0xe1265d95276689f8!8m2!3d46.5729094!4d11.6712967!16s%2Fg%2F11gz_lnjs?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'เปิด 8:30–17:00',map:''},
+        {text:'Round Trip €39/คน',map:''},
+        {text:'ทุ่งหญ้าสูงที่ใหญ่ที่สุดในยุโรป',map:'https://www.google.com/maps/search/?api=1&query=Alpe+di+Siusi+South+Tyrol+Italy'},
+        {text:'⭐ Golden Hour 16:00–17:30',map:''},
+      ]},
+      {time:'18:00–21:00',place:'🚶 City Walk Ortisei',h:false,items:[
+        {text:'Ortisei town center',map:'https://www.google.com/maps/search/?api=1&query=Ortisei+Val+Gardena+Italy'},
+        {text:'ร้านค้า Alpine',map:''},
+        {text:'Wine bar Ortisei',map:'https://www.google.com/maps/search/?api=1&query=wine+bar+Ortisei+Val+Gardena'},
+      ]},
+    ],
+    maps:[
+      {name:'Lake Carezza',url:'https://www.google.com/maps/search/?api=1&query=Lago+di+Carezza+Italy'},
+      {name:'Alpe di Siusi',url:'https://www.google.com/maps/search/?api=1&query=Alpe+di+Siusi+South+Tyrol'},
+      {name:'Ortisei',url:'https://www.google.com/maps/search/?api=1&query=Ortisei+Val+Gardena+Italy'},
+    ]
+  },
+  {
+    num:5, date:'22 Oct · Thu', title:'Seceda + Braies', sub:'Ridgeline views · Emerald lake · Dobbiaco',
+    tags:['★ Highlight','Cable Car'], temp:'8°/0°C ❄',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Seceda_Geisler.jpg/1200px-Seceda_Geisler.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Lago_di_Braies_-_Pragser_Wildsee_-_panoramio_%281%29.jpg/800px-Lago_di_Braies_-_Pragser_Wildsee_-_panoramio_%281%29.jpg',
+    photos:['italy_photos/Seceda%20%2B%20Braies%20Day_5-1.jpg','italy_photos/Seceda%20%2B%20Braies%20Day_5-2.jpg','italy_photos/Seceda%20%2B%20Braies%20Day_5-3.jpg'],
+    stay:'Hotel Rosengarten, Dobbiaco',stayPrice:'',stayLink:'https://www.google.com/maps/search/?api=1&query=Hotel+Rosengarten+Dobbiaco+Italy',
+    tl:[
+      {time:'08:00',place:'🚡 Seceda Cable Car, Ortisei',h:true,items:[
+        {text:'⚠ เช็กก่อน seceda.it — ปลาย ต.ค. อาจปิด seasonal',map:'https://www.google.com/maps/search/?api=1&query=Seceda+cable+car+Ortisei+Italy'},
+        {text:'Backup: Val di Funes + Santa Maddalena ถ้า Seceda ปิด',map:'https://www.google.com/maps/search/?api=1&query=Val+di+Funes+Santa+Maddalena+Italy'},
+      ]},
+      {time:'08:30–12:00',place:'⛰ Seceda Ridgeline 2,518m',h:true,items:[
+        {text:'วิวสันเขา Dolomites สวยที่สุด',map:'https://www.google.com/maps/search/?api=1&query=Seceda+ridgeline+Dolomites'},
+        {text:'ไม่ต้อง hike หนัก',map:''},
+      ]},
+      {time:'14:00–16:00',place:'🏞 Lago di Braies (Pragser Wildsee)',h:true,items:[
+        {text:'🅿 จองที่จอดรถล่วงหน้า braies.it',map:'https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+South+Tyrol+Italy'},
+        {text:'เดินรอบทะเลสาบ ~5 กม. ชิลมาก',map:''},
+        {text:'เรือพาย (ถ้าเปิด) ~€15',map:''},
+      ]},
+      {time:'17:00',place:'🚗 → Dobbiaco',h:false,items:[
+        {text:'เช็คอิน',map:'https://www.google.com/maps/search/?api=1&query=Dobbiaco+South+Tyrol+Italy'},
+        {text:'พักผ่อน',map:''},
+      ]},
+    ],
+    maps:[
+      {name:'Seceda',url:'https://www.google.com/maps/search/?api=1&query=Seceda+cable+car+Ortisei'},
+      {name:'Val di Funes',url:'https://www.google.com/maps/search/?api=1&query=Val+di+Funes+Santa+Maddalena'},
+      {name:'Lago di Braies',url:'https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+South+Tyrol'},
+    ]
+  },
+  {
+    num:6, date:'23 Oct · Fri', title:'Tre Cime 🎂', sub:'East Dolomites · Ra Gusela · Birthday Dinner Cortina',
+    tags:['★ Highlight','Hiking','🎂 Birthday'], temp:'5°/−2°C ❄',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Drei_Zinnen_Abend.jpg/1200px-Drei_Zinnen_Abend.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Cortina_dAmpezzo.jpg/800px-Cortina_dAmpezzo.jpg',
+    photos:['italy_photos/Tre%20Cime%20Day_6-1.jpg','italy_photos/Tre%20Cime%20Day_6-2.jpg','italy_photos/Tre%20Cime%20Day_6-3.jpg'],
+    stay:'Cortina Lodge',stayPrice:'',stayLink:'https://www.google.com/maps/search/?api=1&query=Cortina+Lodge+Cortina+d+Ampezzo',
+    tl:[
+      {time:'08:00',place:'🚗 → Rifugio Auronzo',h:false,items:[
+        {text:'⚠ จองที่จอดรถล่วงหน้า auronzo.info ~€40/คัน',map:'https://www.google.com/maps/search/?api=1&query=Rifugio+Auronzo+Tre+Cime+Lavaredo'},
+      ]},
+      {time:'09:00–13:00',place:'⛰ Tre Cime di Lavaredo Hiking',h:true,items:[
+        {text:'Big Loop 9–10 กม. หรือ Short Walk 6 กม.',map:'https://www.google.com/maps/search/?api=1&query=Tre+Cime+di+Lavaredo+Italy'},
+        {text:'Rifugio Locatelli (จุดพักกลาง)',map:'https://www.google.com/maps/search/?api=1&query=Rifugio+Locatelli+Tre+Cime'},
+      ]},
+      {time:'13:30',place:'🏞 Lake Misurina',h:false,items:[
+        {text:'🍝 Lunch / ☕ Coffee ริมทะเลสาบ',map:'https://www.google.com/maps/search/?api=1&query=Lago+di+Misurina+Italy'},
+      ]},
+      {time:'15:30–17:00',place:'🌅 Ra Gusela / Passo Giau',h:true,items:[
+        {text:'Passo Giau 2,236m',map:'https://www.google.com/maps/search/?api=1&query=Passo+Giau+Dolomites+Italy'},
+        {text:'วิว 360°',map:''},
+        {text:'Golden hour + พระอาทิตย์ตก Dolomites',map:''},
+      ]},
+      {time:'17:30',place:'🏔 Cortina d\'Ampezzo',h:false,items:[
+        {text:'เช็คอิน Cortina Lodge',map:'https://www.google.com/maps/search/?api=1&query=Cortina+d+Ampezzo+Italy'},
+        {text:'🅿 Parcheggio multipiano Pontechiesa',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+multipiano+Pontechiesa+Cortina'},
+      ]},
+      {time:'19:30',place:'🎂🍷 Birthday Dinner Cortina',h:true,items:[
+        {text:'ร้านดังใน Cortina',map:'https://www.google.com/maps/search/?api=1&query=fine+dining+restaurant+Cortina+d+Ampezzo'},
+        {text:'จองล่วงหน้า',map:''},
+      ]},
+    ],
+    maps:[
+      {name:'Tre Cime',url:'https://www.google.com/maps/search/?api=1&query=Rifugio+Auronzo+Tre+Cime+Lavaredo'},
+      {name:'Misurina',url:'https://www.google.com/maps/search/?api=1&query=Lago+di+Misurina+Italy'},
+      {name:'Passo Giau',url:'https://www.google.com/maps/search/?api=1&query=Passo+Giau+Dolomites'},
+      {name:'Cortina',url:'https://www.google.com/maps/search/?api=1&query=Cortina+d+Ampezzo+Italy'},
+    ]
+  },
+  {
+    num:7, date:'24 Oct · Sat', title:'Venice', sub:'คืนรถ VCE · Water Bus · Grand Canal · Birthday Dinner',
+    tags:['🚗 คืนรถ','🚤 Vaporetto'], temp:'18°/12°C',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Venice_-_The_Grand_Canal.jpg/1200px-Venice_-_The_Grand_Canal.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Piazza_San_Marco_-_basilica_%26_campanile.jpg/800px-Piazza_San_Marco_-_basilica_%26_campanile.jpg',
+    photos:['italy_photos/Venice%20Day_7-1.jpg','italy_photos/Venice%20Day_7-2.jpg','italy_photos/Venice%20Day_7-3.jpg'],
+    stay:'Venice Center (2 คืน)',stayPrice:'฿44,621',
+    stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
+    tl:[
+      {time:'09:00–12:00',place:'🚗 Cortina → Venice Marco Polo',h:false,items:[
+        {text:'~2 ชม. ผ่าน Belluno → Treviso',map:''},
+      ]},
+      {time:'12:00',place:'🚗 คืนรถ Venice Marco Polo Airport',h:true,items:[
+        {text:'Car Rental Return Area',map:'https://maps.app.goo.gl/TMbM6Y7TcGnYCX8b8'},
+      ]},
+      {time:'12:30–13:30',place:'🚤 Water Bus เข้า Venice',h:false,items:[
+        {text:'ACTV Line 5 → Piazzale Roma / Ferrovia',map:'https://www.google.com/maps/search/?api=1&query=Venice+Marco+Polo+Airport+water+bus'},
+        {text:'75 นาที Pass €9.50 / 24h €25 / 48h €35',map:''},
+      ]},
+      {time:'14:30–18:00',place:'🚶 Venice Walk',h:false,items:[
+        {text:'Ponte di Rialto',map:'https://www.google.com/maps/search/?api=1&query=Rialto+Bridge+Venice'},
+        {text:'Grand Canal',map:'https://www.google.com/maps/search/?api=1&query=Grand+Canal+Venice'},
+        {text:'🚣 Gondola Experience',map:'https://www.google.com/maps/search/gondola+experience+venice/@45.4613135,12.2133339,34113m/data=!3m2!1e3!4b1?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'Piazza San Marco',map:'https://www.google.com/maps/place/Piazza+San+Marco/data=!4m7!3m6!1s0x477eb1d76e418489:0x2d0bb9644fff61b!8m2!3d45.4341668!4d12.3384717!16zL20vMHByM24!19sChIJiYRBbtexfkcRG_b_RJa70AI?authuser=0&hl=th&rclk=1'},
+        {text:'Basilica di San Marco',map:'https://www.google.com/maps/search/?api=1&query=St+Mark+Basilica+Venice'},
+        {text:'Palazzo Ducale (Doge\'s Palace)',map:'https://maps.app.goo.gl/yiubZEAcBiXSKsTR9'},
+        {text:'Bridge of Sighs',map:'https://www.google.com/maps/place/Bridge+of+Sighs/@45.4340496,12.3382795,1067m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1d7e32401c3:0x7ad5d63fdae814d0!8m2!3d45.4340496!4d12.3408544!16zL20vMDExenl6?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'Scala Contarini del Bovolo',map:'https://www.google.com/maps/place/Palazzo+Contarini+del+Bovolo/@45.4348579,12.3319588,1067m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1d09c4f4e7b:0xf565cf17325e3820!8m2!3d45.4348579!4d12.3345337!16zL20vMGdsa3p0?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'Dorsoduro District',map:'https://www.google.com/maps/place/Dorsoduro,+30100+%E0%B9%80%E0%B8%A7%E0%B8%99%E0%B8%B4%E0%B8%AA+%E0%B9%80%E0%B8%A7%E0%B9%80%E0%B8%99%E0%B9%80%E0%B8%8B%E0%B8%B5%E0%B8%A2+%E0%B8%AD%E0%B8%B4%E0%B8%95%E0%B8%B2%E0%B8%A5%E0%B8%B5/@45.4331234,12.3027617,8532m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1c95366a161:0x1ee4bb1af2fb3a97!8m2!3d45.4338782!4d12.323257!16zL20vMDNxcjFx?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+      ]},
+      {time:'18:00',place:'🌅 Sunset Viewpoint',h:false,items:[
+        {text:'Fondamenta Zattere',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
+        {text:'วิวช่อง Giudecca',map:''},
+        {text:'T Fondaco Rooftop Terrace (ฟรี!)',map:'https://www.google.com/maps/place/T+Fondaco+Rooftop+Terrace/@45.4382733,12.3365754,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1dbc69642bf:0x2b7a39172d0a2f96!8m2!3d45.4382733!4d12.3365754!16s%2Fg%2F11f5brc5lm?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+      ]},
+      {time:'',place:'🌙 VENICE CITY LANDMARK · NIGHT-LIFE',h:false,items:[
+        {text:'Fondamenta delle Zattere',map:'https://www.google.com/maps/place/Fondamenta+delle+Zattere/@45.429234,12.3249902,1067m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1cd871848e5:0x83479aaa304409d5!8m2!3d45.429234!4d12.3275651!16s%2Fg%2F11l2hqflbh?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'Lido di Venezia',map:'https://www.google.com/maps/search/?q=Lido+di+Venezia&entry=mc'},
+        {text:'Isole Giudecca',map:'https://www.google.com/maps/place/Isole+Giudecca/@45.4258296,12.3091164,8534m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb02cd6dde543:0xd5e7d8d94d6bd0bb!8m2!3d45.4244638!4d12.3294986!16zL20vMDNtcGo5?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'Venezia Santa Lucia (สถานีรถไฟ)',map:'https://www.google.com/maps/place/Venezia+Santa+Lucia/@45.4410697,12.3184687,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1c7511cd1f1:0xfc7c01f280ca9309!8m2!3d45.4410697!4d12.3210436!16s%2Fm%2F02prslb?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+      ]},
+      {time:'19:30',place:'🎂 Birthday Dinner (Belated!)',h:true,items:[
+        {text:'Michelin Guide Venice Restaurants',map:'https://www.google.com/maps/search/?api=1&query=Michelin+star+restaurant+Venice+Italy'},
+      ]},
+    ],
+    maps:[
+      {name:'Marco Polo',url:'https://www.google.com/maps/search/?api=1&query=Venice+Marco+Polo+Airport'},
+      {name:'San Marco',url:'https://www.google.com/maps/search/?api=1&query=Piazza+San+Marco+Venice'},
+      {name:'Rialto',url:'https://www.google.com/maps/search/?api=1&query=Rialto+Bridge+Venice'},
+      {name:'T Fondaco',url:'https://www.google.com/maps/place/T+Fondaco+Rooftop+Terrace/@45.4382733,12.3365754,1066m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1dbc69642bf:0x2b7a39172d0a2f96!8m2!3d45.4382733!4d12.3365754!16s%2Fg%2F11f5brc5lm?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+    ]
+  },
+  {
+    num:8, date:'25 Oct · Sun', title:'Venice Islands', sub:'Murano · Burano · San Giorgio Maggiore',
+    tags:['🚤 Islands','Sunset ★'], temp:'17°/11°C',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Burano_island_Venice.jpg/1200px-Burano_island_Venice.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Murano_island_Venice.jpg/800px-Murano_island_Venice.jpg',
+    photos:['italy_photos/Venice%20Islands%20Day_8-1.jpg','italy_photos/Venice%20Islands%20Day_8-2.jpg','italy_photos/Venice%20Islands%20Day_8-3.jpg'],
+    stay:'Venice Center',stayPrice:'(คืนที่ 2)',stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
+    tl:[
+      {time:'08:30',place:'🚤 → Murano Island',h:false,items:[
+        {text:'Vaporetto Line 4.1/4.2 จาก Fondamente Nove',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice+vaporetto'},
+        {text:'ดูการเป่าแก้ว Murano Glass factory',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+factory+Venice+Italy'},
+        {text:'ร้านกระจก Murano',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+shop+Venice'},
+        {text:'ของที่ระลึก',map:''},
+      ]},
+      {time:'11:30',place:'🚤 → Burano Island',h:true,items:[
+        {text:'เรือจาก Murano → Burano ~40 นาที',map:''},
+        {text:'บ้านสีสัน',map:'https://www.google.com/maps/search/?api=1&query=Burano+island+Venice+Italy'},
+        {text:'ถ่ายรูปสนุกมาก',map:''},
+        {text:'🍝 กลางวันที่ Burano',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Burano+Venice'},
+      ]},
+      {time:'15:00',place:'🚤 กลับ Venice',h:false,items:[
+        {text:'เรือ Burano → Fondamente Nove',map:''},
+      ]},
+      {time:'16:00–17:30',place:'📍 San Marco + Doge\'s Palace',h:false,items:[
+        {text:'Basilica di San Marco',map:'https://www.google.com/maps/search/?api=1&query=St+Mark+Basilica+Venice'},
+        {text:'ไม่ต้องซื้อตั๋วถ้าเข้าแค่หน้า',map:''},
+        {text:'Palazzo Ducale (Doge\'s Palace)',map:'https://maps.app.goo.gl/yiubZEAcBiXSKsTR9'},
+        {text:'Bridge of Sighs',map:'https://www.google.com/maps/place/Bridge+of+Sighs/@45.4340496,12.3382795,1067m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477eb1d7e32401c3:0x7ad5d63fdae814d0!8m2!3d45.4340496!4d12.3408544!16zL20vMDExenl6?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'ถ่ายรูปจาก Ponte della Paglia',map:''},
+      ]},
+      {time:'17:30',place:'🌅 San Giorgio Maggiore — Sunset ดีที่สุด',h:true,items:[
+        {text:'Vaporetto Line 2 → San Giorgio Maggiore',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+Venice+Italy'},
+        {text:'ขึ้นหอระฆัง Campanile วิว 360° Venice',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+bell+tower+Venice'},
+      ]},
+      {time:'19:00',place:'🍝 ดินเนอร์ Cannaregio',h:false,items:[
+        {text:'Fondamenta della Misericordia',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+della+Misericordia+Venice'},
+        {text:'บรรยากาศ local',map:''},
+        {text:'Cicchetti bar',map:'https://www.google.com/maps/search/?api=1&query=cicchetti+bar+Venice+Cannaregio'},
+        {text:'venetian tapas',map:''},
+      ]},
+    ],
+    maps:[
+      {name:'Murano',url:'https://www.google.com/maps/search/?api=1&query=Murano+Venice'},
+      {name:'Burano',url:'https://www.google.com/maps/search/?api=1&query=Burano+Venice'},
+      {name:'San Giorgio',url:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+Venice'},
+      {name:'Cannaregio',url:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Misericordia+Venice'},
+    ]
+  },
+  {
+    num:9, date:'26 Oct · Mon', title:'Bergamo → ✈', sub:'Città Alta · QR 118 MXP 22:10 → BKK 27/10',
+    tags:['🚂 Train','Last Day'], temp:'17°/8°C',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Piazza_Vecchia_Bergamo.jpg/1200px-Piazza_Vecchia_Bergamo.jpg',
+    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Piazza_Vecchia_Bergamo.jpg/800px-Piazza_Vecchia_Bergamo.jpg',
+    photos:['italy_photos/Bergamo%20Day_9-1.jpg','italy_photos/Bergamo%20Day_9-2.jpg','italy_photos/Bergamo%20Day_9-3.jpg'],
+    stay:'—',stayPrice:'',stayLink:'',
+    tl:[
+      {time:'07:00',place:'🚂 Venice → Bergamo',h:false,items:[
+        {text:'~4 ชม. ตรวจสอบ trenitalia.com ก่อน',map:'https://www.google.com/maps/search/?api=1&query=Venezia+Santa+Lucia+train+station'},
+      ]},
+      {time:'11:00',place:'🧳 Drop Bags at Bergamo Lockers',h:false,items:[
+        {text:'Bergamo Lockers ในสถานี €4 สำหรับ 4 ชม.',map:'https://maps.google.com/?q=45.6909,9.6702'},
+      ]},
+      {time:'11:10–11:30',place:'🚌 Bus + Funicolare ขึ้น Città Alta',h:false,items:[
+        {text:'ATB Bus สาย 1 หรือ Funicolare Città Alta',map:'https://www.google.com/maps/search/?api=1&query=Funicolare+Citta+Alta+Bergamo'},
+        {text:'City 24h Pass €4.90/คน',map:''},
+      ]},
+      {time:'11:30–15:00',place:'📍 Bergamo Città Alta',h:true,items:[
+        {text:'Porta San Giacomo',map:'https://www.google.com/maps/search/?api=1&query=Porta+San+Giacomo+Bergamo'},
+        {text:'ประตูเมืองหินสวย',map:''},
+        {text:'Piazza Vecchia',map:'https://www.google.com/maps/place/Piazza+Vecchia,+24129+Bergamo+BG,%E0%B8%AD%E0%B8%B4%E0%B8%95%E0%B8%B2%E0%B8%A5%E0%B8%B5/@45.7040733,9.6627128,1061m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4781511553c59769:0x3235878ea2c13498!8m2!3d45.7040733!4d9.6627128!16s%2Fg%2F1td79_xq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+        {text:'จัตุรัสยุคกลาง',map:''},
+        {text:'Basilica di Santa Maria Maggiore',map:'https://www.google.com/maps/search/?api=1&query=Basilica+Santa+Maria+Maggiore+Bergamo'},
+        {text:'Campanone €8–9',map:'https://www.google.com/maps/search/?api=1&query=Campanone+Bergamo+Italy'},
+        {text:'ขึ้นลิฟต์ วิวทั้งเมือง',map:''},
+        {text:'Rocca di Bergamo',map:'https://www.google.com/maps/search/?api=1&query=Rocca+di+Bergamo+Italy'},
+      ]},
+      {time:'13:00–14:00',place:'🍝 Lunch Bergamo',h:false,items:[
+        {text:'Mimì La Casa dei Sapori',map:'https://www.google.com/maps/search/?api=1&query=Mimì+La+Casa+dei+Sapori+Bergamo'},
+        {text:'DaMimmo Bergamo',map:'https://www.google.com/maps/search/?api=1&query=DaMimmo+Bergamo+Italy'},
+        {text:'Casoncelli (พาสต้ายัดไส้ local)',map:''},
+        {text:'Polenta Taragna (ของดีเมือง Bergamo)',map:''},
+      ]},
+      {time:'16:00',place:'🚂 Bergamo → Milan MXP',h:false,items:[
+        {text:'รถไฟ ~1.5 ชม.',map:'https://www.google.com/maps/place/Bergamo/@45.6904556,9.6751171,1062m/data=!3m1!1e3!4m10!1m2!2m1!1sBergamo+train+station+Italy!3m6!1s0x478151047e4338b3:0xa55ed780cad2cd35!8m2!3d45.69043!4d9.6750452!15sChtCZXJnYW1vIHRyYWluIHN0YXRpb24gSXRhbHmSAQ90cmFuc2l0X3N0YXRpb27gAQA!16s%2Fm%2F0g5r0fj?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+      ]},
+      {time:'17:30',place:'✈ Malpensa T1',h:true,items:[
+        {text:'เช็คอิน + Security + Duty Free',map:'https://www.google.com/maps/place/Aeroporto+di+Milano+Malpensa+Terminal+1/data=!4m7!3m6!1s0x4786610d64a14f0b:0x73f32452438ab3b6!8m2!3d45.6273686!4d8.7124406!16s%2Fg%2F11c20s8k07!19sChIJC0-hZA1hhkcRtrOKQ1Ik83M?authuser=0&hl=th&rclk=1'},
+        {text:'Esselunga ในเมือง Milan ถูกกว่าซื้อก่อนถ้าทัน',map:'https://www.google.com/maps/search/?api=1&query=Esselunga+Milan+Italy'},
+      ]},
+      {time:'22:10',place:'✈ QR 118 MXP → DOH → BKK',h:true,items:[
+        {text:'QR 118: MXP 22:10 → DOH 05:55',map:''},
+        {text:'QR 828: DOH 07:50 → BKK 18:25 (+1 day 27 Oct)',map:''},
+      ]},
+    ],
+    maps:[
+      {name:'Bergamo Stn',url:'https://www.google.com/maps/place/Bergamo/@45.69043,9.6750452,1062m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478151047e4338b3:0xa55ed780cad2cd35!8m2!3d45.69043!4d9.6750452!16s%2Fm%2F0g5r0fj?authuser=0&hl=th&entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+      {name:'Piazza Vecchia',url:'https://www.google.com/maps/place/Piazza+Vecchia,+24129+Bergamo+BG,%E0%B8%AD%E0%B8%B4%E0%B8%95%E0%B8%B2%E0%B8%A5%E0%B8%B5/@45.7040733,9.6627128,1061m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4781511553c59769:0x3235878ea2c13498!8m2!3d45.7040733!4d9.6627128!16s%2Fg%2F1td79_xq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D'},
+      {name:'Campanone',url:'https://www.google.com/maps/search/?api=1&query=Campanone+Bergamo'},
+      {name:'Malpensa T1',url:'https://www.google.com/maps/place/Aeroporto+di+Milano+Malpensa+Terminal+1/data=!4m7!3m6!1s0x4786610d64a14f0b:0x73f32452438ab3b6!8m2!3d45.6273686!4d8.7124406!16s%2Fg%2F11c20s8k07!19sChIJC0-hZA1hhkcRtrOKQ1Ik83M?authuser=0&hl=th&rclk=1'},
+    ]
+  },
+];
+
+// ── TEMP COLOR ───────────────────────────────────────────────────────────────
+function tempColor(tempStr) {
+  const hi = parseInt((tempStr||'').match(/\d+/)?.[0] || 15);
+  const stops = [
+    [0,  '#8ecae6'], // icy blue
+    [8,  '#90c4d8'], // cool blue
+    [12, '#8ecbb5'], // teal
+    [16, '#a8c97a'], // yellow-green
+    [20, '#e8b84a'], // warm gold
+    [25, '#e8874a'], // orange
+    [30, '#e84a4a'], // hot red
+  ];
+  for (let i = 1; i < stops.length; i++) {
+    if (hi <= stops[i][0]) {
+      const t = (hi - stops[i-1][0]) / (stops[i][0] - stops[i-1][0]);
+      const hex = (c1, c2) => {
+        const r1=parseInt(c1.slice(1,3),16), g1=parseInt(c1.slice(3,5),16), b1=parseInt(c1.slice(5,7),16);
+        const r2=parseInt(c2.slice(1,3),16), g2=parseInt(c2.slice(3,5),16), b2=parseInt(c2.slice(5,7),16);
+        const r=Math.round(r1+(r2-r1)*t), g=Math.round(g1+(g2-g1)*t), b=Math.round(b1+(b2-b1)*t);
+        return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+      };
+      return hex(stops[i-1][1], stops[i][1]);
+    }
+  }
+  return stops[stops.length-1][1];
+}
+
+// ── BUILD GRID ────────────────────────────────────────────────────────────────
+const grid = document.getElementById('daysGrid');
+let openDay = null;
+
+function openDetail(num) {
+  if (openDay) closeDetail(openDay);
+  const detail = document.getElementById('detail-' + num);
+  if (!detail) return;
+  detail.classList.add('open');
+  openDay = num;
+  document.body.style.overflow = 'hidden';
+  const dImg = detail.querySelector('.detail-image');
+  if (dImg) dImg.classList.remove('expanded');
+  setTimeout(() => startSlideshow(num), 50);
+}
+
+function buildGrid(days) {
+  grid.innerHTML = '';
+  document.querySelectorAll('.day-detail[id^="detail-"]').forEach(el => el.remove());
+  days.forEach(d => {
+    const item = document.createElement('div');
+    item.className = 'day-acc-item';
+    item.dataset.day = d.num;
+    item.innerHTML = `
+      <div class="day-acc-hdr" onclick="openDetail(${d.num})">
+        <span class="day-acc-num">${String(d.num).padStart(2,'0')} —</span>
+        <span class="day-acc-body-info">
+          <span class="day-acc-name">${d.title}</span>
+          <span class="day-acc-sub">${d.sub}</span>
+          <span class="day-acc-tags">${d.tags.map(t => `<span class="day-acc-tag">${t}</span>`).join('')}</span>
+        </span>
+        <span class="day-acc-meta">${d.date}<br><span style="color:${tempColor(d.temp)};font-weight:600">${d.temp}</span></span>
+      </div>
+    `;
+
+    const detail = document.createElement('div');
+    detail.className = 'day-detail'; detail.id = `detail-${d.num}`;
+    detail.innerHTML = `
+      <button class="detail-close" onclick="closeDetail(${d.num})">✕</button>
+      <div class="detail-inner">
+        <div class="detail-image">
+          <div class="slideshow" id="ss-${d.num}">
+            ${(d.photos||[d.detailImg]).map((p,i) => `<img src="${p}" class="slide${i===0?' active':''}" loading="lazy">`).join('')}
+            ${(d.photos||[]).length>1 ? `<div class="slide-dots">${(d.photos||[]).map((_,i) => `<span class="dot${i===0?' active':''}" onclick="goSlide(${d.num},${i});event.stopPropagation()"></span>`).join('')}</div>` : ''}
+          </div>
+        </div>
+        <div class="detail-content">
+          <div class="section-label" style="margin-bottom:.5rem">Day ${d.num} — ${d.date}</div>
+          <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;font-weight:400;margin-bottom:.25rem;display:flex;align-items:baseline;justify-content:space-between">${d.title}<span class="detail-temp-badge" style="color:${tempColor(d.temp)}">${d.temp}</span></h3>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.5rem">${d.sub}</p>
+          <div class="tl">
+            ${d.tl.map(t => `<div class="tl-row${t.h?' highlight':''}">
+              ${t.time ? `<div class="tl-time">${t.time}</div>` : ''}
+              <div class="tl-place">${t.place}</div>
+              ${t.items ? t.items.map(item => `
+                <div class="tl-item-row">
+                  <span class="tl-item-text">${item.text}</span>
+                  ${item.map ? `<a href="${item.map}" target="_blank" class="tl-map-dot" title="Open in Maps">📍</a>` : ''}
+                </div>`).join('') : (t.note ? `<div class="tl-note">${t.note}</div>` : '')}
+            </div>`).join('')}
+          </div>
+          <div class="detail-meta">
+            <div class="meta-block">
+              <div class="meta-label">Stay</div>
+              <div class="meta-value">${d.stay}</div>
+              <div class="meta-price">${d.stayPrice}</div>
+              ${d.stayLink ? `<a href="${d.stayLink}" target="_blank" class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+            </div>
+            <div class="meta-block">
+              <div class="meta-label">Maps</div>
+              <div class="map-links">${d.maps.map(m=>`<a href="${m.url}" target="_blank" class="map-btn">📍 ${m.name} ↗</a>`).join('')}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    detail.querySelector('.detail-image').addEventListener('click', function() {
+      if (window.innerWidth <= 768) this.classList.toggle('expanded');
+    });
+
+    grid.appendChild(item);
+    document.body.appendChild(detail);
+  });
+}
+
+function toggleSubDay(id) {
+  const body = document.getElementById(id);
+  if (!body) return;
+  const isOpen = body.style.display !== 'none';
+  // close siblings
+  const parent = body.closest('.sub-day-list');
+  if (parent) parent.querySelectorAll('.sub-day-body').forEach(b => b.style.display = 'none');
+  if (!isOpen) body.style.display = 'block';
+}
+
+function openSectionModal(id) {
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-' + id).classList.add('open');
+}
+function closeSectionModal(id) {
+  document.body.style.overflow = '';
+  document.getElementById('modal-' + id).classList.remove('open');
+}
+
+function closeDetail(num) {
+  stopSlideshow(num);
+  const el = document.getElementById(`detail-${num}`);
+  if (el) el.classList.remove('open');
+  if (openDay === num) openDay = null;
+  document.body.style.overflow = '';
+}
+
+
+// ── SLIDESHOW ────────────────────────────────────────────────────────────────
+const ssTimers = {};
+function startSlideshow(num) {
+  const ss = document.getElementById('ss-' + num);
+  if (!ss) return;
+  const slides = ss.querySelectorAll('.slide');
+  const dots = ss.querySelectorAll('.dot');
+  if (slides.length <= 1) return;
+  let cur = 0;
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    if (dots[cur]) dots[cur].classList.remove('active');
+    cur = ((n % slides.length) + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    if (dots[cur]) dots[cur].classList.add('active');
+  }
+  if (ssTimers[num]) clearInterval(ssTimers[num].timer);
+  ssTimers[num] = { timer: setInterval(() => goTo(cur + 1), 10000), goTo };
+}
+function stopSlideshow(num) {
+  if (ssTimers[num]) { clearInterval(ssTimers[num].timer); delete ssTimers[num]; }
+}
+function goSlide(num, idx) {
+  if (ssTimers[num]) ssTimers[num].goTo(idx);
+}
+
+buildGrid(DAYS);
+
+
+function jumpTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior:'smooth' });
+}
+document.addEventListener('click', e => {
+  });
+
+// ── HERO BG SLIDESHOW ────────────────────────────────────────────────────────
+const heroImgs = [
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Drei_Zinnen_Abend.jpg/1600px-Drei_Zinnen_Abend.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Venice_-_The_Grand_Canal.jpg/1600px-Venice_-_The_Grand_Canal.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg/1600px-Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg',
+];
+let heroIdx = 0;
+setInterval(() => {
+  heroIdx = (heroIdx + 1) % heroImgs.length;
+  heroBg.style.backgroundImage = `url('${heroImgs[heroIdx]}')`;
+}, 6000);
+
+// ── NAV DROPDOWNS ────────────────────────────────────────────────────────────
+function toggleDD(e, id) {
+  e.preventDefault();
+  var el = document.getElementById(id);
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.nav-dropdown').forEach(function(d){ d.classList.remove('open'); });
+  if (!isOpen) el.classList.add('open');
+}
+function scrollToDay(num) {
+  document.querySelectorAll('.nav-dropdown').forEach(function(d){ d.classList.remove('open'); });
+  var item = document.querySelector('.day-acc-item[data-day="' + num + '"]');
+  if (item) { item.scrollIntoView({behavior:'smooth', block:'start'}); openDetail(num); }
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-dropdown-wrap'))
+    document.querySelectorAll('.nav-dropdown').forEach(function(d){ d.classList.remove('open'); });
+});
+
+
+// ── DAYS TOGGLE ──────────────────────────────────────────────────────────────
+
+function toggleSection(bodyId) {
+  var body = document.getElementById(bodyId);
+  if (!body) return;
+  body.style.display = body.style.display === 'none' ? 'block' : 'none';
+}
+function toggleDays() {
+  var body = document.getElementById('days-body');
+  var open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+}
+
+
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&openDay)closeDetail(openDay);});
+
+// ── LEAFLET MAP ───────────────────────────────────────────────────────────────
+(function() {
+  if (!document.getElementById('heroMap')) return;
+  var isMobile = window.innerWidth <= 900;
+  var mapCenter = isMobile ? [45.9, 10.65] : [46.0, 11.4];
+  var mapZoom   = isMobile ? 6.5 : 7;
+  var map = L.map('heroMap', { center:mapCenter, zoom:mapZoom, zoomControl:false, scrollWheelZoom:false, dragging:false, attributionControl:false, doubleClickZoom:false, touchZoom:false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom:19 }).addTo(map);
+  var pts = [
+    [45.4654, 9.1859,  'Milan',     'left'],
+    [45.9945, 9.2567,  'Como',      'left'],
+    [45.4961, 10.6085, 'Sirmione',  'top'],
+    [45.4383, 10.9917, 'Verona',    'bottom'],
+    [46.5753, 11.6720, 'Dolomites', 'left'],
+    [46.7306, 12.2299, 'Dobbiaco',  'top'],
+    [46.4982, 12.1357, 'Cortina',   'bottom'],
+    [45.4408, 12.3155, 'Venice',    'right'],
+    [45.6983, 9.6773,  'Bergamo',   'top']
+  ];
+  var ac = '#c8923a';
+  var routeCoords = pts.map(function(p){ return [p[0],p[1]]; });
+  pts.forEach(function(p) {
+    L.circleMarker([p[0],p[1]], {radius:5,fillColor:ac,color:ac,weight:0,fillOpacity:.9})
+      .addTo(map)
+      .bindTooltip(p[2], {permanent:true, direction:p[3], className:'map-pin-label', offset:[0,0]});
+  });
+  L.polyline(routeCoords, {color:ac,weight:1.5,opacity:.5,dashArray:'4 6'}).addTo(map);
+  setTimeout(function(){ map.invalidateSize(); }, 100);
+  setTimeout(function(){ map.invalidateSize(); }, 500);
+  window.addEventListener('resize', function(){ map.invalidateSize(); });
+})();
+
+// ── FAB ──────────────────────────────────────────────────────────────────────
+  function toggleFab() {
+    document.getElementById('fabMenu').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.fab') && !e.target.closest('#fabMenu'))
+      document.getElementById('fabMenu').classList.remove('open');
+  });
+
+
+function goSlideAny(ssId, idx) {
+  var ss = document.getElementById(ssId);
+  if (!ss) return;
+  ss.querySelectorAll('.slide').forEach(function(s,i){s.classList.toggle('active',i===idx);});
+  ss.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===idx);});
+  ss._cur = idx;
+}
+function startSlideshowAny(ssId) {
+  var ss = document.getElementById(ssId);
+  if (!ss || ss._ssStarted) return;
+  ss._ssStarted = true; ss._cur = 0;
+  var slides = ss.querySelectorAll('.slide');
+  if (slides.length <= 1) return;
+  setInterval(function(){
+    ss._cur = (ss._cur + 1) % slides.length;
+    goSlideAny(ssId, ss._cur);
+  }, 4000);
+}
+
+function openParkDetail(num){
+  var el=document.getElementById('park-detail-'+num);
+  if(el){el.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){startSlideshowAny('pss-'+num);},50);}
+}
+function closeParkDetail(num){
+  var el=document.getElementById('park-detail-'+num);
+  if(el)el.classList.remove('open');
+  document.body.style.overflow='';
+}
+function openHotelDetail(num){
+  var el=document.getElementById('hotel-detail-'+num);
+  if(el){el.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){startSlideshowAny('hss-'+num);},50);}
+}
+function closeHotelDetail(num){
+  var el=document.getElementById('hotel-detail-'+num);
+  if(el)el.classList.remove('open');
+  document.body.style.overflow='';
+}
+</script>
+
+<!-- FAB (mobile) -->
+<button class="fab" onclick="toggleFab()" id="fabBtn">📍</button>
+<div class="fab-menu" id="fabMenu">
+  <button class="fab-item" onclick="jumpTo('days')">D1–9 Itinerary</button>
+  <button class="fab-item" onclick="jumpTo('overview')">Overview Table</button>
+  <button class="fab-item" onclick="jumpTo('car')">🚗 Rental Car</button>
+  <button class="fab-item" onclick="jumpTo('parking')">🅿 Parking</button>
+  <button class="fab-item" onclick="jumpTo('hotel')">🏨 Hotel</button>
+</div>
+</body>
+</html>
