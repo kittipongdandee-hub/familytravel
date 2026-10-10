@@ -1415,18 +1415,17 @@ const DAYS = [
 
 // ── BUILD GRID
 
-// ── MAPS HELPER — iOS Universal Links fix ─────────────────────────────────────
-// On iOS, target="_blank" prevents Universal Links from intercepting the URL,
-// causing Google Maps app to show "Unsupported link".
-// Fix: use window.location.href on iOS so the OS can intercept the Universal Link.
+// ── iOS DETECTION ─────────────────────────────────────────────────────────────
+// Used by buildGrid to render the correct <a> attributes for Maps links.
+// On iOS: no target attribute → Safari handles as same-window navigation
+//         → OS intercepts maps.app.goo.gl Universal Link → opens Google Maps app
+// On desktop/Android: target="_blank" → opens in new tab
 const _isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-function openMap(url) {
-  if (!url) return;
-  if (_isIOS) {
-    window.location.href = url;
-  } else {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
+
+// Helper: return the correct target/rel attributes string for a Maps link
+function mapsLinkAttrs() {
+  if (_isIOS) return '';  // no target — let Universal Link work
+  return ' target="_blank" rel="noopener noreferrer"';
 }
 
 // ── BUILD GRID ────────────────────────────────────────────────────────────────
@@ -1473,7 +1472,7 @@ function buildGrid(days) {
               ${t.items ? t.items.map(item => `
                 <div class="tl-item-row">
                   <span class="tl-item-text">${item.text}</span>
-                  ${item.map ? `<button onclick="openMap('${item.map.replace(/'/g,"\\'")}')" class="tl-map-dot" title="Open in Maps">📍</button>` : ''}
+                  ${item.map ? `<a href="${item.map}"${mapsLinkAttrs()} class="tl-map-dot" title="Open in Maps">📍</a>` : ''}
                 </div>`).join('') : (t.note ? `<div class="tl-note">${t.note}</div>` : '')}
             </div>`).join('')}
           </div>
@@ -1482,11 +1481,11 @@ function buildGrid(days) {
               <div class="meta-label">Stay</div>
               <div class="meta-value">${d.stay}</div>
               <div class="meta-price">${d.stayPrice}</div>
-              ${d.stayLink ? `<button onclick="openMap('${d.stayLink.replace(/'/g,"\\'")}')" class="map-btn" style="margin-top:.5rem">📍 Google Maps</button>` : ''}
+              ${d.stayLink ? `<a href="${d.stayLink}"${mapsLinkAttrs()} class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
-              <div class="map-links">${d.maps.map(m=>`<button onclick="openMap('${m.url.replace(/'/g,"\\'")}')" class="map-btn">📍 ${m.name} ↗</button>`).join('')}</div>
+              <div class="map-links">${d.maps.map(m=>`<a href="${m.url}"${mapsLinkAttrs()} class="map-btn">📍 ${m.name} ↗</a>`).join('')}</div>
             </div>
           </div>
         </div>
@@ -1605,7 +1604,7 @@ function buildEmergencyGrid() {
 
   grid.innerHTML = stayDays.map(d => {
     const mapsBtn = d.stayLink
-      ? `<button onclick="openMap('${d.stayLink.replace(/'/g,"\\'")}')" class="emer-btn">📍 Google Maps</button>`
+      ? `<a href="${d.stayLink}"${mapsLinkAttrs()} class="emer-btn">📍 Google Maps</a>`
       : '';
     const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
 
