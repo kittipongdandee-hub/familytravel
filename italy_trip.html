@@ -709,23 +709,23 @@ footer .footer-logo {
 <!-- ── PRIVATE DATA MODAL ── -->
 <div id="pwModal" role="dialog" aria-modal="true" aria-label="ใส่รหัสผ่าน">
   <div class="pw-box">
-    <button class="pw-close" onclick="closePwModal()" aria-label="ปิด" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:8px;line-height:1;">✕</button>
+    <button class="pw-close" id="pwClose" aria-label="ปิด" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:8px;line-height:1;touch-action:manipulation;">✕</button>
     <div style="font-size:2rem;margin-bottom:12px;">🔒</div>
     <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin-bottom:6px;">Private Data</div>
     <div style="color:var(--muted);font-size:.85rem;margin-bottom:20px;">ใส่รหัสผ่านเพื่อดูข้อมูลที่พักและเที่ยวบิน</div>
     <input type="password" class="pw-input" id="pwInput"
       placeholder="••••••••••••"
       autocomplete="current-password"
-      onkeydown="if(event.key==='Enter')doUnlock()">
-    <button class="pw-btn" id="pwBtn" onclick="doUnlock()">🔓 Unlock</button>
+      id="pwInput">
+    <button class="pw-btn" id="pwBtn">🔓 Unlock</button>
     <div class="pw-err" id="pwErr"></div>
   </div>
 </div>
 
 <!-- ── LOCK BAR (floating button) ── -->
 <div id="privateLockBar">
-  <button id="btnUnlock" onclick="openPwModal()" aria-label="ดูข้อมูลส่วนตัว">🔒 ดูข้อมูลส่วนตัว</button>
-  <button id="btnLock" onclick="doLock()" aria-label="ล็อกข้อมูล">🔓 ล็อกข้อมูล</button>
+  <button id="btnUnlock" aria-label="ดูข้อมูลส่วนตัว">🔒 ดูข้อมูลส่วนตัว</button>
+  <button id="btnLock" aria-label="ล็อกข้อมูล">🔓 ล็อกข้อมูล</button>
 </div>
 
 <!-- PWA: Online/Offline badge -->
@@ -793,14 +793,14 @@ footer .footer-logo {
     <table class="overview-table">
       <thead><tr><th>#</th><th>Date</th><th>Destination</th><th>Stay</th><th>Transport</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>18 Oct · Sun</td><td>✈ ถึง Milan 07:10 · Duomo · Navigli</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-fly">✈ Arrive</span></td></tr>
-        <tr><td>2</td><td>19 Oct · Mon</td><td>Como → Varenna → Bellagio → Como</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 รับรถ 08:00</span></td></tr>
-        <tr><td>3</td><td>20 Oct · Tue</td><td>Sirmione · Verona · Castel San Pietro</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>4</td><td>21 Oct · Wed</td><td>Lake Carezza → Alpe di Siusi → Ortisei</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>5</td><td>22 Oct · Thu</td><td>Seceda · Lago di Braies · Dobbiaco</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>6</td><td>23 Oct · Fri</td><td>Tre Cime · Ra Gusela · Cortina 🎂</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 คืน 12:00</span></td></tr>
-        <tr><td>8</td><td>25 Oct · Sun</td><td>Murano · Burano · San Giorgio</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-boat">🚤 Vaporetto</span></td></tr>
+        <tr><td>1</td><td>18 Oct · Sun</td><td>✈ ถึง Milan 07:10 · Duomo · Navigli</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-fly">✈ Arrive</span></td></tr>
+        <tr><td>2</td><td>19 Oct · Mon</td><td>Como → Varenna → Bellagio → Como</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 รับรถ 08:00</span></td></tr>
+        <tr><td>3</td><td>20 Oct · Tue</td><td>Sirmione · Verona · Castel San Pietro</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>4</td><td>21 Oct · Wed</td><td>Lake Carezza → Alpe di Siusi → Ortisei</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>5</td><td>22 Oct · Thu</td><td>Seceda · Lago di Braies · Dobbiaco</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>6</td><td>23 Oct · Fri</td><td>Tre Cime · Ra Gusela · Cortina 🎂</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 คืน 12:00</span></td></tr>
+        <tr><td>8</td><td>25 Oct · Sun</td><td>Murano · Burano · San Giorgio</td><td><span class="private-lock-placeholder" id="ovHotel1">🔒</span></td><td><span class="badge badge-boat">🚤 Vaporetto</span></td></tr>
         <tr><td>9</td><td>26 Oct · Mon</td><td>Venice → Bergamo → Milan ✈ 22:10</td><td style="color:var(--muted);font-size:.78rem">—</td><td><span class="badge badge-train">🚂 Train</span></td></tr>
       </tbody>
     </table>
@@ -919,12 +919,12 @@ footer .footer-logo {
       <div class="emergency-grid">
         <div class="emer-card" style="border-left-color:#cf5e5e" id="emerFlightCard">
           <div class="emer-day">✈ เที่ยวบิน</div>
-          <div class="emer-hotel private-lock-placeholder" onclick="openPwModal()" id="emerFlightNum">🔒 ใส่รหัสเพื่อดู</div>
+          <div class="emer-hotel private-lock-placeholder" id="emerFlightNum">🔒 ใส่รหัสเพื่อดู</div>
           <div class="emer-addr" id="emerFlightRoute"></div>
         </div>
         <div class="emer-card" style="border-left-color:#cf5e5e" id="emerHotelCard">
           <div class="emer-day">🏨 ที่พักคืนนี้</div>
-          <div class="emer-hotel private-lock-placeholder" onclick="openPwModal()" id="emerHotelName">🔒 ใส่รหัสเพื่อดู</div>
+          <div class="emer-hotel private-lock-placeholder" id="emerHotelName">🔒 ใส่รหัสเพื่อดู</div>
           <div class="emer-addr" id="emerHotelAddr"></div>
         </div>
         <div class="emer-card" style="border-left-color:#c8923a">
@@ -1569,7 +1569,7 @@ function buildGrid(days) {
           <div class="detail-meta">
             <div class="meta-block">
               <div class="meta-label">Stay</div>
-              <div class="meta-value" id="detailStayVal"><span class="private-lock-placeholder" onclick="openPwModal()">🔒 ใส่รหัสเพื่อดู</span></div>
+              <div class="meta-value" id="detailStayVal"><span class="private-lock-placeholder">🔒 ใส่รหัสเพื่อดู</span></div>
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
@@ -2093,14 +2093,22 @@ window.addEventListener('load', () => {
 
 
 // ── PRIVATE DATA UNLOCK / LOCK ──────────────────────────────────────────────
+
+// Wire buttons via addEventListener — see _wirePrivateLock() called at bottom of file
+
 function openPwModal() {
   document.getElementById('pwModal').classList.add('open');
-  setTimeout(() => document.getElementById('pwInput').focus(), 100);
+  setTimeout(function() {
+    const inp = document.getElementById('pwInput');
+    if (inp) inp.focus();
+  }, 150);
 }
 function closePwModal() {
   document.getElementById('pwModal').classList.remove('open');
-  document.getElementById('pwErr').textContent = '';
-  document.getElementById('pwInput').value = '';
+  const err = document.getElementById('pwErr');
+  const inp = document.getElementById('pwInput');
+  if (err) err.textContent = '';
+  if (inp) inp.value = '';
 }
 
 function fromBase64(str) {
@@ -2229,7 +2237,7 @@ function doLock() {
 
   // Reset overview table
   document.querySelectorAll('[id^="ovHotel"]').forEach(el => {
-    el.outerHTML = `<span class="private-lock-placeholder" onclick="openPwModal()">🔒</span>`;
+    el.outerHTML = `<span class="private-lock-placeholder">🔒</span>`;
   });
 
   // Reset emergency grid
@@ -2244,7 +2252,7 @@ function doLock() {
 
   // Reset detail stay
   const detailStay = document.getElementById('detailStayVal');
-  if (detailStay) detailStay.innerHTML = '<span class="private-lock-placeholder" onclick="openPwModal()">🔒 ใส่รหัสเพื่อดู</span>';
+  if (detailStay) detailStay.innerHTML = '<span class="private-lock-placeholder">🔒 ใส่รหัสเพื่อดู</span>';
 
   // Show unlock button
   document.getElementById('btnUnlock').style.display = 'flex';
@@ -2263,6 +2271,37 @@ document.addEventListener('click', e => {
 });
 // ──────────────────────────────────────────────────────────────────────────
 
+</script>
+
+<script>
+(function _wirePrivateLock() {
+  function addTap(id, fn) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', fn);
+    el.addEventListener('touchend', function(e) { e.preventDefault(); fn(); }, { passive: false });
+  }
+  addTap('btnUnlock', function() { openPwModal(); });
+  addTap('btnLock',   function() { doLock(); });
+  addTap('pwClose',   function() { closePwModal(); });
+  addTap('pwBtn',     function() { doUnlock(); });
+
+  var inp = document.getElementById('pwInput');
+  if (inp) inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') doUnlock(); });
+
+  document.querySelectorAll('.private-lock-placeholder').forEach(function(el) {
+    el.addEventListener('click', function() { openPwModal(); });
+    el.addEventListener('touchend', function(e) { e.preventDefault(); openPwModal(); }, { passive: false });
+  });
+
+  var modal = document.getElementById('pwModal');
+  if (modal) {
+    modal.addEventListener('click', function(e) { if (e.target === modal) closePwModal(); });
+    modal.addEventListener('touchend', function(e) {
+      if (e.target === modal) { e.preventDefault(); closePwModal(); }
+    }, { passive: false });
+  }
+})();
 </script>
 </body>
 </html>
