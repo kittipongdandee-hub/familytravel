@@ -443,7 +443,7 @@ footer .footer-logo {
 .fab:hover { transform: scale(1.1); background: var(--accent2); }
 @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(200,146,58,0.4); } 50% { box-shadow: 0 0 0 12px rgba(200,146,58,0); } }
 .fab-menu {
-  position: fixed; bottom: 5.5rem; right: 2rem;
+  position: fixed; bottom: 9.5rem; right: 2rem;
   background: var(--surface2); border: 1px solid var(--border);
   border-radius: 12px; overflow: hidden; z-index: 200;
   display: none; min-width: 200px;
@@ -670,15 +670,6 @@ footer .footer-logo {
 <div class="flight-strip">
   <div class="flight-ticker" id="ticker"></div>
 </div>
-
-<!-- ⚠️ TEST BUTTON — TEMPORARY — REMOVE AFTER iPhone VERIFICATION -->
-<div id="mapsTestPanel" style="position:fixed;bottom:1rem;right:1rem;z-index:9999;background:#fff3cd;border:2px solid #ffc107;border-radius:.5rem;padding:.75rem 1rem;font-size:.8rem;box-shadow:0 4px 12px rgba(0,0,0,.2);max-width:220px">
-  <div style="font-weight:600;margin-bottom:.5rem">🧪 Maps Test (ชั่วคราว)</div>
-  <a onclick="openMap('https://www.google.com/maps/search/?api=1&query=Duomo%20di%20Milano');return false;" href="https://www.google.com/maps/search/?api=1&query=Duomo%20di%20Milano" style="display:block;background:#1a73e8;color:#fff;text-align:center;padding:.4rem .75rem;border-radius:.25rem;text-decoration:none;margin-bottom:.5rem">📍 ทดสอบ Google Maps</a>
-  <div style="color:#666;font-size:.72rem">ถ้าปุ่มนี้เปิด Maps ได้ → ปัญหาอยู่ที่ URL เดิม<br>ถ้าเปิดไม่ได้ → ปัญหาอยู่ที่ Safari→Maps handoff</div>
-  <button onclick="document.getElementById('mapsTestPanel').remove()" style="margin-top:.5rem;width:100%;background:none;border:1px solid #ccc;border-radius:.25rem;padding:.3rem;cursor:pointer;font-size:.72rem">✕ ปิดแผงทดสอบ</button>
-</div>
-<!-- END TEST BUTTON -->
 
 <!-- SEARCH + DAYS -->
 <section class="section" id="days">
@@ -2080,8 +2071,8 @@ window.addEventListener('load', () => {
 /* ── Lock Bar ── */
 #privLockBar {
   position: fixed;
-  bottom: 24px;
-  right: 20px;
+  bottom: 5.5rem;
+  right: 1.25rem;
   z-index: 10000;
   display: flex;
   gap: 8px;
