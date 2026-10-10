@@ -616,6 +616,71 @@ footer .footer-logo {
 }
 .install-guide strong { color: var(--text); }
 
+
+/* ── PRIVATE DATA LOCK ── */
+#privateLockBar {
+  position: fixed; bottom: 20px; right: 20px; z-index: 500;
+}
+#privateLockBar button {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border: none; border-radius: 50px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+  font-weight: 500; cursor: pointer; transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+#btnUnlock {
+  background: rgba(200,146,58,0.15);
+  border: 1px solid rgba(200,146,58,0.4) !important;
+  color: var(--accent);
+}
+#btnUnlock:hover { background: rgba(200,146,58,0.25); }
+#btnLock {
+  background: rgba(200,146,58,0.9);
+  color: #0e0e0e; display: none;
+}
+#btnLock:hover { background: var(--accent); }
+
+/* Modal overlay */
+#pwModal {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#pwModal.open { display: flex; }
+.pw-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px 28px; max-width: 380px; width: 100%;
+  text-align: center;
+}
+.pw-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.pw-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+  color: var(--accent); margin-bottom: 6px; }
+.pw-sub { color: var(--muted); font-size: 0.8rem; margin-bottom: 20px; }
+.pw-input {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text); border-radius: 10px; padding: 12px 16px;
+  font-size: 1rem; font-family: inherit; text-align: center;
+  letter-spacing: 3px; margin-bottom: 12px;
+}
+.pw-input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.pw-btn {
+  width: 100%; padding: 12px; background: var(--accent);
+  color: #0e0e0e; border: none; border-radius: 10px;
+  font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: opacity 0.2s;
+}
+.pw-btn:hover { opacity: 0.85; }
+.pw-err { color: #cf5e5e; font-size: 0.82rem; margin-top: 8px; min-height: 18px; }
+.pw-close {
+  position: absolute; top: 12px; right: 16px;
+  background: none; border: none; color: var(--muted);
+  font-size: 1.2rem; cursor: pointer; padding: 4px;
+}
+
+/* Private data badge on unlocked fields */
+.private-unlocked { color: var(--accent) !important; font-weight: 500; }
+.private-lock-placeholder { color: var(--muted); font-size: .8rem; cursor: pointer; }
+.private-lock-placeholder:hover { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -687,15 +752,15 @@ footer .footer-logo {
     <table class="overview-table">
       <thead><tr><th>#</th><th>Date</th><th>Destination</th><th>Stay</th><th>Transport</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>18 Oct · Sun</td><td>✈ ถึง Milan 07:10 · Duomo · Navigli</td><td>Milan City Chic</td><td><span class="badge badge-fly">✈ Arrive</span></td></tr>
-        <tr><td>2</td><td>19 Oct · Mon</td><td>Como → Varenna → Bellagio → Como</td><td>Zeus Apt Como</td><td><span class="badge badge-car">🚗 รับรถ 08:00</span></td></tr>
-        <tr><td>3</td><td>20 Oct · Tue</td><td>Sirmione · Verona · Castel San Pietro</td><td>Arena on Foot</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>4</td><td>21 Oct · Wed</td><td>Lake Carezza → Alpe di Siusi → Ortisei</td><td>Apt Rainer</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>5</td><td>22 Oct · Thu</td><td>Seceda · Lago di Braies · Dobbiaco</td><td>Dobbiaco</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>6</td><td>23 Oct · Fri</td><td>Tre Cime · Ra Gusela · Cortina 🎂</td><td>Cortina Lodge</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td>Venice Center</td><td><span class="badge badge-car">🚗 คืน 12:00</span></td></tr>
-        <tr><td>8</td><td>25 Oct · Sun</td><td>Murano · Burano · San Giorgio</td><td>Venice Center</td><td><span class="badge badge-boat">🚤 Vaporetto</span></td></tr>
-        <tr><td>9</td><td>26 Oct · Mon</td><td>Venice → Bergamo → Milan ✈ 22:10</td><td>—</td><td><span class="badge badge-train">🚂 Train</span></td></tr>
+        <tr><td>1</td><td>18 Oct · Sun</td><td>✈ ถึง Milan 07:10 · Duomo · Navigli</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-fly">✈ Arrive</span></td></tr>
+        <tr><td>2</td><td>19 Oct · Mon</td><td>Como → Varenna → Bellagio → Como</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 รับรถ 08:00</span></td></tr>
+        <tr><td>3</td><td>20 Oct · Tue</td><td>Sirmione · Verona · Castel San Pietro</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>4</td><td>21 Oct · Wed</td><td>Lake Carezza → Alpe di Siusi → Ortisei</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>5</td><td>22 Oct · Thu</td><td>Seceda · Lago di Braies · Dobbiaco</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>6</td><td>23 Oct · Fri</td><td>Tre Cime · Ra Gusela · Cortina 🎂</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
+        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-car">🚗 คืน 12:00</span></td></tr>
+        <tr><td>8</td><td>25 Oct · Sun</td><td>Murano · Burano · San Giorgio</td><td><span class="private-lock-placeholder" onclick="openPwModal()" id="ovHotel1">🔒</span></td><td><span class="badge badge-boat">🚤 Vaporetto</span></td></tr>
+        <tr><td>9</td><td>26 Oct · Mon</td><td>Venice → Bergamo → Milan ✈ 22:10</td><td style="color:var(--muted);font-size:.78rem">—</td><td><span class="badge badge-train">🚂 Train</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -811,15 +876,15 @@ footer .footer-logo {
     <div style="max-width:1100px;margin:2rem auto 0">
       <div class="section-label" style="margin-bottom:1rem">ข้อมูลพื้นฐานฉุกเฉิน</div>
       <div class="emergency-grid">
-        <div class="emer-card" style="border-left-color:#cf5e5e">
-          <div class="emer-day">เที่ยวบิน ขาไป</div>
-          <div class="emer-hotel">QR 835 · QR 123</div>
-          <div class="emer-addr">BKK 17 Oct 20:00 → DOH 22:55<br>DOH 18 Oct 02:00 → MXP 07:10</div>
+        <div class="emer-card" style="border-left-color:#cf5e5e" id="emerFlightCard">
+          <div class="emer-day">✈ เที่ยวบิน</div>
+          <div class="emer-hotel private-lock-placeholder" onclick="openPwModal()" id="emerFlightNum">🔒 ใส่รหัสเพื่อดู</div>
+          <div class="emer-addr" id="emerFlightRoute"></div>
         </div>
-        <div class="emer-card" style="border-left-color:#cf5e5e">
-          <div class="emer-day">เที่ยวบิน ขากลับ</div>
-          <div class="emer-hotel">QR 118 · QR 828</div>
-          <div class="emer-addr">MXP 26 Oct 22:10 → DOH 05:55<br>DOH 27 Oct 07:50 → BKK 18:25</div>
+        <div class="emer-card" style="border-left-color:#cf5e5e" id="emerHotelCard">
+          <div class="emer-day">🏨 ที่พักคืนนี้</div>
+          <div class="emer-hotel private-lock-placeholder" onclick="openPwModal()" id="emerHotelName">🔒 ใส่รหัสเพื่อดู</div>
+          <div class="emer-addr" id="emerHotelAddr"></div>
         </div>
         <div class="emer-card" style="border-left-color:#c8923a">
           <div class="emer-day">รถเช่า</div>
@@ -963,17 +1028,23 @@ window.addEventListener('scroll', () => {
 });
 
 // ── FLIGHT TICKER ───────────────────────────────────────────────────────────
-const flights = [
-  { no:'QR 835', route:'BKK 20:00 → DOH 22:55', date:'17 Oct' },
-  { no:'QR 123', route:'DOH 02:00 → MXP 07:10', date:'18 Oct' },
-  { no:'QR 118', route:'MXP 22:10 → DOH 05:55', date:'26 Oct' },
-  { no:'QR 828', route:'DOH 07:50 → BKK 18:25', date:'27 Oct' },
-];
+// ── PRIVATE DATA (AES-256-GCM encrypted, PBKDF2 key derivation) ──
+const PRIVATE_PAYLOAD = {"v":1,"alg":"AES-256-GCM","kdf":"PBKDF2-SHA256-100k","data":"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"};
+
+let _privateData = null; // holds decrypted data in memory only while unlocked
+
 const tickerEl = document.getElementById('ticker');
-const tickerContent = flights.map(f =>
-  `<div class="flight-item"><strong>${f.no}</strong><span>✈</span>${f.route}<span class="flight-sep">·</span>${f.date}</div>`
-).join('');
-tickerEl.innerHTML = tickerContent.repeat(4); // repeat for seamless loop
+function updateTicker(flights) {
+  if (!flights || !flights.length) {
+    tickerEl.innerHTML = '<div class="flight-item" style="opacity:.4">🔒 ข้อมูลเที่ยวบิน — กด Unlock เพื่อดู</div>'.repeat(4);
+    return;
+  }
+  const content = flights.map(f =>
+    `<div class="flight-item"><strong>${f.no}</strong><span>✈</span>${f.route}<span class="flight-sep">·</span>${f.date}</div>`
+  ).join('');
+  tickerEl.innerHTML = content.repeat(4);
+}
+updateTicker(null);
 
 // ── DAY DATA ─────────────────────────────────────────────────────────────────
 const DAYS = [
@@ -982,8 +1053,6 @@ const DAYS = [
     tags:['Arrive','City Walk'], temp:'17°/9°C',
     img:'italy_photos/Milan Day_1-1.jpg',
     detailImg:'italy_photos/Milan Day_1-2.jpg',
-    stay:'Milan City Chic – Porta Venezia',stayPrice:'฿18,628',
-    stayLink:'https://maps.app.goo.gl/xphdyoM1qdDgNiye6',
     tl:[
       {time:'07:30',place:'✈ ถึง Malpensa T1',h:false,items:[
         {text:'รอกระเป๋า',map:'https://maps.app.goo.gl/fRNoPJ2bixKenrXL8'},
@@ -1032,8 +1101,6 @@ const DAYS = [
     tags:['🚗 รับรถ','Ferry'], temp:'17°/8°C',
     img:'italy_photos/Lake como Day_2-1.jpg',
     detailImg:'italy_photos/Lake como Day_2-2.jpg',
-    stay:'Zeus – Luxury Apartment, Como',stayPrice:'฿16,062',
-    stayLink:'https://maps.app.goo.gl/cJUmdWL6Eq1gQxKWA',
     tl:[
       {time:'08:00',place:'🚗 รับรถ Milano Centrale',h:true,items:[
         {text:'Galleria delle Carrozze',map:'https://maps.app.goo.gl/E1Mzj1JFzXa3NJTB7'},
@@ -1085,8 +1152,6 @@ const DAYS = [
     tags:['🚗 Drive','Sunset ★'], temp:'18°/8°C',
     img:'italy_photos/Verona Day 3-1.jpg',
     detailImg:'italy_photos/Verona Day 3-2.jpg',
-    stay:'Arena on Foot – 3BR + Parking, Verona',stayPrice:'฿12,283',
-    stayLink:'https://maps.app.goo.gl/cAfzRrH6dtmAeECJ6',
     tl:[
       {time:'10:00–12:00',place:'📍 Sirmione',h:false,items:[
         {text:'🅿 Parcheggio Monte Baldo ไม่จำกัดความสูง €3.50/ชม.',map:'https://maps.app.goo.gl/vKH5jPBXC9G8A1e17'},
@@ -1135,8 +1200,6 @@ const DAYS = [
     tags:['🚗 Drive','Gondola ★'], temp:'8°/0°C ❄',
     img:'italy_photos/West Dolomites Day_4-1.jpg',
     detailImg:'italy_photos/West Dolomites Day_4-2.jpg',
-    stay:'Apartment Rainer – 3BR + Garden, Ortisei',stayPrice:'฿31,511',
-    stayLink:'https://maps.app.goo.gl/pR1zTUWP9S4LbQzB7',
     tl:[
       {time:'09:30–11:00',place:'🏞 Lake Carezza (Karersee)',h:true,items:[
         {text:'ทะเลสาบสีมรกต',map:'https://maps.app.goo.gl/QfWnptFE4DjLDsXK9'},
@@ -1175,8 +1238,6 @@ const DAYS = [
     tags:['★ Highlight','Cable Car'], temp:'6°/−2°C ❄',
     img:'italy_photos/Seceda + Braies Day_5-1.jpg',
     detailImg:'italy_photos/Seceda + Braies Day_5-2.jpg',
-    stay:'Hotel Rosengarten Dobbiaco',stayPrice:'TBD',
-    stayLink:'https://maps.app.goo.gl/x3yzfbXLSycR6xWeA',
     tl:[
       {time:'08:00',place:'🚡 Seceda Cable Car, Ortisei',h:true,items:[
         {text:'🅿 Parkgarage Seceda H2.2m',map:'https://www.google.com/maps/search/?api=1&query=Parkgarage+Seceda+Ortisei+Italy'},
@@ -1197,8 +1258,8 @@ const DAYS = [
         {text:'เดินรอบทะเลสาบ ~5 กม. ชิลมาก',map:'https://maps.app.goo.gl/X6g7eZE5qoJdXwmf9'},
         {text:'เรือพาย (ถ้าเปิด) ~€15',map:''},
       ]},
-      {time:'17:00',place:'🚗 → Hotel Rosengarten Dobbiaco',h:false,items:[
-        {text:'เช็คอิน Hotel Rosengarten',map:'https://maps.app.goo.gl/x3yzfbXLSycR6xWeA'},
+      {time:'17:00',place:'🚗 → ที่พัก Dobbiaco',h:false,items:[
+        {text:'เช็คอิน (ดูที่อยู่ใน Private Kit)',map:''},
         {text:'พักผ่อน',map:''},
       ]},
     ],
@@ -1214,8 +1275,6 @@ const DAYS = [
     tags:['★ Highlight','Hiking','🎂 Birthday'], temp:'7°/−1°C',
     img:'italy_photos/Tre Cime Day_6-1.jpg',
     detailImg:'italy_photos/Tre Cime Day_6-2.jpg',
-    stay:'Cortina Lodge',stayPrice:'฿18,563',
-    stayLink:'https://maps.app.goo.gl/82iVP5XQt6H8ERUd7',
     tl:[
       {time:'08:00',place:'🚗 → Rifugio Auronzo',h:false,items:[
         {text:'⚠ จองที่จอดรถล่วงหน้า auronzo.info ~€40/คัน',map:'https://maps.app.goo.gl/KKrWPJcLtKBhCcaq7'},
@@ -1238,7 +1297,7 @@ const DAYS = [
         {text:'Golden hour + พระอาทิตย์ตก Dolomites',map:''},
       ]},
       {time:'17:30',place:'🏔 Cortina d\'Ampezzo',h:false,items:[
-        {text:'เช็คอิน Cortina Lodge',map:'https://maps.app.goo.gl/82iVP5XQt6H8ERUd7'},
+        {text:'เช็คอิน (ดูที่อยู่ใน Private Kit)',map:''},
         {text:'🅿 Parcheggio multipiano Pontechiesa <2.49m (3ชม.แรก€2)',map:'https://maps.app.goo.gl/67X7LtKcUTJBTvMX6'},
         {text:'🅿 Parcheggio ฟรี (เก็บ 09:00–20:00 ฤดูกาล) 4ชม.€1',map:'https://maps.app.goo.gl/y5qCuorTXfCnBnkj6'},
       ]},
@@ -1252,7 +1311,7 @@ const DAYS = [
       {name:'Cadini Misurina',url:'https://maps.app.goo.gl/C6mUaJXfFBXGbKbY8'},
       {name:'Misurina',url:'https://maps.app.goo.gl/k9mGjP3zV8i6MXkr6'},
       {name:'Passo Giau',url:'https://maps.app.goo.gl/R1SnEzFHkBo5qePc8'},
-      {name:'Cortina Lodge',url:'https://maps.app.goo.gl/82iVP5XQt6H8ERUd7'},
+      {name:'Cortina d\'Ampezzo Town',url:'https://maps.app.goo.gl/R1SnEzFHkBo5qePc8'},
     ]
   },
   {
@@ -1260,8 +1319,6 @@ const DAYS = [
     tags:['🚗 คืนรถ','🚤 Water Taxi'], temp:'16°/10°C',
     img:'italy_photos/Venice Day_7-1.jpg',
     detailImg:'italy_photos/Venice Day_7-2.jpg',
-    stay:'Venice Center (2 คืน)',stayPrice:'฿44,621',
-    stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
     tl:[
       {time:'09:00–12:00',place:'🚗 Cortina → Venice Marco Polo',h:false,items:[
         {text:'~2 ชม. ผ่าน Belluno → Treviso',map:''},
@@ -1311,7 +1368,6 @@ const DAYS = [
     tags:['🚤 Islands','Sunset ★'], temp:'16°/10°C',
     img:'italy_photos/Venice Islands Day_8-1.jpg',
     detailImg:'italy_photos/Venice Islands Day_8-2.jpg',
-    stay:'Venice Center',stayPrice:'(คืนที่ 2)',stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
     tl:[
       {time:'08:30',place:'🚤 → Murano Island',h:false,items:[
         {text:'Vaporetto Line 4.1/4.2 จาก Fondamente Nove',map:'https://maps.app.goo.gl/9k8sH9WimDKWFf476'},
@@ -1356,11 +1412,10 @@ const DAYS = [
     ]
   },
   {
-    num:9, date:'26 Oct · Mon', title:'Bergamo → ✈', sub:'Città Alta · Cappella Colleoni · QR 118 MXP 22:10 → BKK 27/10',
+    num:9, date:'26 Oct · Mon', title:'Bergamo → ✈', sub:'Città Alta · Cappella Colleoni · ✈ MXP 22:10 → BKK 27/10',
     tags:['🚂 Train','Last Day'], temp:'19°/11°C',
     img:'italy_photos/Bergamo Day_9-1.jpg',
     detailImg:'italy_photos/Bergamo Day_9-2.jpg',
-    stay:'—',stayPrice:'',stayLink:'',
     tl:[
       {time:'07:00',place:'🚂 Venice → Bergamo',h:false,items:[
         {text:'~4 ชม. ตรวจสอบ trenitalia.com ก่อน',map:'https://maps.app.goo.gl/R4Jj7KFYjHaVgNEW6'},
@@ -1399,9 +1454,9 @@ const DAYS = [
         {text:'เช็คอิน + Security + Duty Free',map:'https://maps.app.goo.gl/fRNoPJ2bixKenrXL8'},
         {text:'Esselunga ในเมือง Milan ถูกกว่าซื้อก่อนถ้าทัน',map:'https://www.google.com/maps/search/?api=1&query=Esselunga+Milan+Italy'},
       ]},
-      {time:'22:10',place:'✈ QR 118 MXP → DOH → BKK',h:true,items:[
-        {text:'QR 118: MXP 22:10 → DOH 05:55',map:''},
-        {text:'QR 828: DOH 07:50 → BKK 18:25 (+1 day 27 Oct)',map:''},
+      {time:'22:10',place:'✈ ขากลับ MXP → DOH → BKK',h:true,items:[
+        {text:'✈ ขาออก MXP 22:10 (ดูเลขเที่ยวบินใน Private Kit)',map:''},
+        {text:'ถึง BKK 18:25 (+1 day 27 Oct)',map:''},
       ]},
     ],
     maps:[
@@ -1467,9 +1522,7 @@ function buildGrid(days) {
           <div class="detail-meta">
             <div class="meta-block">
               <div class="meta-label">Stay</div>
-              <div class="meta-value">${d.stay}</div>
-              <div class="meta-price">${d.stayPrice}</div>
-              ${d.stayLink ? `<a href="${d.stayLink}" target="_blank" class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+              <div class="meta-value" id="detailStayVal"><span class="private-lock-placeholder" onclick="openPwModal()">🔒 ใส่รหัสเพื่อดู</span></div>
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
@@ -1584,13 +1637,8 @@ if (!navigator.onLine) showBadge(false);
 function buildEmergencyGrid() {
   const grid = document.getElementById('emergencyGrid');
   if (!grid) return;
-
-  // Only show days with a real stayLink (not day 9 which has no overnight)
-  const stayDays = DAYS.filter(d => d.stay && d.stay !== '—');
-
-  grid.innerHTML = stayDays.map(d => {
-    const mapsBtn = d.stayLink
-      ? `<a href="${d.stayLink}" target="_blank" class="emer-btn">📍 Google Maps</a>`
+  grid.innerHTML = '<p style="color:var(--muted);font-size:.9rem;padding:1rem 0">ข้อมูลที่พักรายคืนอยู่ใน <strong>Private Travel Kit</strong> — เปิดไฟล์ italy_private_kit.html บนอุปกรณ์ของคุณ</p>';
+}" target="_blank" class="emer-btn">📍 Google Maps</a>`
       : '';
     const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
 
@@ -1643,7 +1691,7 @@ function saveTripDataLocal() {
       version: '1.0',
       days: DAYS.map(d => ({
         num: d.num, date: d.date, title: d.title, sub: d.sub,
-        temp: d.temp, stay: d.stay, stayPrice: d.stayPrice, stayLink: d.stayLink,
+        temp: d.temp,
         tl: d.tl, maps: d.maps
       }))
     };
@@ -1855,7 +1903,7 @@ const CHECKLIST_DEFS = {
   travel: [
     { text: 'Passport (ตรวจวันหมดอายุ)', cat: 'เอกสาร' },
     { text: 'Visa / ETIAS (EU entry)', cat: 'เอกสาร' },
-    { text: 'ตั๋วเครื่องบิน QR 835 / QR 123', cat: 'เอกสาร' },
+    { text: 'ตั๋วเครื่องบิน (ดูเลขเที่ยวบินใน Private Kit)', cat: 'เอกสาร' },
     { text: 'ใบจองโรงแรมทุกคืน', cat: 'เอกสาร' },
     { text: 'ใบจองรถเช่า Hyundai Staria', cat: 'เอกสาร' },
     { text: 'Travel Insurance', cat: 'ประกัน' },
@@ -1995,6 +2043,179 @@ window.addEventListener('load', () => {
     }
   }
 });
+
+
+// ── PRIVATE DATA UNLOCK / LOCK ──────────────────────────────────────────────
+function openPwModal() {
+  document.getElementById('pwModal').classList.add('open');
+  setTimeout(() => document.getElementById('pwInput').focus(), 100);
+}
+function closePwModal() {
+  document.getElementById('pwModal').classList.remove('open');
+  document.getElementById('pwErr').textContent = '';
+  document.getElementById('pwInput').value = '';
+}
+
+function fromBase64(str) {
+  return Uint8Array.from(atob(str), c => c.charCodeAt(0));
+}
+
+async function doUnlock() {
+  const pw = document.getElementById('pwInput').value;
+  const errEl = document.getElementById('pwErr');
+  const btn = document.getElementById('pwBtn');
+  if (!pw) { errEl.textContent = 'กรุณาใส่รหัสผ่าน'; return; }
+
+  btn.disabled = true; btn.textContent = '⏳ กำลังถอดรหัส...';
+  errEl.textContent = '';
+
+  try {
+    const packed = fromBase64(PRIVATE_PAYLOAD.data);
+    const salt = packed.slice(0, 16);
+    const iv   = packed.slice(16, 28);
+    const tag  = packed.slice(28, 44);
+    const ct   = packed.slice(44);
+    // combine ct+tag for AES-GCM (Web Crypto expects tag appended)
+    const ctWithTag = new Uint8Array(ct.length + tag.length);
+    ctWithTag.set(ct); ctWithTag.set(tag, ct.length);
+
+    const keyMat = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+      keyMat, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+    );
+    const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ctWithTag);
+    _privateData = JSON.parse(new TextDecoder().decode(plainBuf));
+
+    document.getElementById('pwInput').value = '';
+    closePwModal();
+    applyPrivateData(_privateData);
+  } catch(e) {
+    errEl.textContent = '❌ รหัสผ่านไม่ถูกต้อง';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  } finally {
+    btn.disabled = false; btn.textContent = '🔓 Unlock';
+  }
+}
+
+function applyPrivateData(data) {
+  // Show lock button, hide unlock
+  document.getElementById('btnUnlock').style.display = 'none';
+  document.getElementById('btnLock').style.display = 'flex';
+
+  // 1. Update ticker
+  updateTicker(data.flights);
+
+  // 2. Update overview table hotel cells
+  const acc = data.accommodation || [];
+  acc.forEach((h, i) => {
+    const el = document.getElementById('ovHotel' + (i + 1));
+    if (el) {
+      if (h.mapsLink) {
+        el.outerHTML = `<a href="${h.mapsLink}" target="_blank" rel="noopener" style="color:var(--accent);font-size:.78rem;text-decoration:none">${h.hotel}</a>`;
+      } else {
+        el.outerHTML = `<span style="font-size:.78rem;color:var(--text)">${h.hotel}</span>`;
+      }
+    }
+  });
+
+  // 3. Update emergency grid — show today's hotel + flights
+  const today = new Date();
+  const todayStr = today.toLocaleDateString('en-GB', { day:'numeric', month:'short' }).replace(' ', ' ');
+  const todayHotel = acc.find(h => h.date && h.date.startsWith(today.getDate())) || acc[0];
+
+  // Flights
+  const emerFN = document.getElementById('emerFlightNum');
+  const emerFR = document.getElementById('emerFlightRoute');
+  if (emerFN && data.flights && data.flights.length) {
+    emerFN.className = 'emer-hotel private-unlocked';
+    emerFN.textContent = data.flights.map(f => f.no).join(' · ');
+    emerFR.innerHTML = data.flights.map(f => `${f.date}: ${f.route}`).join('<br>');
+  }
+
+  // Today's hotel
+  const emerHN = document.getElementById('emerHotelName');
+  const emerHA = document.getElementById('emerHotelAddr');
+  if (emerHN && todayHotel) {
+    emerHN.className = 'emer-hotel private-unlocked';
+    if (todayHotel.mapsLink) {
+      emerHN.innerHTML = `<a href="${todayHotel.mapsLink}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">${todayHotel.hotel}</a>`;
+    } else {
+      emerHN.textContent = todayHotel.hotel;
+    }
+    emerHA.textContent = todayHotel.city + ' · ' + todayHotel.date;
+  }
+
+  // 4. Update detail panel stay (currently open day)
+  const detailStay = document.getElementById('detailStayVal');
+  if (detailStay && _currentDay !== undefined) {
+    updateDetailStay(_currentDay);
+  }
+
+  // 5. Store in sessionStorage for detail panel refresh (NOT localStorage)
+  try { sessionStorage.setItem('_pvd', JSON.stringify(data)); } catch(e) {}
+}
+
+function updateDetailStay(dayNum) {
+  const el = document.getElementById('detailStayVal');
+  if (!el || !_privateData) return;
+  const acc = _privateData.accommodation || [];
+  const h = acc.find(a => a.day === dayNum);
+  if (h) {
+    if (h.mapsLink) {
+      el.innerHTML = `<a href="${h.mapsLink}" target="_blank" rel="noopener" class="private-unlocked" style="text-decoration:none">${h.hotel}</a><br><span style="color:var(--muted);font-size:.78rem">${h.price || ''}</span>`;
+    } else {
+      el.innerHTML = `<span class="private-unlocked">${h.hotel}</span><br><span style="color:var(--muted);font-size:.78rem">${h.price || ''}</span>`;
+    }
+  } else {
+    el.innerHTML = '<span style="color:var(--muted);font-size:.78rem">—</span>';
+  }
+}
+
+function doLock() {
+  _privateData = null;
+  try { sessionStorage.removeItem('_pvd'); } catch(e) {}
+
+  // Reset ticker
+  updateTicker(null);
+
+  // Reset overview table
+  document.querySelectorAll('[id^="ovHotel"]').forEach(el => {
+    el.outerHTML = `<span class="private-lock-placeholder" onclick="openPwModal()">🔒</span>`;
+  });
+
+  // Reset emergency grid
+  const emerFN = document.getElementById('emerFlightNum');
+  const emerFR = document.getElementById('emerFlightRoute');
+  const emerHN = document.getElementById('emerHotelName');
+  const emerHA = document.getElementById('emerHotelAddr');
+  if (emerFN) { emerFN.className = 'emer-hotel private-lock-placeholder'; emerFN.textContent = '🔒 ใส่รหัสเพื่อดู'; emerFN.onclick = openPwModal; }
+  if (emerFR) emerFR.textContent = '';
+  if (emerHN) { emerHN.className = 'emer-hotel private-lock-placeholder'; emerHN.textContent = '🔒 ใส่รหัสเพื่อดู'; emerHN.onclick = openPwModal; }
+  if (emerHA) emerHA.textContent = '';
+
+  // Reset detail stay
+  const detailStay = document.getElementById('detailStayVal');
+  if (detailStay) detailStay.innerHTML = '<span class="private-lock-placeholder" onclick="openPwModal()">🔒 ใส่รหัสเพื่อดู</span>';
+
+  // Show unlock button
+  document.getElementById('btnUnlock').style.display = 'flex';
+  document.getElementById('btnLock').style.display = 'none';
+}
+
+// Hook into detail panel open to update stay
+const _origOpenDetail = typeof openDetail === 'function' ? openDetail : null;
+// patch: when detail panel is opened, if unlocked, update stay field
+document.addEventListener('click', e => {
+  const card = e.target.closest('.day-card');
+  if (card && _privateData) {
+    const dayNum = parseInt(card.dataset.day);
+    if (!isNaN(dayNum)) setTimeout(() => updateDetailStay(dayNum), 50);
+  }
+});
+// ──────────────────────────────────────────────────────────────────────────
+
 </script>
 </body>
 </html>
