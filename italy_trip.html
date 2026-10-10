@@ -2277,12 +2277,12 @@ window.addEventListener('load', () => {
 
   async function decryptPrivate(encJson, password) {
     /* Format: { v:2, alg:"AES-256-GCM", kdf:"PBKDF2-SHA256-100k", data:"<base64>" }
-       Packed: Salt(16) + IV(12) + AuthTag(16) + Ciphertext */
+       Packed: Salt(16) + IV(12) + Ciphertext(N) + AuthTag(16)
+       Web Crypto AES-GCM expects ciphertext with tag appended at the end (ct || tag) */
     const packed = b64ToBytes(encJson.data);
     const salt   = packed.slice(0, 16);
     const iv     = packed.slice(16, 28);
-    // Note: Web Crypto treats GCM tag as appended to ciphertext
-    const cipherWithTag = packed.slice(28);  // IV(12) consumed; remaining is tag+ct
+    const cipherWithTag = packed.slice(28);  // ct + tag (tag last 16 bytes)
     const key = await deriveKey(password, salt);
     const plainBuf = await crypto.subtle.decrypt(
       { name: 'AES-GCM', iv: iv, tagLength: 128 },
