@@ -369,6 +369,8 @@ nav {
   border-radius: 99px; font-size: 0.72rem;
   color: var(--muted); text-decoration: none;
   transition: all 0.2s; letter-spacing: 0.05em;
+  background: transparent; cursor: pointer;
+  font-family: inherit; font-weight: 300;
 }
 .map-btn:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -468,6 +470,8 @@ footer .footer-logo {
   flex-shrink: 0; font-size: 0.75rem;
   text-decoration: none; opacity: 0.5;
   transition: opacity 0.2s;
+  background: transparent; border: none; cursor: pointer;
+  padding: 0; line-height: 1;
 }
 .tl-map-dot:hover { opacity: 1; }
 
@@ -1411,6 +1415,20 @@ const DAYS = [
 
 // ── BUILD GRID
 
+// ── MAPS HELPER — iOS Universal Links fix ─────────────────────────────────────
+// On iOS, target="_blank" prevents Universal Links from intercepting the URL,
+// causing Google Maps app to show "Unsupported link".
+// Fix: use window.location.href on iOS so the OS can intercept the Universal Link.
+const _isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+function openMap(url) {
+  if (!url) return;
+  if (_isIOS) {
+    window.location.href = url;
+  } else {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+}
+
 // ── BUILD GRID ────────────────────────────────────────────────────────────────
 let openDay = null;
 const grid = document.getElementById('daysGrid');
@@ -1455,7 +1473,7 @@ function buildGrid(days) {
               ${t.items ? t.items.map(item => `
                 <div class="tl-item-row">
                   <span class="tl-item-text">${item.text}</span>
-                  ${item.map ? `<a href="${item.map}" target="_blank" rel="noopener noreferrer" class="tl-map-dot" title="Open in Maps">📍</a>` : ''}
+                  ${item.map ? `<button onclick="openMap('${item.map.replace(/'/g,"\\'")}')" class="tl-map-dot" title="Open in Maps">📍</button>` : ''}
                 </div>`).join('') : (t.note ? `<div class="tl-note">${t.note}</div>` : '')}
             </div>`).join('')}
           </div>
@@ -1464,11 +1482,11 @@ function buildGrid(days) {
               <div class="meta-label">Stay</div>
               <div class="meta-value">${d.stay}</div>
               <div class="meta-price">${d.stayPrice}</div>
-              ${d.stayLink ? `<a href="${d.stayLink}" target="_blank" rel="noopener noreferrer" class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+              ${d.stayLink ? `<button onclick="openMap('${d.stayLink.replace(/'/g,"\\'")}')" class="map-btn" style="margin-top:.5rem">📍 Google Maps</button>` : ''}
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
-              <div class="map-links">${d.maps.map(m=>`<a href="${m.url}" target="_blank" rel="noopener noreferrer" class="map-btn">📍 ${m.name} ↗</a>`).join('')}</div>
+              <div class="map-links">${d.maps.map(m=>`<button onclick="openMap('${m.url.replace(/'/g,"\\'")}')" class="map-btn">📍 ${m.name} ↗</button>`).join('')}</div>
             </div>
           </div>
         </div>
@@ -1587,7 +1605,7 @@ function buildEmergencyGrid() {
 
   grid.innerHTML = stayDays.map(d => {
     const mapsBtn = d.stayLink
-      ? `<a href="${d.stayLink}" target="_blank" rel="noopener noreferrer" class="emer-btn">📍 Google Maps</a>`
+      ? `<button onclick="openMap('${d.stayLink.replace(/'/g,"\\'")}')" class="emer-btn">📍 Google Maps</button>`
       : '';
     const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
 
@@ -2332,6 +2350,14 @@ window.addEventListener('load', () => {
       /* Replace array contents */
       flights.length = 0;
       data.flights.forEach(function(f) { flights.push(f); });
+    }
+
+    /* Re-render cards and emergency grid so Maps buttons appear */
+    if (typeof buildGrid === 'function' && typeof DAYS !== 'undefined') {
+      buildGrid(DAYS);
+    }
+    if (typeof buildEmergencyGrid === 'function') {
+      buildEmergencyGrid();
     }
 
     /* Re-render current day if renderDay exists */
