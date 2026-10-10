@@ -651,13 +651,15 @@ footer .footer-logo {
 
 /* Modal overlay */
 #pwModal {
-  display: none; position: fixed; inset: 0; z-index: 10001;
+  display: flex; position: fixed; inset: 0; z-index: 10001;
   background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   align-items: center; justify-content: center; padding: 20px;
   touch-action: manipulation;
+  visibility: hidden; opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
 }
-#pwModal.open { display: flex; }
+#pwModal.open { visibility: visible; opacity: 1; pointer-events: auto; }
 .pw-box {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 16px; padding: 36px 28px 28px; max-width: 380px; width: 100%;
@@ -1684,18 +1686,7 @@ if (!navigator.onLine) showBadge(false);
 function buildEmergencyGrid() {
   const grid = document.getElementById('emergencyGrid');
   if (!grid) return;
-  grid.innerHTML = '<p style="color:var(--muted);font-size:.9rem;padding:1rem 0">ข้อมูลที่พักรายคืนอยู่ใน <strong>Private Travel Kit</strong> — เปิดไฟล์ italy_private_kit.html บนอุปกรณ์ของคุณ</p>';
-}" target="_blank" class="emer-btn">📍 Google Maps</a>`
-      : '';
-    const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
-
-    return `<div class="emer-card">
-      <div class="emer-day">Day ${d.num} · ${d.date}</div>
-      <div class="emer-hotel">${d.stay}</div>
-      <div class="emer-addr">${d.stayPrice || ''}</div>
-      <div class="emer-actions">${mapsBtn}${copyBtn}</div>
-    </div>`;
-  }).join('');
+  grid.innerHTML = '<p style="color:var(--muted);font-size:.9rem;padding:1rem 0">🔒 ใส่รหัสผ่านเพื่อดูข้อมูลที่พักรายคืน</p>';
 }
 buildEmergencyGrid();
 
@@ -2097,16 +2088,26 @@ window.addEventListener('load', () => {
 // Wire buttons via addEventListener — see _wirePrivateLock() called at bottom of file
 
 function openPwModal() {
-  document.getElementById('pwModal').classList.add('open');
+  var m = document.getElementById('pwModal');
+  if (!m) return;
+  m.classList.add('open');
+  m.style.visibility = 'visible';
+  m.style.opacity = '1';
+  m.style.pointerEvents = 'auto';
   setTimeout(function() {
-    const inp = document.getElementById('pwInput');
+    var inp = document.getElementById('pwInput');
     if (inp) inp.focus();
   }, 150);
 }
 function closePwModal() {
-  document.getElementById('pwModal').classList.remove('open');
-  const err = document.getElementById('pwErr');
-  const inp = document.getElementById('pwInput');
+  var m = document.getElementById('pwModal');
+  if (!m) return;
+  m.classList.remove('open');
+  m.style.visibility = 'hidden';
+  m.style.opacity = '0';
+  m.style.pointerEvents = 'none';
+  var err = document.getElementById('pwErr');
+  var inp = document.getElementById('pwInput');
   if (err) err.textContent = '';
   if (inp) inp.value = '';
 }
