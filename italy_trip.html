@@ -1420,7 +1420,7 @@ function buildGrid(days) {
   days.forEach(d => {
     // Card
     const card = document.createElement('a');
-    card.href = '#'; card.className = 'day-card'; card.dataset.day = d.num;
+    card.href = 'javascript:void(0)'; card.className = 'day-card'; card.dataset.day = d.num;
     card.setAttribute('data-text', JSON.stringify(d));
     card.innerHTML = `
       <div class="day-card-img"><img src="${d.img}" alt="${d.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.5s;filter:brightness(0.4) saturate(0.7)"></div>
@@ -1455,7 +1455,7 @@ function buildGrid(days) {
               ${t.items ? t.items.map(item => `
                 <div class="tl-item-row">
                   <span class="tl-item-text">${item.text}</span>
-                  ${item.map ? `<a href="${item.map}" target="_blank" class="tl-map-dot" title="Open in Maps">📍</a>` : ''}
+                  ${item.map ? `<a href="${item.map}" target="_blank" rel="noopener noreferrer" class="tl-map-dot" title="Open in Maps">📍</a>` : ''}
                 </div>`).join('') : (t.note ? `<div class="tl-note">${t.note}</div>` : '')}
             </div>`).join('')}
           </div>
@@ -1464,11 +1464,11 @@ function buildGrid(days) {
               <div class="meta-label">Stay</div>
               <div class="meta-value">${d.stay}</div>
               <div class="meta-price">${d.stayPrice}</div>
-              ${d.stayLink ? `<a href="${d.stayLink}" target="_blank" class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+              ${d.stayLink ? `<a href="${d.stayLink}" target="_blank" rel="noopener noreferrer" class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
-              <div class="map-links">${d.maps.map(m=>`<a href="${m.url}" target="_blank" class="map-btn">📍 ${m.name} ↗</a>`).join('')}</div>
+              <div class="map-links">${d.maps.map(m=>`<a href="${m.url}" target="_blank" rel="noopener noreferrer" class="map-btn">📍 ${m.name} ↗</a>`).join('')}</div>
             </div>
           </div>
         </div>
@@ -1477,7 +1477,7 @@ function buildGrid(days) {
 
     card.addEventListener('click', e => {
       /* Allow links (Maps, etc.) inside the card to open normally */
-      if (e.target.closest('a')) return;
+      if (e.target.closest('a[href]:not([href="javascript:void(0)"])')) return;
       e.preventDefault();
       if (openDay === d.num) { closeDetail(d.num); return; }
       if (openDay) closeDetail(openDay);
@@ -1587,7 +1587,7 @@ function buildEmergencyGrid() {
 
   grid.innerHTML = stayDays.map(d => {
     const mapsBtn = d.stayLink
-      ? `<a href="${d.stayLink}" target="_blank" class="emer-btn">📍 Google Maps</a>`
+      ? `<a href="${d.stayLink}" target="_blank" rel="noopener noreferrer" class="emer-btn">📍 Google Maps</a>`
       : '';
     const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
 
