@@ -4,16 +4,25 @@
    GitHub Pages: https://kittipongdandee-hub.github.io/familytravel/
 
    Strategy:
-     Static shell  → Cache-First (HTML, manifest)
-     Google Fonts  → Cache-First, long-lived
-     Wikipedia img → Network-First, cache fallback
-     Offline page  → Served from cache if network fails
+     Static shell         → Cache-First (HTML, manifest)
+     private.enc.json     → Network-First, cache encrypted copy for offline
+                            (NEVER cache decrypted/plaintext data — decryption
+                             only happens in the page's JS, never in the SW)
+     Google Fonts         → Cache-First, long-lived
+     Wikipedia img        → Network-First, cache fallback
+     Offline page         → Served from cache if network fails
+
+   Security note:
+     The encrypted file (private.enc.json) is safe to cache because it
+     contains only AES-256-GCM ciphertext. Plaintext private data is
+     NEVER stored or passed through the service worker.
    ============================================================ */
 
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const SHELL_CACHE   = `italy-shell-${CACHE_VERSION}`;
 const IMG_CACHE     = `italy-images-${CACHE_VERSION}`;
 const FONT_CACHE    = `italy-fonts-${CACHE_VERSION}`;
+const PRIV_CACHE    = `italy-private-enc-${CACHE_VERSION}`;  /* encrypted only */
 
 /* Critical files to pre-cache on install */
 const BASE = '/familytravel';
@@ -34,7 +43,7 @@ self.addEventListener('install', event => {
 
 /* ── Activate ─────────────────────────────────────────────── */
 self.addEventListener('activate', event => {
-  const valid = [SHELL_CACHE, IMG_CACHE, FONT_CACHE];
+  const valid = [SHELL_CACHE, IMG_CACHE, FONT_CACHE, PRIV_CACHE];
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
@@ -65,13 +74,21 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  /* 3. Same-origin (GitHub Pages /familytravel/*) → cache-first */
+  /* 3. Same-origin (GitHub Pages /familytravel/*) */
   if (url.hostname === self.location.hostname) {
+    /* private.enc.json → network-first so unlocks always try fresh;
+       fall back to cached encrypted copy if offline.
+       IMPORTANT: only the encrypted JSON is ever stored here. */
+    if (url.pathname.endsWith('private.enc.json')) {
+      event.respondWith(networkFirstPrivateEnc(req));
+      return;
+    }
+    /* Everything else → cache-first */
     event.respondWith(cacheFirst(req, SHELL_CACHE));
     return;
   }
 
-  /* 4. All other external (Maps links open in Maps app, not here) → pass through */
+  /* 4. All other external → pass through */
 });
 
 /* ── Cache-First ──────────────────────────────────────────── */
@@ -89,6 +106,27 @@ async function cacheFirst(req, cacheName) {
   } catch {
     if (req.destination === 'document') return offlineFallback();
     return new Response('', { status: 503 });
+  }
+}
+
+/* ── Network-First for private.enc.json (encrypted only) ──── */
+async function networkFirstPrivateEnc(req) {
+  try {
+    const fresh = await fetch(req);
+    if (fresh && fresh.status === 200) {
+      /* Cache encrypted file for offline unlock */
+      const cache = await caches.open(PRIV_CACHE);
+      cache.put(req, fresh.clone());
+    }
+    return fresh;
+  } catch {
+    /* Offline: serve cached encrypted copy (still needs password to decrypt) */
+    const cached = await caches.match(req);
+    if (cached) return cached;
+    return new Response(
+      JSON.stringify({ error: 'offline', msg: 'private.enc.json not cached yet — connect once to cache it' }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 }
 
