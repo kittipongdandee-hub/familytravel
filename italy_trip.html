@@ -671,6 +671,15 @@ footer .footer-logo {
   <div class="flight-ticker" id="ticker"></div>
 </div>
 
+<!-- ⚠️ TEST BUTTON — TEMPORARY — REMOVE AFTER iPhone VERIFICATION -->
+<div id="mapsTestPanel" style="position:fixed;bottom:1rem;right:1rem;z-index:9999;background:#fff3cd;border:2px solid #ffc107;border-radius:.5rem;padding:.75rem 1rem;font-size:.8rem;box-shadow:0 4px 12px rgba(0,0,0,.2);max-width:220px">
+  <div style="font-weight:600;margin-bottom:.5rem">🧪 Maps Test (ชั่วคราว)</div>
+  <a onclick="openMap('https://www.google.com/maps/search/?api=1&query=Duomo%20di%20Milano');return false;" href="https://www.google.com/maps/search/?api=1&query=Duomo%20di%20Milano" style="display:block;background:#1a73e8;color:#fff;text-align:center;padding:.4rem .75rem;border-radius:.25rem;text-decoration:none;margin-bottom:.5rem">📍 ทดสอบ Google Maps</a>
+  <div style="color:#666;font-size:.72rem">ถ้าปุ่มนี้เปิด Maps ได้ → ปัญหาอยู่ที่ URL เดิม<br>ถ้าเปิดไม่ได้ → ปัญหาอยู่ที่ Safari→Maps handoff</div>
+  <button onclick="document.getElementById('mapsTestPanel').remove()" style="margin-top:.5rem;width:100%;background:none;border:1px solid #ccc;border-radius:.25rem;padding:.3rem;cursor:pointer;font-size:.72rem">✕ ปิดแผงทดสอบ</button>
+</div>
+<!-- END TEST BUTTON -->
+
 <!-- SEARCH + DAYS -->
 <section class="section" id="days">
   <div class="section-label">Itinerary</div>
@@ -1415,17 +1424,45 @@ const DAYS = [
 
 // ── BUILD GRID
 
-// ── iOS DETECTION ─────────────────────────────────────────────────────────────
-// Used by buildGrid to render the correct <a> attributes for Maps links.
-// On iOS: no target attribute → Safari handles as same-window navigation
-//         → OS intercepts maps.app.goo.gl Universal Link → opens Google Maps app
-// On desktop/Android: target="_blank" → opens in new tab
-const _isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+// ── MAPS HELPER ───────────────────────────────────────────────────────────────
+// Root cause of "Unsupported link":
+//   The page has <meta name="apple-mobile-web-app-capable" content="yes">.
+//   When opened from Home Screen (standalone PWA mode), iOS disables Universal
+//   Links entirely — tapping maps.app.goo.gl stays inside the WebView and the
+//   Google Maps app receives the URL directly, but cannot resolve the short link,
+//   showing "Unsupported link".
+//
+// Fix strategy:
+//   Detect standalone mode. If standalone → use window.open() which spawns a
+//   real Safari browser window where Universal Links DO work.
+//   If regular Safari → plain <a> with no target (Universal Link intercept works).
+//   Desktop/Android → target="_blank" new tab as before.
+//
+// For maximum compatibility, also convert maps.app.goo.gl to
+// https://www.google.com/maps/search/?api=1&query= using the place name from
+// the link text as a fallback label (used only when URL cannot be determined).
 
-// Helper: return the correct target/rel attributes string for a Maps link
-function mapsLinkAttrs() {
-  if (_isIOS) return '';  // no target — let Universal Link work
-  return ' target="_blank" rel="noopener noreferrer"';
+const _isIOS        = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const _isStandalone = _isIOS && (window.navigator.standalone === true);
+
+function openMap(url) {
+  if (!url) return;
+  if (_isStandalone) {
+    // Standalone PWA: Universal Links broken — open real Safari window instead
+    window.open(url, '_system') || window.open(url, '_blank');
+  } else if (_isIOS) {
+    // Regular Safari: navigate current window — OS intercepts Universal Link
+    window.location.href = url;
+  } else {
+    // Desktop / Android: open new tab
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+}
+
+// Helper: return onclick + target attributes string for a Maps <a> link
+function mapsLinkAttrs(url) {
+  var escaped = (url || '').replace(/'/g, "\\'");
+  return ` onclick="openMap('${escaped}');return false;" href="${url}"`;
 }
 
 // ── BUILD GRID ────────────────────────────────────────────────────────────────
@@ -1472,7 +1509,7 @@ function buildGrid(days) {
               ${t.items ? t.items.map(item => `
                 <div class="tl-item-row">
                   <span class="tl-item-text">${item.text}</span>
-                  ${item.map ? `<a href="${item.map}"${mapsLinkAttrs()} class="tl-map-dot" title="Open in Maps">📍</a>` : ''}
+                  ${item.map ? `<a${mapsLinkAttrs(item.map)} class="tl-map-dot" title="Open in Maps">📍</a>` : ''}
                 </div>`).join('') : (t.note ? `<div class="tl-note">${t.note}</div>` : '')}
             </div>`).join('')}
           </div>
@@ -1481,11 +1518,11 @@ function buildGrid(days) {
               <div class="meta-label">Stay</div>
               <div class="meta-value">${d.stay}</div>
               <div class="meta-price">${d.stayPrice}</div>
-              ${d.stayLink ? `<a href="${d.stayLink}"${mapsLinkAttrs()} class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+              ${d.stayLink ? `<a${mapsLinkAttrs(d.stayLink)} class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
-              <div class="map-links">${d.maps.map(m=>`<a href="${m.url}"${mapsLinkAttrs()} class="map-btn">📍 ${m.name} ↗</a>`).join('')}</div>
+              <div class="map-links">${d.maps.map(m=>`<a${mapsLinkAttrs(m.url)} class="map-btn">📍 ${m.name} ↗</a>`).join('')}</div>
             </div>
           </div>
         </div>
@@ -1604,7 +1641,7 @@ function buildEmergencyGrid() {
 
   grid.innerHTML = stayDays.map(d => {
     const mapsBtn = d.stayLink
-      ? `<a href="${d.stayLink}"${mapsLinkAttrs()} class="emer-btn">📍 Google Maps</a>`
+      ? `<a${mapsLinkAttrs(d.stayLink)} class="emer-btn">📍 Google Maps</a>`
       : '';
     const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
 
