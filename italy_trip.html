@@ -97,7 +97,6 @@ nav {
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Drei_Zinnen_Abend.jpg/1600px-Drei_Zinnen_Abend.jpg');
   background-size: cover; background-position: center;
   transform: scale(1.05);
   transition: transform 8s ease;
@@ -237,11 +236,15 @@ nav {
 }
 .day-card-img {
   position: absolute; inset: 0;
-  background-size: cover; background-position: center;
+  overflow: hidden;
+}
+.day-card-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s;
   filter: brightness(0.4) saturate(0.7);
 }
-.day-card:hover .day-card-img {
+.day-card:hover .day-card-img img {
   transform: scale(1.08); filter: brightness(0.55) saturate(0.9);
 }
 .day-card-overlay {
@@ -637,7 +640,9 @@ footer .footer-logo {
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg" id="heroBg">
+    <img id="heroBgImg" src="italy_photos/Tre Cime Day_6-3.jpg" alt="Tre Cime di Lavaredo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;">
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">17 — 27 October 2026</div>
@@ -975,8 +980,8 @@ const DAYS = [
   {
     num:1, date:'18 Oct · Sun', title:'Milan', sub:'Duomo · Galleria · Brera · Navigli',
     tags:['Arrive','City Walk'], temp:'17°/9°C',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg/1200px-Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Galleria_Vittorio_Emanuele_II_from_top.jpg/800px-Galleria_Vittorio_Emanuele_II_from_top.jpg',
+    img:'italy_photos/Milan Day_1-1.jpg',
+    detailImg:'italy_photos/Milan Day_1-2.jpg',
     stay:'Milan City Chic – Porta Venezia',stayPrice:'฿18,628',
     stayLink:'https://maps.app.goo.gl/xphdyoM1qdDgNiye6',
     tl:[
@@ -1025,8 +1030,8 @@ const DAYS = [
   {
     num:2, date:'19 Oct · Mon', title:'Lake Como', sub:'Como · Varenna · Bellagio · Como',
     tags:['🚗 รับรถ','Ferry'], temp:'17°/8°C',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Bellagio_da_Varenna.jpg/1200px-Bellagio_da_Varenna.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Bellagio_da_Varenna.jpg/800px-Bellagio_da_Varenna.jpg',
+    img:'italy_photos/Lake como Day_2-1.jpg',
+    detailImg:'italy_photos/Lake como Day_2-2.jpg',
     stay:'Zeus – Luxury Apartment, Como',stayPrice:'฿16,062',
     stayLink:'https://maps.app.goo.gl/cJUmdWL6Eq1gQxKWA',
     tl:[
@@ -1078,8 +1083,8 @@ const DAYS = [
   {
     num:3, date:'20 Oct · Tue', title:'Sirmione → Verona', sub:'Lake Garda · Arena · Castel San Pietro Sunset',
     tags:['🚗 Drive','Sunset ★'], temp:'18°/8°C',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Castello_Scaligero_di_Sirmione.jpg/1200px-Castello_Scaligero_di_Sirmione.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Arena_di_Verona_-_The_arena_%285975768516%29.jpg/800px-Arena_di_Verona_-_The_arena_%285975768516%29.jpg',
+    img:'italy_photos/Verona Day 3-1.jpg',
+    detailImg:'italy_photos/Verona Day 3-2.jpg',
     stay:'Arena on Foot – 3BR + Parking, Verona',stayPrice:'฿12,283',
     stayLink:'https://maps.app.goo.gl/cAfzRrH6dtmAeECJ6',
     tl:[
@@ -1128,8 +1133,8 @@ const DAYS = [
   {
     num:4, date:'21 Oct · Wed', title:'West Dolomites', sub:'Lake Carezza · Alpe di Siusi · Ortisei',
     tags:['🚗 Drive','Gondola ★'], temp:'8°/0°C ❄',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Karersee_mit_Latemargruppe.jpg/1200px-Karersee_mit_Latemargruppe.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Alpe_di_Siusi.jpg/800px-Alpe_di_Siusi.jpg',
+    img:'italy_photos/West Dolomites Day_4-1.jpg',
+    detailImg:'italy_photos/West Dolomites Day_4-2.jpg',
     stay:'Apartment Rainer – 3BR + Garden, Ortisei',stayPrice:'฿31,511',
     stayLink:'https://maps.app.goo.gl/pR1zTUWP9S4LbQzB7',
     tl:[
@@ -1168,8 +1173,8 @@ const DAYS = [
   {
     num:5, date:'22 Oct · Thu', title:'Seceda + Val di Funes + Braies', sub:'Ridgeline · Santa Maddalena · Emerald Lake · Dobbiaco',
     tags:['★ Highlight','Cable Car'], temp:'6°/−2°C ❄',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Seceda_Geisler.jpg/1200px-Seceda_Geisler.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Lago_di_Braies_-_Pragser_Wildsee_-_panoramio_%281%29.jpg/800px-Lago_di_Braies_-_Pragser_Wildsee_-_panoramio_%281%29.jpg',
+    img:'italy_photos/Seceda + Braies Day_5-1.jpg',
+    detailImg:'italy_photos/Seceda + Braies Day_5-2.jpg',
     stay:'Hotel Rosengarten Dobbiaco',stayPrice:'TBD',
     stayLink:'https://maps.app.goo.gl/x3yzfbXLSycR6xWeA',
     tl:[
@@ -1207,8 +1212,8 @@ const DAYS = [
   {
     num:6, date:'23 Oct · Fri', title:'Tre Cime 🎂', sub:'East Dolomites · Cadini di Misurina · Ra Gusela · Birthday Dinner Cortina',
     tags:['★ Highlight','Hiking','🎂 Birthday'], temp:'7°/−1°C',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Drei_Zinnen_Abend.jpg/1200px-Drei_Zinnen_Abend.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Cortina_dAmpezzo.jpg/800px-Cortina_dAmpezzo.jpg',
+    img:'italy_photos/Tre Cime Day_6-1.jpg',
+    detailImg:'italy_photos/Tre Cime Day_6-2.jpg',
     stay:'Cortina Lodge',stayPrice:'฿18,563',
     stayLink:'https://maps.app.goo.gl/82iVP5XQt6H8ERUd7',
     tl:[
@@ -1253,8 +1258,8 @@ const DAYS = [
   {
     num:7, date:'24 Oct · Sat', title:'Venice', sub:'คืนรถ VCE · Private Water Taxi · Grand Canal · WOW Seafood',
     tags:['🚗 คืนรถ','🚤 Water Taxi'], temp:'16°/10°C',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Venice_-_The_Grand_Canal.jpg/1200px-Venice_-_The_Grand_Canal.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Piazza_San_Marco_-_basilica_%26_campanile.jpg/800px-Piazza_San_Marco_-_basilica_%26_campanile.jpg',
+    img:'italy_photos/Venice Day_7-1.jpg',
+    detailImg:'italy_photos/Venice Day_7-2.jpg',
     stay:'Venice Center (2 คืน)',stayPrice:'฿44,621',
     stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
     tl:[
@@ -1304,8 +1309,8 @@ const DAYS = [
   {
     num:8, date:'25 Oct · Sun', title:'Venice Islands + Dorsoduro', sub:'Murano · Burano · San Giorgio Maggiore · Zattere',
     tags:['🚤 Islands','Sunset ★'], temp:'16°/10°C',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Burano_island_Venice.jpg/1200px-Burano_island_Venice.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Murano_island_Venice.jpg/800px-Murano_island_Venice.jpg',
+    img:'italy_photos/Venice Islands Day_8-1.jpg',
+    detailImg:'italy_photos/Venice Islands Day_8-2.jpg',
     stay:'Venice Center',stayPrice:'(คืนที่ 2)',stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
     tl:[
       {time:'08:30',place:'🚤 → Murano Island',h:false,items:[
@@ -1353,8 +1358,8 @@ const DAYS = [
   {
     num:9, date:'26 Oct · Mon', title:'Bergamo → ✈', sub:'Città Alta · Cappella Colleoni · QR 118 MXP 22:10 → BKK 27/10',
     tags:['🚂 Train','Last Day'], temp:'19°/11°C',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Piazza_Vecchia_Bergamo.jpg/1200px-Piazza_Vecchia_Bergamo.jpg',
-    detailImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Piazza_Vecchia_Bergamo.jpg/800px-Piazza_Vecchia_Bergamo.jpg',
+    img:'italy_photos/Bergamo Day_9-1.jpg',
+    detailImg:'italy_photos/Bergamo Day_9-2.jpg',
     stay:'—',stayPrice:'',stayLink:'',
     tl:[
       {time:'07:00',place:'🚂 Venice → Bergamo',h:false,items:[
@@ -1423,7 +1428,7 @@ function buildGrid(days) {
     card.href = '#'; card.className = 'day-card'; card.dataset.day = d.num;
     card.setAttribute('data-text', JSON.stringify(d));
     card.innerHTML = `
-      <div class="day-card-img" style="background-image:url('${d.img}')"></div>
+      <div class="day-card-img"><img src="${d.img}" alt="${d.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.5s;filter:brightness(0.4) saturate(0.7)"></div>
       <div class="day-card-overlay"></div>
       <div class="day-card-num">${String(d.num).padStart(2,'0')}</div>
       <div class="day-card-body">
@@ -1523,14 +1528,24 @@ document.addEventListener('click', e => {
 
 // ── HERO BG SLIDESHOW ────────────────────────────────────────────────────────
 const heroImgs = [
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Drei_Zinnen_Abend.jpg/1600px-Drei_Zinnen_Abend.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Venice_-_The_Grand_Canal.jpg/1600px-Venice_-_The_Grand_Canal.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg/1600px-Cathedral_and_Piazza_del_Duomo%2C_Milan_-_June_2017.jpg',
+  'italy_photos/Tre Cime Day_6-3.jpg',
+  'italy_photos/Venice Day_7-3.jpg',
+  'italy_photos/Milan Day_1-3.jpg',
+  'italy_photos/Seceda + Braies Day_5-3.jpg',
+  'italy_photos/West Dolomites Day_4-3.jpg',
 ];
 let heroIdx = 0;
+const heroBgImg = document.getElementById('heroBgImg');
 setInterval(() => {
   heroIdx = (heroIdx + 1) % heroImgs.length;
-  heroBg.style.backgroundImage = `url('${heroImgs[heroIdx]}')`;
+  if (heroBgImg) {
+    heroBgImg.style.opacity = '0';
+    heroBgImg.style.transition = 'opacity 0.8s';
+    setTimeout(() => {
+      heroBgImg.src = heroImgs[heroIdx];
+      heroBgImg.style.opacity = '1';
+    }, 800);
+  }
 }, 6000);
 
 // ── PWA: SERVICE WORKER REGISTRATION ────────────────────────────────────────
