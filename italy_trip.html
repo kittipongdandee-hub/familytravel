@@ -1476,6 +1476,8 @@ function buildGrid(days) {
     `;
 
     card.addEventListener('click', e => {
+      /* Allow links (Maps, etc.) inside the card to open normally */
+      if (e.target.closest('a')) return;
       e.preventDefault();
       if (openDay === d.num) { closeDetail(d.num); return; }
       if (openDay) closeDetail(openDay);
