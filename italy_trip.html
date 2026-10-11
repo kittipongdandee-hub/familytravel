@@ -370,6 +370,9 @@ nav {
 .weather-planb { color: var(--muted); font-size: 0.78rem; }
 .weather-planb strong { color: var(--accent); }
 .weather-src { color: rgba(122,118,112,0.6); font-size: 0.7rem; margin-top: 0.4rem; }
+.weather-links { font-size: 0.72rem; margin-top: 0.35rem; }
+.weather-links a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(200,146,58,0.3); }
+.weather-links a:hover { border-bottom-color: var(--accent); }
 
 /* accom + map links */
 .detail-meta {
@@ -675,7 +678,7 @@ footer .footer-logo {
   <div class="hero-content">
     <div class="hero-eyebrow">17 — 27 October 2026</div>
     <h1 class="hero-title">
-      Italia<br><em>Seven</em><br>Days
+      Italia<br><em>Nine</em><br>Days
     </h1>
     <p class="hero-sub">
       Milan · Lake Como · Sirmione · Verona<br>
@@ -683,8 +686,6 @@ footer .footer-logo {
     </p>
     <div class="hero-stats">
       <div><div class="hero-stat-num">9</div><div class="hero-stat-label">Days</div></div>
-      <div><div class="hero-stat-num">7</div><div class="hero-stat-label">People</div></div>
-      <div><div class="hero-stat-num">QR</div><div class="hero-stat-label">Qatar Airways</div></div>
     </div>
   </div>
   <div class="scroll-hint">Scroll</div>
@@ -961,7 +962,7 @@ footer .footer-logo {
 
 <footer>
   <span class="footer-logo">🇮🇹 Italy 2026</span>
-  <span>17–27 October · 7 People · Qatar Airways</span>
+  <span>17–27 October</span>
 </footer>
 
 <!-- FAB -->
@@ -1049,7 +1050,7 @@ const DAYS = [
       {name:'Brera',url:'https://www.google.com/maps/search/?api=1&query=Via+Brera+Milan'},
       {name:'Navigli',url:'https://www.google.com/maps/search/?api=1&query=Naviglio+Grande+Milan'},
     ],
-    weather:{icon:'🌧',label:'FORECAST',temp:'13–17°C',rain:'18mm',note:'⚠️ ฝนตกหนัก 18mm ตลอดวัน (yr.no ยืนยัน) · ลม 5 m/s · Duomo/Galleria มีหลังคา เน้นในร่ม',planB:'Duomo ด้านใน, Galleria, Pinacoteca di Brera, Museo del Novecento — อย่าเพิ่งเดิน Navigli กลางฝน',src:'yr.no Milan (12 Oct) ✅ CONFIRMED'}
+    weather:{icon:'🌧',label:'FORECAST',temp:'13–17°C',rain:'18mm',note:'⚠️ ฝนตกหนัก 18mm ตลอดวัน (yr.no ยืนยัน) · ลม 5 m/s · Duomo/Galleria มีหลังคา เน้นในร่ม',planB:'Duomo ด้านใน, Galleria, Pinacoteca di Brera, Museo del Novecento — อย่าเพิ่งเดิน Navigli กลางฝน',src:'yr.no Milan (12 Oct) ✅ CONFIRMED',links:[{name:'yr.no Milan',url:'https://www.yr.no/en/forecast/daily-table/2-3173435/Italy/Lombardy/Metropolitan_City_of_Milan/Milan'}]}
   },
   {
     num:2, date:'19 Oct · Mon', title:'Lake Como', sub:'Como · Varenna · Bellagio · Como',
@@ -1104,7 +1105,7 @@ const DAYS = [
       {name:'Bellagio',url:'https://www.google.com/maps/search/?api=1&query=Waterfront+Bellagio+Lake+Como'},
       {name:'Ferry Varenna',url:'https://www.google.com/maps/search/?api=1&query=Varenna+ferry+terminal+Lake+Como'},
     ],
-    weather:{icon:'☀️',label:'FORECAST',temp:'12–20°C',rain:'0mm',note:'☀️ อากาศดีมาก หลังฝน 18 Oct · yr.no ยืนยัน ท้องฟ้าโปร่งตลอดวัน · เรือข้ามฟากเดินปกติ',planB:'ไม่จำเป็น — แนวโน้มดีมาก',src:'yr.no Milan/Como (12 Oct) ✅ CONFIRMED'}
+    weather:{icon:'☀️',label:'FORECAST',temp:'12–20°C',rain:'0mm',note:'☀️ อากาศดีมาก หลังฝน 18 Oct · yr.no ยืนยัน ท้องฟ้าโปร่งตลอดวัน · เรือข้ามฟากเดินปกติ',planB:'ไม่จำเป็น — แนวโน้มดีมาก',src:'yr.no Milan/Como (12 Oct) ✅ CONFIRMED',links:[{name:'yr.no Milan',url:'https://www.yr.no/en/forecast/daily-table/2-3173435/Italy/Lombardy/Metropolitan_City_of_Milan/Milan'},{name:'yr.no Como',url:'https://www.yr.no/en/forecast/daily-table/2-3178229/Italy/Lombardy/Province_of_Como/Como'}]}
   },
   {
     num:3, date:'20 Oct · Tue', title:'Sirmione → Verona', sub:'Lake Garda · Arena · Castel San Pietro Sunset',
@@ -1155,7 +1156,7 @@ const DAYS = [
       {name:'Ponte Pietra',url:'https://www.google.com/maps/search/?api=1&query=Ponte+Pietra+Verona'},
       {name:'Castel S.Pietro',url:'https://www.google.com/maps/search/?api=1&query=Funicolare+Castel+San+Pietro+Verona'},
     ],
-    weather:{icon:'☀️',label:'FORECAST',temp:'12–17°C',rain:'0mm',note:'☀️ yr.no Verona 20 Oct: ท้องฟ้าโปร่ง ไม่มีฝน · Sirmione ZTL หมดอายุ 13 Oct แล้ว ✅ ขับรถได้ปกติ',planB:'ไม่จำเป็น — อากาศดี · ถ้า Grotte di Catullo เต็ม เดิน peninsula แทนได้',src:'yr.no Verona (12 Oct) ✅ CONFIRMED'}
+    weather:{icon:'☀️',label:'FORECAST',temp:'12–17°C',rain:'0mm',note:'☀️ yr.no Verona 20 Oct: ท้องฟ้าโปร่ง ไม่มีฝน · Sirmione ZTL หมดอายุ 13 Oct แล้ว ✅ ขับรถได้ปกติ',planB:'ไม่จำเป็น — อากาศดี · ถ้า Grotte di Catullo เต็ม เดิน peninsula แทนได้',src:'yr.no Verona (12 Oct) ✅ CONFIRMED',links:[{name:'yr.no Verona',url:'https://www.yr.no/en/forecast/daily-table/2-3164527/Italy/Veneto/Province_of_Verona/Verona'}]}
   },
   {
     num:4, date:'21 Oct · Wed', title:'West Dolomites', sub:'Lake Carezza · Alpe di Siusi · Ortisei',
@@ -1196,7 +1197,7 @@ const DAYS = [
       {name:'Parkgarage',url:'https://www.google.com/maps/search/?api=1&query=Parkgarage+Lift+Alpe+di+Siusi+Ortisei'},
       {name:'Ortisei',url:'https://www.google.com/maps/search/?api=1&query=Ortisei+town+center+Val+Gardena'},
     ],
-    weather:{icon:'🌤',label:'TREND',temp:'1–12°C (Alpe di Siusi)',rain:'กำลังอัปเดต',note:'⚠️ ข้อมูล yr.no ยังไม่ครอบคลุมถึง 21 Oct · ใกล้เคียง Cortina 20 Oct =-1/12°C แห้ง · หนาวตอนเช้า 1–3°C บนกระเช้า · กระเช้าเปิดถึง 2 Nov ✅ · Mont de Seura ปิดตั้งแต่ 11 Oct ⚠️',planB:'Mont de Seura ปิด — ใช้ Ortisei–Alpe di Siusi gondola แทน (เปิดถึง 2 Nov) · หากน้ำแข็งบน trail เดิน viewpoint เท่านั้น',src:'yr.no Cortina (12 Oct, ข้อมูลถึง 20 Oct) · valgardena.it lifts'}
+    weather:{icon:'🌤',label:'TREND',temp:'1–12°C (Alpe di Siusi)',rain:'กำลังอัปเดต',note:'⚠️ ข้อมูล yr.no ยังไม่ครอบคลุมถึง 21 Oct · ใกล้เคียง Cortina 20 Oct =-1/12°C แห้ง · หนาวตอนเช้า 1–3°C บนกระเช้า · กระเช้าเปิดถึง 2 Nov ✅ · Mont de Seura ปิดตั้งแต่ 11 Oct ⚠️',planB:'Mont de Seura ปิด — ใช้ Ortisei–Alpe di Siusi gondola แทน (เปิดถึง 2 Nov) · หากน้ำแข็งบน trail เดิน viewpoint เท่านั้น',src:'yr.no Cortina (12 Oct, ข้อมูลถึง 20 Oct) · valgardena.it lifts',links:[{name:'yr.no Cortina',url:'https://www.yr.no/en/forecast/daily-table/2-3177952/Italy/Veneto/Province_of_Belluno/Cortina_d%27Ampezzo'},{name:'ARPAV Veneto',url:'https://www.arpa.veneto.it/previsioni/it/html/meteo_veneto.php'}]}
   },
   {
     num:5, date:'22 Oct · Thu', title:'Seceda + Val di Funes + Braies', sub:'Ridgeline · Santa Maddalena · Emerald Lake · Dobbiaco',
@@ -1236,7 +1237,7 @@ const DAYS = [
       {name:'St. Johann Ranui',url:'https://www.google.com/maps/search/?api=1&query=St+Johann+in+Ranui+church+Val+di+Funes'},
       {name:'Lago di Braies',url:'https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+Pragser+Wildsee'},
     ],
-    weather:{icon:'🌤',label:'TREND',temp:'1–13°C (Seceda 2518m)',rain:'กำลังอัปเดต',note:'⚠️ ยังไม่มีข้อมูลถึง 22 Oct · ใกล้เคียง Cortina 18-20 Oct: 6/11°C, แห้ง · Seceda เปิดถึง 2 Nov ✅ · 2518m อาจมีหิมะตกค้าง เตรียม down jacket + ถุงมือ',planB:'หาก Seceda trail ปิดเพราะหิมะ — ชม viewpoint ที่สถานีบน + Lago di Braies + Santa Maddalena · Lago di Braies ไม่มีปัญหาจากหิมะ',src:'yr.no Cortina 18-20 Oct (12 Oct) + TREND ถึง 22 Oct · valgardena.it lifts'}
+    weather:{icon:'🌤',label:'TREND',temp:'1–13°C (Seceda 2518m)',rain:'กำลังอัปเดต',note:'⚠️ ยังไม่มีข้อมูลถึง 22 Oct · ใกล้เคียง Cortina 18-20 Oct: 6/11°C, แห้ง · Seceda เปิดถึง 2 Nov ✅ · 2518m อาจมีหิมะตกค้าง เตรียม down jacket + ถุงมือ',planB:'หาก Seceda trail ปิดเพราะหิมะ — ชม viewpoint ที่สถานีบน + Lago di Braies + Santa Maddalena · Lago di Braies ไม่มีปัญหาจากหิมะ',src:'yr.no Cortina 18-20 Oct (12 Oct) + TREND ถึง 22 Oct · valgardena.it lifts',links:[{name:'yr.no Cortina',url:'https://www.yr.no/en/forecast/daily-table/2-3177952/Italy/Veneto/Province_of_Belluno/Cortina_d%27Ampezzo'},{name:'ARPAV Veneto',url:'https://www.arpa.veneto.it/previsioni/it/html/meteo_veneto.php'}]}
   },
   {
     num:6, date:'23 Oct · Fri', title:'Tre Cime 🎂', sub:'East Dolomites · Cadini di Misurina · Ra Gusela · Birthday Dinner Cortina',
@@ -1283,7 +1284,7 @@ const DAYS = [
       {name:'Passo Giau',url:'https://www.google.com/maps/search/?api=1&query=Passo+Giau+Ra+Gusela+Cortina'},
       {name:'🔒 Hotel — Locked',url:''},
     ],
-    weather:{icon:'🌤',label:'TREND',temp:'3–12°C Cortina · −3°C Tre Cime (2999m)',rain:'กำลังอัปเดต',note:'⚠️ ยังไม่มีข้อมูลถึง 23 Oct · ใกล้เคียง Cortina 18-20 Oct: 6-11°C แห้ง · Tre Cime 2999m หนาวมาก ❄️ · ⚠️ AURONZO TOLL ROAD: จองออนไลน์ที่ pass.auronzo.info ก่อนเดินทาง (€40/รถ) — ห้ามจ่ายที่ด่าน!',planB:'หากถนน Auronzo ปิดหรือลืมจอง: Ra Gusela (Passo Giau) + Cortina town + Birthday Dinner ตามแผน',src:'yr.no Cortina 18-20 Oct (12 Oct) + TREND ถึง 23 Oct · pass.auronzo.info จองก่อน!'}
+    weather:{icon:'🌤',label:'TREND',temp:'3–12°C Cortina · −3°C Tre Cime (2999m)',rain:'กำลังอัปเดต',note:'⚠️ ยังไม่มีข้อมูลถึง 23 Oct · ใกล้เคียง Cortina 18-20 Oct: 6-11°C แห้ง · Tre Cime 2999m หนาวมาก ❄️ · ⚠️ AURONZO TOLL ROAD: จองออนไลน์ที่ pass.auronzo.info ก่อนเดินทาง (€40/รถ) — ห้ามจ่ายที่ด่าน!',planB:'หากถนน Auronzo ปิดหรือลืมจอง: Ra Gusela (Passo Giau) + Cortina town + Birthday Dinner ตามแผน',src:'yr.no Cortina 18-20 Oct (12 Oct) + TREND ถึง 23 Oct · pass.auronzo.info จองก่อน!',links:[{name:'yr.no Cortina',url:'https://www.yr.no/en/forecast/daily-table/2-3177952/Italy/Veneto/Province_of_Belluno/Cortina_d%27Ampezzo'},{name:'ARPAV Veneto',url:'https://www.arpa.veneto.it/previsioni/it/html/meteo_veneto.php'}]}
   },
   {
     num:7, date:'24 Oct · Sat', title:'Venice', sub:'คืนรถ VCE · Private Water Taxi · Grand Canal · Birthday Seafood Dinner',
@@ -1335,7 +1336,7 @@ const DAYS = [
       {name:'Gondola',url:'https://www.google.com/maps/search/?api=1&query=Molo+San+Marco+gondola+Venice'},
       {name:'Seafood Dinner',url:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Venice+Italy'},
     ],
-    weather:{icon:'☀️',label:'TREND',temp:'12–18°C',rain:'0%',note:'ดีมาก — แห้ง อาจลม NE เล็กน้อย (Bora) · Acqua Alta เป็นไปได้ช่วง Oct-Nov แต่ยังไม่มีการแจ้งเตือน',planB:'ไม่จำเป็น · หากลมแรง vaporetto ปรับ route — ใช้เส้นหลักแทน',src:'iLMeteo.it Venezia lungo-termine (11 Oct)'}
+    weather:{icon:'☀️',label:'TREND',temp:'12–18°C',rain:'0%',note:'ดีมาก — แห้ง อาจลม NE เล็กน้อย (Bora) · Acqua Alta เป็นไปได้ช่วง Oct-Nov แต่ยังไม่มีการแจ้งเตือน',planB:'ไม่จำเป็น · หากลมแรง vaporetto ปรับ route — ใช้เส้นหลักแทน',src:'iLMeteo.it Venezia lungo-termine (11 Oct)',links:[{name:'yr.no Venice',url:'https://www.yr.no/en/forecast/daily-table/2-3164603/Italy/Veneto/Metropolitan_City_of_Venice/Venice'},{name:'Acqua Alta',url:'https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree'}]}
   },
   {
     num:8, date:'25 Oct · Sun', title:'Venice Islands + Dorsoduro', sub:'Murano · Burano · San Giorgio Maggiore · Zattere',
@@ -1385,7 +1386,7 @@ const DAYS = [
       {name:'Salute',url:'https://www.google.com/maps/search/?api=1&query=Santa+Maria+della+Salute+Venice'},
       {name:'San Giorgio',url:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
     ],
-    weather:{icon:'☀️',label:'TREND',temp:'11–18°C',rain:'0%',note:'ดีมาก — แห้ง · ลม NNE (Bora) 13–19 km/h เล็กน้อย · เรือ vaporetto ปกติ',planB:'หากลมแรงผิดปกติ — ใช้ vaporetto route หลัก (1, 2) แทน outer island routes',src:'iLMeteo.it Venezia lungo-termine (11 Oct)'}
+    weather:{icon:'☀️',label:'TREND',temp:'11–18°C',rain:'0%',note:'ดีมาก — แห้ง · ลม NNE (Bora) 13–19 km/h เล็กน้อย · เรือ vaporetto ปกติ',planB:'หากลมแรงผิดปกติ — ใช้ vaporetto route หลัก (1, 2) แทน outer island routes',src:'iLMeteo.it Venezia lungo-termine (11 Oct)',links:[{name:'yr.no Venice',url:'https://www.yr.no/en/forecast/daily-table/2-3164603/Italy/Veneto/Metropolitan_City_of_Venice/Venice'},{name:'Acqua Alta',url:'https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree'}]}
   },
   {
     num:9, date:'26 Oct · Mon', title:'Bergamo → ✈', sub:'Città Alta · Cappella Colleoni',
@@ -1443,7 +1444,7 @@ const DAYS = [
       {name:'Campanone',url:'https://www.google.com/maps/search/?api=1&query=Campanone+Torre+Civica+Bergamo'},
       {name:'Malpensa T1',url:'https://www.google.com/maps/search/?api=1&query=Malpensa+Terminal+1+Milan+Airport'},
     ],
-    weather:{icon:'❓',label:'UNCONFIRMED',temp:'ไม่มีข้อมูล',rain:'?',note:'⚠ ไม่มีพยากรณ์ถึง 26 Oct · แนวโน้มจาก 25 Oct Venice: แห้ง NNE 13 km/h · เช็คใหม่วันที่ 24-25 Oct',planB:'เผื่อเวลา + เดินทางแต่เช้า หากฝน/ล่าช้า — ลด Bergamo เน้น MXP 22:10 ห้าม miss',src:'ไม่มีข้อมูลถึงวันนี้ — เช็คใหม่ใกล้วัน'}
+    weather:{icon:'❓',label:'UNCONFIRMED',temp:'ไม่มีข้อมูล',rain:'?',note:'⚠ ไม่มีพยากรณ์ถึง 26 Oct · แนวโน้มจาก 25 Oct Venice: แห้ง NNE 13 km/h · เช็คใหม่วันที่ 24-25 Oct',planB:'เผื่อเวลา + เดินทางแต่เช้า หากฝน/ล่าช้า — ลด Bergamo เน้น MXP 22:10 ห้าม miss',src:'ไม่มีข้อมูลถึงวันนี้ — เช็คใหม่ใกล้วัน',links:[{name:'yr.no Bergamo',url:'https://www.yr.no/en/forecast/daily-table/2-3182164/Italy/Lombardy/Province_of_Bergamo/Bergamo'}]}
   },
 ];
 
@@ -1549,6 +1550,7 @@ function buildGrid(days) {
               <div class="weather-note">${d.weather.note}</div>
               <div class="weather-planb"><strong>Plan B:</strong> ${d.weather.planB}</div>
               <div class="weather-src">📡 ${d.weather.src}</div>
+              ${d.weather.links ? `<div class="weather-links">🔗 ${d.weather.links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.name}</a>`).join(' · ')}</div>` : ''}
             </div>
           </div>` : ''}
           <div class="detail-meta">
