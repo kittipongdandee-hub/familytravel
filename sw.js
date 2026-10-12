@@ -18,7 +18,7 @@
      NEVER stored or passed through the service worker.
    ============================================================ */
 
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const SHELL_CACHE   = `italy-shell-${CACHE_VERSION}`;
 const IMG_CACHE     = `italy-images-${CACHE_VERSION}`;
 const FONT_CACHE    = `italy-fonts-${CACHE_VERSION}`;
@@ -186,6 +186,14 @@ function offlineFallback() {
 self.addEventListener('message', async event => {
   const { type, urls } = event.data || {};
 
+  /* Reply helper: prefer MessageChannel port (iOS Safari compatible),
+     fall back to event.source for broadcast messages like CACHE_PROGRESS */
+  const replyPort = event.ports && event.ports[0];
+  const reply = (msg) => {
+    if (replyPort) replyPort.postMessage(msg);
+    else event.source?.postMessage(msg);
+  };
+
   /* Allow page to force SW claim (helps iOS Safari first-load) */
   if (type === 'SKIP_WAITING') {
     await self.skipWaiting();
@@ -204,6 +212,7 @@ self.addEventListener('message', async event => {
         if (res.ok) { await cache.put(url, res); done++; }
       } catch { /* skip failed */ }
 
+      /* CACHE_PROGRESS always goes to event.source (broadcast, no port) */
       event.source?.postMessage({
         type: 'CACHE_PROGRESS',
         done,
@@ -214,19 +223,19 @@ self.addEventListener('message', async event => {
     event.source?.postMessage({ type: 'CACHE_IMAGES_DONE', done, total: urls.length });
   }
 
-  /* Re-cache the main HTML file */
+  /* Re-cache the main HTML file — reply via port (MessageChannel) */
   if (type === 'CACHE_SHELL') {
     try {
       const cache = await caches.open(SHELL_CACHE);
       const res = await fetch(`${BASE}/italy_trip.html`);
       if (res.ok) await cache.put(`${BASE}/italy_trip.html`, res.clone());
-      event.source?.postMessage({ type: 'CACHE_SHELL_DONE' });
+      reply({ type: 'CACHE_SHELL_DONE' });
     } catch (err) {
-      event.source?.postMessage({ type: 'CACHE_SHELL_ERROR', err: String(err) });
+      reply({ type: 'CACHE_SHELL_ERROR', err: String(err) });
     }
   }
 
-  /* Check what's cached */
+  /* Check what's cached — reply via port (MessageChannel) */
   if (type === 'CHECK_CACHE') {
     const shellCache = await caches.open(SHELL_CACHE);
     const imgCache   = await caches.open(IMG_CACHE);
@@ -234,7 +243,7 @@ self.addEventListener('message', async event => {
     const [shellKeys, imgKeys, fontKeys] = await Promise.all([
       shellCache.keys(), imgCache.keys(), fontCache.keys()
     ]);
-    event.source?.postMessage({
+    reply({
       type: 'CACHE_STATUS',
       shell: shellKeys.length,
       images: imgKeys.length,

@@ -1820,7 +1820,7 @@ async function downloadOfflineData() {
   status.textContent = 'บันทึก Fonts...';
   let fontOk = false;
   try {
-    const fontCache = await caches.open('italy-fonts-v4');
+    const fontCache = await caches.open('italy-fonts-v5');
     const fontUrl = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap';
     const cached = await fontCache.match(fontUrl);
     if (cached) { fontOk = true; }
