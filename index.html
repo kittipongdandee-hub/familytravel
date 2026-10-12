@@ -722,9 +722,9 @@ footer .footer-logo {
         <tr><td>4</td><td>21 Oct · Wed</td><td>Lake Carezza → Alpe di Siusi → Ortisei</td><td>Apt Rainer</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
         <tr><td>5</td><td>22 Oct · Thu</td><td>Seceda · Lago di Braies · Dobbiaco</td><td>Dobbiaco</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
         <tr><td>6</td><td>23 Oct · Fri</td><td>Tre Cime · Ra Gusela · Cortina 🎂</td><td class="priv-cell" data-priv-day="6" data-priv-type="hotel"><span class="priv-locked">🔒 Hotel — Locked</span><span class="priv-data" style="display:none"></span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td>Venice Center</td><td><span class="badge badge-car">🚗 คืน 12:00</span></td></tr>
+        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td>Venice Center</td><td><span class="badge badge-car">🚗 คืน 12:30</span></td></tr>
         <tr><td>8</td><td>25 Oct · Sun</td><td>Murano · Burano · San Giorgio</td><td>Venice Center</td><td><span class="badge badge-boat">🚤 Vaporetto</span></td></tr>
-        <tr><td>9</td><td>26 Oct · Mon</td><td>Venice → Bergamo → Milan ✈ 22:10</td><td>—</td><td><span class="badge badge-train">🚂 Train</span></td></tr>
+        <tr><td>9</td><td>26 Oct · Mon</td><td>Venice → Bergamo → Milan ✈ 22:10</td><td>—</td><td><span class="badge badge-car">🚗 รถเช่า</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1050,7 +1050,7 @@ const DAYS = [
       {name:'Brera',url:'https://www.google.com/maps/search/?api=1&query=Via+Brera+Milan'},
       {name:'Navigli',url:'https://www.google.com/maps/search/?api=1&query=Naviglio+Grande+Milan'},
     ],
-    weather:{icon:'🌧',label:'FORECAST',temp:'13–17°C',rain:'18mm',note:'⚠️ ฝนตกหนัก 18mm ตลอดวัน (yr.no ยืนยัน) · ลม 5 m/s · Duomo/Galleria มีหลังคา เน้นในร่ม',planB:'Duomo ด้านใน, Galleria, Pinacoteca di Brera, Museo del Novecento — อย่าเพิ่งเดิน Navigli กลางฝน',src:'yr.no Milan (12 Oct) ✅ CONFIRMED',links:[{name:'yr.no Milan',url:'https://www.yr.no/en/forecast/daily-table/2-3173435/Italy/Lombardy/Metropolitan_City_of_Milan/Milan'}]}
+    weather:{icon:'🌧',label:'FORECAST',temp:'14–19°C',rain:'11mm',note:'⚠️ ฝนตกหนัก 11mm ตลอดวัน · ลม 4 m/s · Duomo/Galleria มีหลังคา เน้นในร่ม',planB:'Duomo ด้านใน, Galleria, Pinacoteca di Brera, Museo del Novecento — อย่าเพิ่งเดิน Navigli กลางฝน',src:'yr.no Milan (12 Oct 01:23) ✅ CONFIRMED',links:[{name:'yr.no Milan',url:'https://www.yr.no/en/forecast/daily-table/2-3173435/Italy/Lombardy/Metropolitan_City_of_Milan/Milan'}]}
   },
   {
     num:2, date:'19 Oct · Mon', title:'Lake Como', sub:'Como · Varenna · Bellagio · Como',
@@ -1064,35 +1064,40 @@ const DAYS = [
         {text:'Galleria delle Carrozze',map:'https://www.google.com/maps/search/?api=1&query=Galleria+delle+Carrozze+Milano+Centrale'},
         {text:'ออกเส้น SS36 ไม่เจอ ZTL',map:''},
       ]},
-      {time:'08:45',place:'📍 Como (แวะก่อน)',h:false,items:[
+      {time:'09:15',place:'🅿 จอดรถ Como – Autosilo Valduce',h:false,items:[
+        {text:'📍 Autosilo Valduce H2.08m (Viale Lecco 9, Como)',map:'https://www.google.com/maps/search/?api=1&query=Autosilo+Valduce+Viale+Lecco+9+Como'},
+        {text:'⚠ ความสูงรถ ≤ 2.08 ม.',map:''},
+      ]},
+      {time:'09:15–09:55',place:'📍 Como (เช้า)',h:false,items:[
         {text:'Como Cathedral',map:'https://www.google.com/maps/search/?api=1&query=Como+Cathedral+Italy'},
         {text:'Piazza Cavour',map:'https://www.google.com/maps/search/?api=1&query=Piazza+Cavour+Como+Italy'},
         {text:'ริมทะเลสาบ',map:''},
-        {text:'🅿 Autosilo Valduce (Viale Lecco 9)',map:'https://www.google.com/maps/search/?api=1&query=Autosilo+Valduce+Viale+Lecco+9+Como'},
-        {text:'🅿 Como Central Parking (เลือกอย่างใดอย่างหนึ่ง)',map:'https://www.google.com/maps/search/?api=1&query=Como+Central+Parking+Viale+Innocenzo+XI+Como'},
       ]},
-      {time:'09:15',place:'🅿 จอดรถ Varenna',h:false,items:[
-        {text:'Parcheggio Multipiano Varenna <2.05m (Viale Giovanni Polvani 1)',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+Multipiano+Viale+Giovanni+Polvani+1+Varenna'},
-        {text:'€3/ชม.',map:''},
+      {time:'10:00',place:'🚢 เรือ Como → Varenna',h:true,items:[
+        {text:'Ferry Como–Varenna (สาย CDV traghetto)',map:'https://www.google.com/maps/search/?api=1&query=Como+ferry+terminal+Lake+Como'},
+        {text:'~2 ชม. 20 นาที — ชมทะเลสาบตลอดทาง',map:''},
       ]},
-      {time:'09:15–11:20',place:'📍 Varenna',h:false,items:[
-        {text:'Villa Monastero €15',map:'https://www.google.com/maps/search/?api=1&query=Villa+Monastero+Varenna+Italy'},
+      {time:'12:20–14:20',place:'📍 Varenna',h:true,items:[
+        {text:'Villa Monastero €15 (เข้า 13:00)',map:'https://www.google.com/maps/search/?api=1&query=Villa+Monastero+Varenna+Italy'},
         {text:'Passeggiata degli Innamorati',map:'https://www.google.com/maps/search/?api=1&query=Passeggiata+degli+Innamorati+Varenna+Italy'},
-        {text:'☕ Gelato Varenna',map:'https://www.google.com/maps/search/?api=1&query=gelato+Varenna+Italy'},
+        {text:'☕ Gelato / Cafe Varenna',map:'https://www.google.com/maps/search/?api=1&query=gelato+Varenna+Italy'},
       ]},
-      {time:'11:20',place:'🚤 เรือ Varenna → Bellagio',h:false,items:[
-        {text:'€4.60/คน',map:'https://www.google.com/maps/search/?api=1&query=Varenna+ferry+terminal+Lake+Como'},
+      {time:'14:28–14:45',place:'🚢 เรือ Varenna → Bellagio',h:false,items:[
+        {text:'Ferry Varenna–Bellagio €4.60/คน',map:'https://www.google.com/maps/search/?api=1&query=Varenna+ferry+terminal+Lake+Como'},
         {text:'~15 นาที',map:''},
       ]},
-      {time:'11:45–15:20',place:'📍 Bellagio',h:true,items:[
-        {text:'Waterfront Bellagio',map:'https://www.google.com/maps/search/?api=1&query=Waterfront+Bellagio+Lake+Como'},
-        {text:'Salita Serbelloni',map:'https://www.google.com/maps/search/?api=1&query=Salita+Serbelloni+Bellagio+Italy'},
-        {text:'ร้านค้าซอยเล็ก',map:''},
-        {text:'🍝 กลางวัน 12:30',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Bellagio+Lake+Como'},
-        {text:'Punta Spartivento',map:'https://www.google.com/maps/search/?api=1&query=Punta+Spartivento+Bellagio+Lake+Como'},
+      {time:'14:45–17:00',place:'📍 Bellagio',h:true,items:[
+        {text:'🍝 Lunch 14:45–15:20',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Bellagio+Lake+Como'},
+        {text:'Waterfront Bellagio 15:20–15:40',map:'https://www.google.com/maps/search/?api=1&query=Waterfront+Bellagio+Lake+Como'},
+        {text:'Salita Serbelloni 15:40–16:05',map:'https://www.google.com/maps/search/?api=1&query=Salita+Serbelloni+Bellagio+Italy'},
+        {text:'Punta Spartivento 16:05–16:20',map:'https://www.google.com/maps/search/?api=1&query=Punta+Spartivento+Bellagio+Lake+Como'},
         {text:'วิวสุดของแหลม',map:''},
       ]},
-      {time:'18:30–21:00',place:'📍 Como (ค่ำ)',h:false,items:[
+      {time:'17:05–17:50',place:'🚢 เรือ Bellagio → Como (Speed Ferry)',h:false,items:[
+        {text:'Speed Ferry Bellagio–Como ~45 นาที',map:'https://www.google.com/maps/search/?api=1&query=Bellagio+ferry+terminal+Lake+Como'},
+        {text:'(หรือ Slow Ferry 16:45–18:55 ถ้ายังอยู่ Bellagio)',map:''},
+      ]},
+      {time:'18:00–21:00',place:'📍 Como (ค่ำ)',h:false,items:[
         {text:'Como Cathedral',map:'https://www.google.com/maps/search/?api=1&query=Como+Cathedral+Italy'},
         {text:'Piazza Cavour',map:'https://www.google.com/maps/search/?api=1&query=Piazza+Cavour+Como+Italy'},
         {text:'ริมทะเลสาบ',map:''},
@@ -1100,10 +1105,11 @@ const DAYS = [
       ]},
     ],
     maps:[
-      {name:'Como',url:'https://www.google.com/maps/search/?api=1&query=Como+Cathedral+Italy'},
-      {name:'Varenna',url:'https://www.google.com/maps/search/?api=1&query=Parcheggio+Multipiano+Varenna+Italy'},
+      {name:'Como Autosilo',url:'https://www.google.com/maps/search/?api=1&query=Autosilo+Valduce+Viale+Lecco+9+Como'},
+      {name:'Ferry Como',url:'https://www.google.com/maps/search/?api=1&query=Como+ferry+terminal+Lake+Como'},
+      {name:'Varenna',url:'https://www.google.com/maps/search/?api=1&query=Villa+Monastero+Varenna+Italy'},
       {name:'Bellagio',url:'https://www.google.com/maps/search/?api=1&query=Waterfront+Bellagio+Lake+Como'},
-      {name:'Ferry Varenna',url:'https://www.google.com/maps/search/?api=1&query=Varenna+ferry+terminal+Lake+Como'},
+      {name:'Punta Spartivento',url:'https://www.google.com/maps/search/?api=1&query=Punta+Spartivento+Bellagio+Lake+Como'},
     ],
     weather:{icon:'☀️',label:'FORECAST',temp:'12–20°C',rain:'0mm',note:'☀️ อากาศดีมาก หลังฝน 18 Oct · yr.no ยืนยัน ท้องฟ้าโปร่งตลอดวัน · เรือข้ามฟากเดินปกติ',planB:'ไม่จำเป็น — แนวโน้มดีมาก',src:'yr.no Milan/Como (12 Oct) ✅ CONFIRMED',links:[{name:'yr.no Milan',url:'https://www.yr.no/en/forecast/daily-table/2-3173435/Italy/Lombardy/Metropolitan_City_of_Milan/Milan'},{name:'yr.no Como',url:'https://www.yr.no/en/forecast/daily-table/2-3178229/Italy/Lombardy/Province_of_Como/Como'}]}
   },
@@ -1156,7 +1162,7 @@ const DAYS = [
       {name:'Ponte Pietra',url:'https://www.google.com/maps/search/?api=1&query=Ponte+Pietra+Verona'},
       {name:'Castel S.Pietro',url:'https://www.google.com/maps/search/?api=1&query=Funicolare+Castel+San+Pietro+Verona'},
     ],
-    weather:{icon:'☀️',label:'FORECAST',temp:'12–17°C',rain:'0mm',note:'☀️ yr.no Verona 20 Oct: ท้องฟ้าโปร่ง ไม่มีฝน · Sirmione ZTL หมดอายุ 13 Oct แล้ว ✅ ขับรถได้ปกติ',planB:'ไม่จำเป็น — อากาศดี · ถ้า Grotte di Catullo เต็ม เดิน peninsula แทนได้',src:'yr.no Verona (12 Oct) ✅ CONFIRMED',links:[{name:'yr.no Verona',url:'https://www.yr.no/en/forecast/daily-table/2-3164527/Italy/Veneto/Province_of_Verona/Verona'}]}
+    weather:{icon:'☀️',label:'FORECAST',temp:'10–19°C',rain:'0mm',note:'☀️ yr.no Verona 20 Oct: ท้องฟ้าโปร่ง ไม่มีฝน · ลม 6 m/s · Sirmione ZTL หมดอายุ 13 Oct แล้ว ✅ ขับรถได้ปกติ',planB:'ไม่จำเป็น — อากาศดี · ถ้า Grotte di Catullo เต็ม เดิน peninsula แทนได้',src:'yr.no Verona (12 Oct 01:23) ✅ CONFIRMED',links:[{name:'yr.no Verona',url:'https://www.yr.no/en/forecast/daily-table/2-3164527/Italy/Veneto/Province_of_Verona/Verona'}]}
   },
   {
     num:4, date:'21 Oct · Wed', title:'West Dolomites', sub:'Lake Carezza · Alpe di Siusi · Ortisei',
@@ -1207,26 +1213,44 @@ const DAYS = [
     stay:'',stayPrice:'',
     stayLink:'',
     tl:[
-      {time:'08:00',place:'🚡 Seceda Cable Car, Ortisei',h:true,items:[
-        {text:'🅿 Parkgarage Seceda H2.2m',map:'https://www.google.com/maps/search/?api=1&query=Parkgarage+Seceda+Ortisei+Italy'},
-        {text:'⚠ เช็กก่อน seceda.it — ปลาย ต.ค. อาจปิด seasonal',map:'https://www.google.com/maps/search/?api=1&query=Seceda+Cable+Car+Ortisei+Dolomites'},
+      {time:'07:30',place:'🚗 ออกจาก Ortisei → Parkgarage Seceda',h:false,items:[
+        {text:'ขับ ~15 นาที ไป Parkgarage Seceda',map:'https://www.google.com/maps/search/?api=1&query=Parkgarage+Seceda+Ortisei+Italy'},
       ]},
-      {time:'08:30–12:00',place:'⛰ Seceda Ridgeline 2,518m',h:true,items:[
+      {time:'07:45–08:00',place:'🅿 Parkgarage Seceda H2.2m',h:false,items:[
+        {text:'📍 Parkgarage Seceda H2.2m',map:'https://www.google.com/maps/search/?api=1&query=Parkgarage+Seceda+Ortisei+Italy'},
+        {text:'⚠ เช็กก่อน seceda.it — ปลาย ต.ค. อาจปิด seasonal',map:''},
+      ]},
+      {time:'08:30',place:'🚡 ขึ้นกระเช้า Seceda',h:true,items:[
+        {text:'Seceda Cable Car จาก Ortisei',map:'https://www.google.com/maps/search/?api=1&query=Seceda+Cable+Car+Ortisei+Dolomites'},
+      ]},
+      {time:'09:00–10:30',place:'⛰ Seceda Ridgeline 2,518m',h:true,items:[
         {text:'วิวสันเขา Dolomites สวยที่สุด',map:'https://www.google.com/maps/search/?api=1&query=Seceda+Cable+Car+Ortisei+Dolomites'},
         {text:'ไม่ต้อง hike หนัก',map:''},
       ]},
-      {time:'12:30–14:00',place:'📍 Val di Funes – Santa Maddalena',h:true,items:[
+      {time:'10:30',place:'🚡 ลงกระเช้า → Ortisei',h:false,items:[
+        {text:'ลงจากยอด + เดิน Ortisei สั้น ๆ',map:'https://www.google.com/maps/search/?api=1&query=Ortisei+Val+Gardena+Italy'},
+      ]},
+      {time:'11:00–11:40',place:'🚗 ขับ Ortisei → Val di Funes',h:false,items:[
+        {text:'ขับผ่านหุบเขา ~40 นาที',map:'https://www.google.com/maps/search/?api=1&query=Val+di+Funes+Villnoss+Italy'},
+      ]},
+      {time:'11:40–13:15',place:'📍 Val di Funes – Santa Maddalena',h:true,items:[
         {text:'Santa Maddalena (Villnöß)',map:'https://www.google.com/maps/search/?api=1&query=Santa+Maddalena+Villnoss+Val+di+Funes'},
         {text:'วิว Geisler/Odle Group คลาสสิก',map:''},
         {text:'St. Johann in Ranui (โบสถ์โดดเดี่ยวหน้าภูเขา)',map:'https://www.google.com/maps/search/?api=1&query=St+Johann+in+Ranui+church+Val+di+Funes'},
         {text:'🍝 ร้านอาหาร Santa Maddalena',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Santa+Maddalena+Val+di+Funes'},
       ]},
-      {time:'14:00–16:00',place:'🏞 Lago di Braies (Pragser Wildsee)',h:true,items:[
-        {text:'🅿 P4 Pragser Wildsee — จองล่วงหน้า braies.it',map:'https://www.google.com/maps/search/?api=1&query=P4+Pragser+Wildsee+parking+Lago+di+Braies'},
-        {text:'เดินรอบทะเลสาบ ~5 กม. ชิลมาก',map:'https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+Pragser+Wildsee'},
-        {text:'เรือพาย (ถ้าเปิด) ~€15',map:''},
+      {time:'13:30',place:'🚗 ขับ → Lago di Braies',h:false,items:[
+        {text:'ขับ ~1.5 ชม.',map:'https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+Pragser+Wildsee'},
       ]},
-      {time:'17:00',place:'🚗 → 🔒 Hotel — Locked',h:false,items:[
+      {time:'15:00–16:30',place:'🏞 Lago di Braies (Pragser Wildsee)',h:true,items:[
+        {text:'15:00–15:15 🅿 P4 Pragser Wildsee — จองล่วงหน้า braies.it',map:'https://www.google.com/maps/search/?api=1&query=P4+Pragser+Wildsee+parking+Lago+di+Braies'},
+        {text:'15:15–16:00 🛶 เรือพาย (ถ้าเปิด) ~€15',map:'https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+Pragser+Wildsee'},
+        {text:'16:00–16:30 เดินรอบทะเลสาบ',map:''},
+      ]},
+      {time:'16:30',place:'🚗 ออก → Hotel Rosengarten Dobbiaco',h:false,items:[
+        {text:'ขับ ~30 นาที',map:''},
+      ]},
+      {time:'17:00',place:'🔒 Hotel Rosengarten Dobbiaco',h:false,items:[
         {text:'🔒 Hotel — Locked',map:''},
         {text:'พักผ่อน',map:''},
       ]},
@@ -1240,7 +1264,7 @@ const DAYS = [
     weather:{icon:'🌤',label:'TREND',temp:'1–13°C (Seceda 2518m)',rain:'กำลังอัปเดต',note:'⚠️ ยังไม่มีข้อมูลถึง 22 Oct · ใกล้เคียง Cortina 18-20 Oct: 6/11°C, แห้ง · Seceda เปิดถึง 2 Nov ✅ · 2518m อาจมีหิมะตกค้าง เตรียม down jacket + ถุงมือ',planB:'หาก Seceda trail ปิดเพราะหิมะ — ชม viewpoint ที่สถานีบน + Lago di Braies + Santa Maddalena · Lago di Braies ไม่มีปัญหาจากหิมะ',src:'yr.no Cortina 18-20 Oct (12 Oct) + TREND ถึง 22 Oct · valgardena.it lifts',links:[{name:'yr.no Cortina',url:'https://www.yr.no/en/forecast/daily-table/2-3177952/Italy/Veneto/Province_of_Belluno/Cortina_d%27Ampezzo'},{name:'ARPAV Veneto',url:'https://www.arpa.veneto.it/previsioni/it/html/meteo_veneto.php'}]}
   },
   {
-    num:6, date:'23 Oct · Fri', title:'Tre Cime 🎂', sub:'East Dolomites · Cadini di Misurina · Ra Gusela · Birthday Dinner Cortina',
+    num:6, date:'23 Oct · Fri', title:'Tre Cime 🎂', sub:'East Dolomites · Lake Misurina · Ra Gusela · Birthday Dinner Cortina',
     tags:['★ Highlight','Hiking','🎂 Birthday'], temp:'7°/−1°C',
     img:'italy_photos/Tre Cime Day_6-1.jpg',
     detailImg:'italy_photos/Tre Cime Day_6-2.jpg',
@@ -1254,11 +1278,7 @@ const DAYS = [
         {text:'Big Loop 9–10 กม. หรือ Short Walk 6 กม.',map:'https://www.google.com/maps/search/?api=1&query=Tre+Cime+di+Lavaredo+hiking+Dolomites'},
         {text:'Rifugio Locatelli (จุดพักกลาง)',map:'https://www.google.com/maps/search/?api=1&query=Rifugio+Locatelli+Tre+Cime+Dolomites'},
       ]},
-      {time:'12:30',place:'🏞 Cadini di Misurina Viewpoint',h:true,items:[
-        {text:'จุดชมวิว Tre Cime ที่ดีที่สุด',map:'https://www.google.com/maps/search/?api=1&query=Cadini+di+Misurina+viewpoint+Dolomites'},
-        {text:'เดินประมาณ 30 นาทีจากที่จอดรถ',map:''},
-      ]},
-      {time:'13:30',place:'🏞 Lake Misurina',h:false,items:[
+      {time:'14:30',place:'🏞 Lake Misurina',h:false,items:[
         {text:'🍝 Lunch / ☕ Coffee ริมทะเลสาบ',map:'https://www.google.com/maps/search/?api=1&query=Lake+Misurina+Dolomites'},
         {text:'ทะเลสาบสวยงามด้านล่าง Tre Cime',map:''},
       ]},
@@ -1279,7 +1299,6 @@ const DAYS = [
     ],
     maps:[
       {name:'Tre Cime',url:'https://www.google.com/maps/search/?api=1&query=Tre+Cime+di+Lavaredo+hiking+Dolomites'},
-      {name:'Cadini Misurina',url:'https://www.google.com/maps/search/?api=1&query=Cadini+di+Misurina+viewpoint+Dolomites'},
       {name:'Misurina',url:'https://www.google.com/maps/search/?api=1&query=Lake+Misurina+Dolomites'},
       {name:'Passo Giau',url:'https://www.google.com/maps/search/?api=1&query=Passo+Giau+Ra+Gusela+Cortina'},
       {name:'🔒 Hotel — Locked',url:''},
@@ -1294,45 +1313,69 @@ const DAYS = [
     stay:'',stayPrice:'',
     stayLink:'',
     tl:[
-      {time:'09:00–12:00',place:'🚗 Cortina → Venice Marco Polo',h:false,items:[
+      {time:'09:00',place:'🚗 Cortina → Venice Marco Polo Airport',h:false,items:[
         {text:'~2 ชม. ผ่าน Belluno → Treviso',map:''},
+        {text:'ถึงสนามบิน ~11:00',map:''},
       ]},
-      {time:'12:00',place:'🚗 คืนรถ Marco Polo Airport',h:true,items:[
+      {time:'11:00–12:30',place:'🍝 Lunch ก่อนคืนรถ',h:false,items:[
+        {text:'ร้านอาหารบริเวณ VCE / Tessera',map:'https://www.google.com/maps/search/?api=1&query=restaurant+near+Venice+Marco+Polo+Airport'},
+        {text:'มื้อสุดท้ายก่อนเข้า Venice',map:''},
+      ]},
+      {time:'12:30',place:'🚗 คืนรถ Marco Polo Airport',h:true,items:[
         {text:'Venice Marco Polo Airport',map:'https://www.google.com/maps/search/?api=1&query=Venice+Marco+Polo+Airport'},
         {text:'Drop Zone',map:''},
       ]},
-      {time:'12:30–13:30',place:'🚤 Private Water Taxi เข้า Venice',h:false,items:[
+      {time:'13:00–14:00',place:'🚤 Private Water Taxi เข้า Venice',h:false,items:[
         {text:'Private Water Taxi จาก Marco Polo Airport',map:'https://www.google.com/maps/search/?api=1&query=Venice+Marco+Polo+Airport'},
-        {text:'~60 นาที สู่ Venice (Grand Canal)',map:''},
+        {text:'จุดจอด: Fondamente Nove B — ใกล้ที่พักที่สุด',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
         {text:'⚠ จองล่วงหน้า — แนะนำ alilaguna.it หรือ taxi privato',map:''},
+        {text:'🎫 ซื้อ ACTV 2-Day Pass ที่ Fondamente Nove €35/คน',map:''},
       ]},
-      {time:'14:30–18:00',place:'🚶 Venice Walk',h:false,items:[
+      {time:'14:00–14:30',place:'🏨 Check-in / ฝากกระเป๋า',h:false,items:[
+        {text:'↓ เดิน ~12 นาที จาก Fondamente Nove',map:''},
+      ]},
+      {time:'14:45–15:20',place:'📍 Rialto Bridge + Grand Canal',h:false,items:[
         {text:'Ponte di Rialto',map:'https://www.google.com/maps/search/?api=1&query=Ponte+di+Rialto+Venice'},
         {text:'Grand Canal',map:'https://www.google.com/maps/search/?api=1&query=Grand+Canal+Venice'},
-        {text:'Piazza San Marco',map:'https://www.google.com/maps/search/?api=1&query=Piazza+San+Marco+Venice'},
-        {text:'Basilica di San Marco',map:'https://www.google.com/maps/search/?api=1&query=Basilica+di+San+Marco+Venice'},
-        {text:'Scala Contarini del Bovolo €10',map:'https://www.google.com/maps/search/?api=1&query=Scala+Contarini+del+Bovolo+Venice'},
-        {text:'Campanile di San Marco €15',map:'https://www.google.com/maps/search/?api=1&query=Campanile+di+San+Marco+Venice'},
       ]},
-      {time:'17:00–17:40',place:'🚤 Gondola Molo San Marco',h:true,items:[
+      {time:'15:30–16:00',place:'📍 Campanile di San Marco €15',h:false,items:[
+        {text:'Campanile di San Marco',map:'https://www.google.com/maps/search/?api=1&query=Campanile+di+San+Marco+Venice'},
+        {text:'🛗 ขึ้นลิฟต์ — วิว Basilica + lagoon + San Giorgio',map:''},
+        {text:'🎫 จองล่วงหน้า: tickets.basilicasanmarco.it',map:''},
+      ]},
+      {time:'16:00–16:40',place:'📍 Piazza San Marco',h:true,items:[
+        {text:'Piazza San Marco',map:'https://www.google.com/maps/search/?api=1&query=Piazza+San+Marco+Venice'},
+        {text:'Basilica di San Marco (exterior)',map:'https://www.google.com/maps/search/?api=1&query=Basilica+di+San+Marco+Venice'},
+        {text:'Doge\'s Palace (exterior)',map:'https://www.google.com/maps/search/?api=1&query=Palazzo+Ducale+Venice'},
+        {text:'Bridge of Sighs',map:'https://www.google.com/maps/search/?api=1&query=Bridge+of+Sighs+Venice'},
+      ]},
+      {time:'16:40–17:00',place:'☕ พัก + เดิน + รอเรือ',h:false,items:[
+        {text:'เดินริมน้ำ Molo + รอ Gondola',map:'https://www.google.com/maps/search/?api=1&query=Molo+San+Marco+Venice'},
+      ]},
+      {time:'17:00–17:40',place:'🛶 Gondola Molo San Marco',h:true,items:[
         {text:'Gondola ride จาก Molo San Marco',map:'https://www.google.com/maps/search/?api=1&query=Molo+San+Marco+gondola+Venice'},
         {text:'ประมาณ €80–100/เรือ (40 นาที)',map:''},
       ]},
-      {time:'18:00',place:'🌅 Sunset Viewpoint',h:false,items:[
-        {text:'Fondamenta Zattere',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
-        {text:'วิวช่อง Giudecca',map:''},
-        {text:'T Fondaco dei Tedeschi Rooftop (ฟรี!)',map:'https://www.google.com/maps/search/?api=1&query=T+Fondaco+dei+Tedeschi+Rooftop+Venice'},
-        {text:'Fondamenta Misericordia (ย่าน local)',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Misericordia+Venice'},
+      {time:'17:45–18:40',place:'🌅 San Giorgio Maggiore',h:false,items:[
+        {text:'🚤 Vaporetto Line 2 จาก S. Zaccaria "B" → San Giorgio',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+Venice'},
+        {text:'Campanile di San Giorgio Maggiore — วิว Punta della Dogana เป็นสามเหลี่ยม',map:'https://www.google.com/maps/search/?api=1&query=Campanile+San+Giorgio+Maggiore+Venice'},
+        {text:'📸 Santa Maria della Salute + San Marco + Doge\'s Palace + Lagoon 🌅',map:''},
+        {text:'🚤 กลับฝั่ง Venice 18:40–19:00',map:''},
       ]},
-      {time:'19:30',place:'🎂 Birthday Seafood Dinner',h:true,items:[
+      {time:'19:00',place:'🎂 Birthday Dinner — WOW Seafood',h:true,items:[
         {text:'🦞 Seafood restaurants Venice',map:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Venice+Italy'},
         {text:'จองล่วงหน้า',map:''},
+      ]},
+      {time:'21:00',place:'🌙 Fondamenta Misericordia',h:false,items:[
+        {text:'ย่าน local ยามค่ำคืน',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Misericordia+Venice'},
       ]},
     ],
     maps:[
       {name:'Marco Polo',url:'https://www.google.com/maps/search/?api=1&query=Venice+Marco+Polo+Airport'},
-      {name:'San Marco',url:'https://www.google.com/maps/search/?api=1&query=Piazza+San+Marco+Venice'},
+      {name:'Fondamente Nove',url:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
       {name:'Rialto',url:'https://www.google.com/maps/search/?api=1&query=Ponte+di+Rialto+Venice'},
+      {name:'San Marco',url:'https://www.google.com/maps/search/?api=1&query=Piazza+San+Marco+Venice'},
+      {name:'San Giorgio',url:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+Venice'},
       {name:'Gondola',url:'https://www.google.com/maps/search/?api=1&query=Molo+San+Marco+gondola+Venice'},
       {name:'Seafood Dinner',url:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Venice+Italy'},
     ],
@@ -1345,106 +1388,166 @@ const DAYS = [
     detailImg:'italy_photos/Venice Islands Day_8-2.jpg',
     stay:'',stayPrice:'',stayLink:'',
     tl:[
-      {time:'08:30',place:'🚤 → Murano Island',h:false,items:[
-        {text:'Vaporetto Line 4.1/4.2 จาก Fondamente Nove',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+vaporetto+Venice'},
-        {text:'ดูการเป่าแก้ว Murano Glass factory',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+factory+Venice'},
-        {text:'ร้านกระจก Murano',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+shop+Venice'},
-        {text:'ของที่ระลึก',map:''},
+      {time:'08:20',place:'🚤 ออกจากที่พัก → Fondamente Nove A',h:false,items:[
+        {text:'เดิน ~8 นาที จากที่พักไป Fondamente Nove A',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
       ]},
-      {time:'11:30',place:'🚤 → Burano Island',h:true,items:[
-        {text:'เรือจาก Murano → Burano ~40 นาที',map:''},
-        {text:'บ้านสีสัน',map:'https://www.google.com/maps/search/?api=1&query=Burano+island+colorful+houses+Venice'},
-        {text:'ถ่ายรูปสนุกมาก',map:''},
-        {text:'🍝 กลางวันที่ Burano',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Burano+Venice'},
+      {time:'08:30',place:'🚤 → Murano (Line 12)',h:false,items:[
+        {text:'Fondamente Nove A → Murano Faro A (Line 12)',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+vaporetto+Venice'},
+        {text:'~35 นาที',map:''},
       ]},
-      {time:'15:00',place:'🚤 กลับ Venice',h:false,items:[
-        {text:'เรือ Burano → Fondamente Nove',map:''},
+      {time:'09:05–10:30',place:'📍 Murano Island',h:true,items:[
+        {text:'09:10–09:25 Campo Santo Stefano + Torre Orologio',map:'https://www.google.com/maps/search/?api=1&query=Campo+Santo+Stefano+Murano+Venice'},
+        {text:'09:25–09:45 Rio dei Vetrai (คลองแก้ว)',map:'https://www.google.com/maps/search/?api=1&query=Rio+dei+Vetrai+Murano+Venice'},
+        {text:'09:45–10:00 Glass shops + ดูการเป่าแก้ว',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+factory+Venice'},
+        {text:'10:10–10:20 Fondamenta S. Giovanni dei Battuti',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+shop+Venice'},
+        {text:'10:20–10:30 กลับ Faro A รอเรือ',map:''},
       ]},
-      {time:'15:30–16:30',place:'📍 Punta della Dogana + Santa Maria della Salute',h:false,items:[
-        {text:'Punta della Dogana (ปลายแหลม Dorsoduro)',map:'https://www.google.com/maps/search/?api=1&query=Punta+della+Dogana+Dorsoduro+Venice'},
-        {text:'Santa Maria della Salute (โบสถ์ Baroque)',map:'https://www.google.com/maps/search/?api=1&query=Santa+Maria+della+Salute+Venice'},
+      {time:'10:30–11:10',place:'🚤 Murano → Burano',h:false,items:[
+        {text:'เรือ Line 12 Murano Faro → Burano ~40 นาที',map:''},
+      ]},
+      {time:'11:10–13:30',place:'📍 Burano Island',h:true,items:[
+        {text:'11:10–11:20 Via Baldassarre Galuppi (ถนนหลัก)',map:'https://www.google.com/maps/search/?api=1&query=Via+Baldassarre+Galuppi+Burano+Venice'},
+        {text:'11:20–11:35 Piazza Galuppi + Church of San Martino',map:'https://www.google.com/maps/search/?api=1&query=Piazza+Galuppi+Burano+Venice'},
+        {text:'11:45–12:30 Tre Ponti + Fondamenta di Terranova (บ้านสีสัน)',map:'https://www.google.com/maps/search/?api=1&query=Burano+island+colorful+houses+Venice'},
+        {text:'🍝 12:45–13:00 Lunch Burano',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Burano+Venice'},
+      ]},
+      {time:'13:30–14:15',place:'🚤 Burano → Fondamente Nove → San Zaccaria',h:false,items:[
+        {text:'13:30–14:00 เรือ Burano → Fondamente Nove',map:''},
+        {text:'14:00–14:15 รอ + เรือ Fondamente Nove → San Zaccaria',map:''},
+      ]},
+      {time:'14:30–14:45',place:'🚤 San Zaccaria → Zattere',h:false,items:[
+        {text:'Vaporetto จาก San Zaccaria ไป Zattere',map:'https://www.google.com/maps/search/?api=1&query=San+Zaccaria+vaporetto+Venice'},
+      ]},
+      {time:'14:45–15:50',place:'📍 Punta della Dogana + Santa Maria della Salute',h:false,items:[
+        {text:'14:45–15:15 Punta della Dogana (ปลายแหลม Dorsoduro)',map:'https://www.google.com/maps/search/?api=1&query=Punta+della+Dogana+Dorsoduro+Venice'},
+        {text:'15:20–15:50 Santa Maria della Salute (โบสถ์ Baroque)',map:'https://www.google.com/maps/search/?api=1&query=Santa+Maria+della+Salute+Venice'},
         {text:'วิวสวยมาก Grand Canal + San Marco',map:''},
       ]},
-      {time:'16:30–17:30',place:'📍 Zattere + Giudecca Canal',h:false,items:[
+      {time:'15:50–16:20',place:'📍 Zattere + Giudecca Canal',h:false,items:[
         {text:'Fondamenta Zattere',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
         {text:'เดินริมคลอง Giudecca ช้า ๆ',map:''},
         {text:'☕ Café Zattere',map:'https://www.google.com/maps/search/?api=1&query=cafe+Zattere+Venice'},
       ]},
-      {time:'17:30',place:'🌅 San Giorgio Maggiore — Sunset ดีที่สุด',h:true,items:[
-        {text:'Vaporetto Line 2 → San Giorgio Maggiore',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
-        {text:'ขึ้นหอระฆัง Campanile วิว 360° Venice',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
+      {time:'16:20–17:25',place:'🌅 San Giorgio Maggiore — Sunset',h:true,items:[
+        {text:'16:10–16:20 Zattere → San Giorgio (Vaporetto Line 2)',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
+        {text:'16:20–17:00 ขึ้นหอระฆัง Campanile วิว 360° Venice',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
+        {text:'17:00–17:25 Sunset + ชม lagoon',map:''},
+        {text:'17:25–17:45 กลับ Zattere',map:''},
       ]},
-      {time:'19:00',place:'🍝 ดินเนอร์ Dorsoduro / Zattere',h:false,items:[
-        {text:'ย่าน Dorsoduro บรรยากาศ local',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
-        {text:'Fondamenta Zattere',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
+      {time:'17:45–18:30',place:'📍 Zattere + Giudecca Canal (เย็น)',h:false,items:[
+        {text:'เดินริมคลอง Giudecca ยามเย็น',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
+        {text:'บรรยากาศ golden hour ริมน้ำ',map:''},
+      ]},
+      {time:'18:30–19:00',place:'📍 Campo Santa Margherita',h:false,items:[
+        {text:'Campo Santa Margherita — จัตุรัส local ที่สุดใน Venice',map:'https://www.google.com/maps/search/?api=1&query=Campo+Santa+Margherita+Venice'},
+        {text:'ชม aperitivo / เดินเล่น',map:''},
+      ]},
+      {time:'19:00–20:30',place:'🍝 ดินเนอร์ Dorsoduro',h:false,items:[
+        {text:'ย่าน Dorsoduro บรรยากาศ local',map:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Dorsoduro+Venice'},
         {text:'ร้านอาหารทะเล Dorsoduro',map:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Dorsoduro+Venice'},
+      ]},
+      {time:'20:30–21:15',place:'🚤 กลับที่พัก',h:false,items:[
+        {text:'เรือ Vaporetto กลับ Fondamente Nove ย่านที่พัก',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
       ]},
     ],
     maps:[
+      {name:'Fondamente Nove',url:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
       {name:'Murano',url:'https://www.google.com/maps/search/?api=1&query=Murano+glass+factory+Venice'},
       {name:'Burano',url:'https://www.google.com/maps/search/?api=1&query=Burano+island+colorful+houses+Venice'},
+      {name:'Punta Dogana',url:'https://www.google.com/maps/search/?api=1&query=Punta+della+Dogana+Dorsoduro+Venice'},
       {name:'Salute',url:'https://www.google.com/maps/search/?api=1&query=Santa+Maria+della+Salute+Venice'},
       {name:'San Giorgio',url:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
+      {name:'S.Margherita',url:'https://www.google.com/maps/search/?api=1&query=Campo+Santa+Margherita+Venice'},
     ],
     weather:{icon:'☀️',label:'TREND',temp:'11–18°C',rain:'0%',note:'ดีมาก — แห้ง · ลม NNE (Bora) 13–19 km/h เล็กน้อย · เรือ vaporetto ปกติ',planB:'หากลมแรงผิดปกติ — ใช้ vaporetto route หลัก (1, 2) แทน outer island routes',src:'iLMeteo.it Venezia lungo-termine (11 Oct)',links:[{name:'yr.no Venice',url:'https://www.yr.no/en/forecast/daily-table/2-3164603/Italy/Veneto/Metropolitan_City_of_Venice/Venice'},{name:'Acqua Alta',url:'https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree'}]}
   },
   {
     num:9, date:'26 Oct · Mon', title:'Bergamo → ✈', sub:'Città Alta · Cappella Colleoni',
-    tags:['🚂 Train','Last Day'], temp:'19°/11°C',
+    tags:['🚗 รถเช่า','Last Day'], temp:'19°/11°C',
     img:'italy_photos/Bergamo Day_9-1.jpg',
     detailImg:'italy_photos/Bergamo Day_9-2.jpg',
     stay:'',stayPrice:'',stayLink:'',
     tl:[
-      {time:'07:00',place:'🚂 Venice → Bergamo',h:false,items:[
-        {text:'~4 ชม. ตรวจสอบ trenitalia.com ก่อน',map:'https://www.google.com/maps/search/?api=1&query=Venice+Santa+Lucia+train+station'},
+      {time:'07:30',place:'🚤 Fondamente Nove → VCE Airport',h:false,items:[
+        {text:'เรือ/water taxi จาก Fondamente Nove ไปสนามบิน Venice (VCE)',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
+        {text:'ถึงสนามบิน ~08:30–09:00',map:''},
       ]},
-      {time:'11:00',place:'🧳 ฝากกระเป๋า Bergamo Station',h:false,items:[
-        {text:'Left Luggage ในอาคารสถานี €4 สำหรับ 4 ชม.',map:'https://www.google.com/maps/search/?api=1&query=Bergamo+train+station+left+luggage'},
+      {time:'09:00',place:'🚗 รับรถเช่า VCE Airport',h:true,items:[
+        {text:'📍 Viale Galileo Gallei, 30, 30173 Venezia VE',map:'https://maps.app.goo.gl/HoZ1i9Lc88rQJg4z9'},
+        {text:'Business hours 08:00–23:00 · โทร: +39 041 299 1030',map:''},
+        {text:'7 คน — ตรวจสอบรถ + เอกสาร ก่อนออก',map:''},
       ]},
-      {time:'11:10–11:30',place:'🚌 Bus + Funicolare ขึ้น Città Alta',h:false,items:[
-        {text:'ATB Bus สาย 1 หรือ Funicolare Città Alta',map:'https://www.google.com/maps/search/?api=1&query=Funicolare+Citta+Alta+Bergamo'},
-        {text:'City 24h Pass €4.90/คน',map:''},
+      {time:'09:00–11:45',place:'🚗 Venice → Bergamo (~2.5 ชม.)',h:false,items:[
+        {text:'ทางด่วน A4 ทิศตะวันตก ผ่าน Mestre → Brescia → Bergamo',map:''},
       ]},
-      {time:'11:30–15:00',place:'📍 Bergamo Città Alta',h:true,items:[
+      {time:'11:45',place:'📍 ถึง Bergamo Città Alta',h:false,items:[
+        {text:'มาถึงย่านเมืองเก่า Bergamo',map:'https://www.google.com/maps/search/?api=1&query=Bergamo+Citta+Alta+Italy'},
+      ]},
+      {time:'12:00–12:15',place:'🅿 จอดรถ + ห้องน้ำ Parcheggio Città Alta – Via della Fara',h:true,items:[
+        {text:'📍 Parcheggio della Fara Città Alta',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+della+Fara+Via+Fara+Bergamo+Citta+Alta'},
+        {text:'€3.30/ชม. (8 ชั้น 469 คัน) · ทางเข้าสูง 2.15 ม. · เปิด 24 ชม.',map:''},
+        {text:'⚠ Bergamo Città Alta มี ZTL — ต้องใช้ป้ายจอดเท่านั้น',map:''},
+        {text:'เส้นทาง: Viale Vittorio Emanuele II → Conca d\'Oro roundabout → Via della Fara',map:''},
+      ]},
+      {time:'12:15–12:40',place:'📍 Porta San Giacomo + Venetian Walls',h:false,items:[
         {text:'Porta San Giacomo',map:'https://www.google.com/maps/search/?api=1&query=Porta+San+Giacomo+Bergamo+Citta+Alta'},
-        {text:'ประตูเมืองหินสวย',map:''},
-        {text:'Piazza Vecchia',map:'https://www.google.com/maps/search/?api=1&query=Piazza+Vecchia+Bergamo+Citta+Alta'},
-        {text:'จัตุรัสยุคกลาง',map:''},
-        {text:'Basilica di Santa Maria Maggiore',map:'https://www.google.com/maps/search/?api=1&query=Basilica+di+Santa+Maria+Maggiore+Bergamo'},
-        {text:'Cappella Colleoni',map:'https://www.google.com/maps/search/?api=1&query=Cappella+Colleoni+Bergamo'},
-        {text:'Campanone €8–9',map:'https://www.google.com/maps/search/?api=1&query=Campanone+Torre+Civica+Bergamo'},
-        {text:'ขึ้นลิฟต์ วิวทั้งเมือง',map:''},
-        {text:'Rocca di Bergamo',map:'https://www.google.com/maps/search/?api=1&query=Rocca+di+Bergamo'},
+        {text:'กำแพงเวนิสยุค 1500s',map:''},
       ]},
-      {time:'13:00–14:00',place:'🍝 Lunch Bergamo',h:false,items:[
+      {time:'12:40–13:05',place:'📍 Piazza Vecchia',h:false,items:[
+        {text:'Piazza Vecchia',map:'https://www.google.com/maps/search/?api=1&query=Piazza+Vecchia+Bergamo+Citta+Alta'},
+        {text:'Contarini Fountain · Palazzo della Ragione · Campanone (ถ่ายด้านนอก)',map:''},
+        {text:'☕ แวะกาแฟ',map:''},
+      ]},
+      {time:'13:05–13:35',place:'📍 Basilica di Santa Maria Maggiore',h:true,items:[
+        {text:'Basilica di Santa Maria Maggiore',map:'https://www.google.com/maps/search/?api=1&query=Basilica+di+Santa+Maria+Maggiore+Bergamo'},
+        {text:'เปิด 07:00–18:30 · เข้าฟรี',map:''},
+      ]},
+      {time:'13:35–13:50',place:'📍 Cappella Colleoni + Duomo',h:false,items:[
+        {text:'Cappella Colleoni',map:'https://www.google.com/maps/search/?api=1&query=Cappella+Colleoni+Bergamo'},
+        {text:'Bergamo Cathedral (Duomo)',map:'https://www.google.com/maps/search/?api=1&query=Bergamo+Cathedral+Duomo'},
+      ]},
+      {time:'13:50–14:40',place:'🍝 Lunch Bergamo Città Alta',h:false,items:[
         {text:'Mimì La Casa dei Sapori',map:'https://www.google.com/maps/search/?api=1&query=Mimi+La+Casa+dei+Sapori+Bergamo'},
-        {text:'DaMimmo Bergamo',map:'https://www.google.com/maps/search/?api=1&query=DaMimmo+Bergamo+restaurant'},
-        {text:'Casoncelli (พาสต้ายัดไส้ local)',map:''},
+        {text:'Da Mimmo Bergamo Alta ⭐ เมนู Bergamasque ชัดเจน',map:'https://www.google.com/maps/search/?api=1&query=DaMimmo+Bergamo+restaurant'},
+        {text:'Casoncelli alla bergamasca (พาสต้ายัดไส้ local)',map:''},
         {text:'Polenta Taragna (ของดีเมือง Bergamo)',map:''},
       ]},
-      {time:'15:00–15:30',place:'🅿 Parcheggio Città Alta Via della Fara',h:false,items:[
-        {text:'🅿 Parcheggio della Fara Città Alta €3.30/ชม. (469 คัน 8 ชั้น)',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+della+Fara+Via+Fara+Bergamo+Citta+Alta'},
+      {time:'14:40–15:10',place:'📍 Venetian Walls / Viewpoint',h:false,items:[
+        {text:'วิวเมืองล่างและ Pianura Padana',map:''},
       ]},
-      {time:'16:00',place:'🚂 Bergamo → Milan MXP',h:false,items:[
-        {text:'รถไฟ ~1.5 ชม.',map:'https://www.google.com/maps/search/?api=1&query=Bergamo+train+station+left+luggage'},
+      {time:'15:20–15:35',place:'📍 Via Gombito + ของฝาก',h:false,items:[
+        {text:'Via Gombito — ถนนหลักเมืองเก่า',map:'https://www.google.com/maps/search/?api=1&query=Via+Gombito+Bergamo+Citta+Alta'},
+        {text:'ซื้อของกิน / ของฝากก่อนออก',map:''},
       ]},
-      {time:'17:30',place:'✈ Malpensa T1',h:true,items:[
+      {time:'15:35–16:00',place:'🅿 กลับลานจอดรถ Parcheggio Via della Fara',h:false,items:[
+        {text:'เดินกลับไปที่รถ',map:'https://www.google.com/maps/search/?api=1&query=Parcheggio+della+Fara+Via+Fara+Bergamo+Citta+Alta'},
+        {text:'เตรียมสัมภาระ + ชำระค่าที่จอด ก่อนออก 16:00',map:''},
+      ]},
+      {time:'16:00',place:'🚗 ออกจาก Bergamo → MXP',h:true,items:[
+        {text:'ทางด่วน A4 → Milan Malpensa ~1.5 ชม.',map:''},
+        {text:'ถึง MXP ~17:15–17:30',map:''},
+      ]},
+      {time:'19:00',place:'🚗 คืนรถ Milan Malpensa (MXP)',h:true,items:[
+        {text:'📍 Via Cipriano Facchinetti, 51, 21019 Somma Lombardo VA',map:'https://maps.app.goo.gl/SGRVapppjcYJHDZDA'},
+        {text:'Business hours 08:00–23:00 · โทร: 0039 3 349 486 716 / 0039 3 311 251 527 / 0039 0 3 311 251 528',map:''},
+      ]},
+      {time:'19:00–22:10',place:'✈ Malpensa T1',h:true,items:[
         {text:'เช็คอิน + Security + Duty Free',map:'https://www.google.com/maps/search/?api=1&query=Malpensa+Terminal+1+Milan+Airport'},
-        {text:'Esselunga ในเมือง Milan ถูกกว่าซื้อก่อนถ้าทัน',map:'https://www.google.com/maps/search/?api=1&query=Esselunga+Milan+Italy'},
+        {text:'Esselunga ในเมือง Milan ถูกกว่า ซื้อก่อนถ้าทัน',map:'https://www.google.com/maps/search/?api=1&query=Esselunga+Milan+Italy'},
       ]},
       {time:'22:10',place:'✈ เที่ยวบิน — 🔒 Locked',h:true,items:[
-        {text:'🔒 เที่ยวบินขากลับ — Locked',map:''},
         {text:'🔒 เที่ยวบินขากลับ — Locked',map:''},
       ]},
     ],
     maps:[
-      {name:'Bergamo Stn',url:'https://www.google.com/maps/search/?api=1&query=Bergamo+train+station+left+luggage'},
+      {name:'VCE รับรถ',url:'https://maps.app.goo.gl/HoZ1i9Lc88rQJg4z9'},
+      {name:'Parcheggio Fara',url:'https://www.google.com/maps/search/?api=1&query=Parcheggio+della+Fara+Via+Fara+Bergamo+Citta+Alta'},
       {name:'Piazza Vecchia',url:'https://www.google.com/maps/search/?api=1&query=Piazza+Vecchia+Bergamo+Citta+Alta'},
       {name:'Cappella Colleoni',url:'https://www.google.com/maps/search/?api=1&query=Cappella+Colleoni+Bergamo'},
-      {name:'Campanone',url:'https://www.google.com/maps/search/?api=1&query=Campanone+Torre+Civica+Bergamo'},
+      {name:'MXP คืนรถ',url:'https://maps.app.goo.gl/SGRVapppjcYJHDZDA'},
       {name:'Malpensa T1',url:'https://www.google.com/maps/search/?api=1&query=Malpensa+Terminal+1+Milan+Airport'},
     ],
-    weather:{icon:'❓',label:'UNCONFIRMED',temp:'ไม่มีข้อมูล',rain:'?',note:'⚠ ไม่มีพยากรณ์ถึง 26 Oct · แนวโน้มจาก 25 Oct Venice: แห้ง NNE 13 km/h · เช็คใหม่วันที่ 24-25 Oct',planB:'เผื่อเวลา + เดินทางแต่เช้า หากฝน/ล่าช้า — ลด Bergamo เน้น MXP 22:10 ห้าม miss',src:'ไม่มีข้อมูลถึงวันนี้ — เช็คใหม่ใกล้วัน',links:[{name:'yr.no Bergamo',url:'https://www.yr.no/en/forecast/daily-table/2-3182164/Italy/Lombardy/Province_of_Bergamo/Bergamo'}]}
+    weather:{icon:'❓',label:'UNCONFIRMED',temp:'ไม่มีข้อมูล',rain:'?',note:'⚠ ไม่มีพยากรณ์ถึง 26 Oct · แนวโน้มจาก 25 Oct Venice: แห้ง NNE 13 km/h · เช็คใหม่วันที่ 24-25 Oct',planB:'เผื่อเวลา + เดินทางแต่เช้า หากฝน/ล่าช้า — ลด Bergamo เน้น MXP ห้าม miss เที่ยวบิน 22:10',src:'ไม่มีข้อมูลถึงวันนี้ — เช็คใหม่ใกล้วัน',links:[{name:'yr.no Bergamo',url:'https://www.yr.no/en/forecast/daily-table/2-3182164/Italy/Lombardy/Province_of_Bergamo/Bergamo'}]}
   },
 ];
 
