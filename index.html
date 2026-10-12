@@ -1791,7 +1791,7 @@ async function downloadOfflineData() {
   } else {
     // SW not yet controlling — try direct fetch into cache
     try {
-      const cache = await caches.open('italy-shell-v2');
+      const cache = await caches.open('italy-shell-v4');
       await cache.add('/familytravel/italy_trip.html');
       shellOk = true;
     } catch { shellOk = false; }
@@ -1803,7 +1803,7 @@ async function downloadOfflineData() {
   status.textContent = 'บันทึก Fonts...';
   let fontOk = false;
   try {
-    const fontCache = await caches.open('italy-fonts-v2');
+    const fontCache = await caches.open('italy-fonts-v4');
     const fontUrl = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap';
     const cached = await fontCache.match(fontUrl);
     if (cached) { fontOk = true; }
@@ -1842,7 +1842,7 @@ async function downloadOfflineData() {
   } else {
     // Fallback: cache directly without SW
     try {
-      const imgCache = await caches.open('italy-images-v2');
+      const imgCache = await caches.open('italy-images-v4');
       for (const url of imgUrls) {
         try { const r = await fetch(url, {mode:'cors'}); if (r.ok) { await imgCache.put(url, r); imgsDone++; } }
         catch { /* skip */ }
@@ -1883,8 +1883,8 @@ async function checkOfflineReady() {
   let shellCount = 0, imgCount = 0;
   try {
     const [sc, ic] = await Promise.all([
-      caches.open('italy-shell-v2').then(c => c.keys()).then(k => k.length),
-      caches.open('italy-images-v2').then(c => c.keys()).then(k => k.length)
+      caches.open('italy-shell-v4').then(c => c.keys()).then(k => k.length),
+      caches.open('italy-images-v4').then(c => c.keys()).then(k => k.length)
     ]);
     shellCount = sc; imgCount = ic;
   } catch {}
