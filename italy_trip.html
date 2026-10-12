@@ -1759,6 +1759,26 @@ function collectImageUrls() {
   return [...urls];
 }
 
+// ── PWA: WAIT FOR SW CONTROLLER (iOS Safari needs 2 reloads after first install) ──
+async function waitForSWController(timeoutMs = 10000) {
+  if (navigator.serviceWorker.controller) return navigator.serviceWorker.controller;
+  // Try claiming the page by telling the SW to skipWaiting + clients.claim
+  const reg = await navigator.serviceWorker.getRegistration();
+  if (reg && reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+  // Wait for controllerchange event
+  return new Promise(resolve => {
+    const onCtrl = () => {
+      navigator.serviceWorker.removeEventListener('controllerchange', onCtrl);
+      resolve(navigator.serviceWorker.controller);
+    };
+    navigator.serviceWorker.addEventListener('controllerchange', onCtrl);
+    setTimeout(() => {
+      navigator.serviceWorker.removeEventListener('controllerchange', onCtrl);
+      resolve(navigator.serviceWorker.controller); // may still be null — callers must check
+    }, timeoutMs);
+  });
+}
+
 // ── PWA: DOWNLOAD ALL DATA (triggered by button) ─────────────────────────────
 async function downloadOfflineData() {
   const btn = document.getElementById('btnDownload');
@@ -1781,22 +1801,19 @@ async function downloadOfflineData() {
   bar.style.width = '20%';
   status.textContent = 'บันทึกไฟล์หลัก (HTML)...';
   let shellOk = false;
-  if (navigator.serviceWorker.controller) {
+  const swCtrl = await waitForSWController(10000);
+  if (swCtrl) {
     shellOk = await new Promise(resolve => {
       const ch = new MessageChannel();
       ch.port1.onmessage = e => resolve(e.data.type === 'CACHE_SHELL_DONE');
-      navigator.serviceWorker.controller.postMessage({ type: 'CACHE_SHELL' }, [ch.port2]);
-      setTimeout(() => resolve(false), 8000);
+      swCtrl.postMessage({ type: 'CACHE_SHELL' }, [ch.port2]);
+      setTimeout(() => resolve(false), 10000);
     });
-  } else {
-    // SW not yet controlling — try direct fetch into cache
-    try {
-      const cache = await caches.open('italy-shell-v4');
-      await cache.add('/familytravel/italy_trip.html');
-      shellOk = true;
-    } catch { shellOk = false; }
   }
-  updateChecklist('chk-html', shellOk ? '✅' : '⚠', shellOk ? 'ไฟล์หลัก (HTML) ✓' : 'ไฟล์หลัก (ยังไม่ได้แคช — ลอง reload แล้วกดใหม่)');
+  // Note: no direct caches.open() fallback — on iOS Safari page JS cannot read SW cache partition
+  updateChecklist('chk-html', shellOk ? '✅' : '⚠',
+    shellOk ? 'ไฟล์หลัก (HTML) ✓'
+            : swCtrl ? 'ไฟล์หลัก (แคชไม่สำเร็จ — ลองอีกครั้ง)' : 'ไฟล์หลัก (SW ยังไม่พร้อม — reload แล้วกดใหม่)');
   bar.style.width = '35%';
 
   // Step 3: Cache fonts
@@ -1821,7 +1838,7 @@ async function downloadOfflineData() {
   updateChecklist('chk-imgs', '⏳', `กำลังบันทึกรูปภาพ (${imgUrls.length} ภาพ)...`);
 
   let imgsDone = 0;
-  if (navigator.serviceWorker.controller) {
+  if (swCtrl) {
     imgsDone = await new Promise(resolve => {
       let done = 0;
       const handler = e => {
@@ -1836,20 +1853,9 @@ async function downloadOfflineData() {
         }
       };
       navigator.serviceWorker.addEventListener('message', handler);
-      navigator.serviceWorker.controller.postMessage({ type: 'CACHE_IMAGES', urls: imgUrls });
+      swCtrl.postMessage({ type: 'CACHE_IMAGES', urls: imgUrls });
       setTimeout(() => { navigator.serviceWorker.removeEventListener('message', handler); resolve(done); }, 60000);
     });
-  } else {
-    // Fallback: cache directly without SW
-    try {
-      const imgCache = await caches.open('italy-images-v4');
-      for (const url of imgUrls) {
-        try { const r = await fetch(url, {mode:'cors'}); if (r.ok) { await imgCache.put(url, r); imgsDone++; } }
-        catch { /* skip */ }
-        bar.style.width = (45 + Math.round((imgsDone / imgUrls.length) * 50)) + '%';
-        status.textContent = `บันทึกรูปภาพ (${imgsDone}/${imgUrls.length})...`;
-      }
-    } catch { /* ignore */ }
   }
 
   updateChecklist('chk-imgs',
@@ -1881,26 +1887,18 @@ async function checkOfflineReady() {
   const dataOk = !!localStorage.getItem('italyTripData');
 
   let shellCount = 0, imgCount = 0;
-  // iOS Safari: page JS cannot read SW-managed cache — must ask SW via message
-  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+  // iOS Safari: page JS cannot read SW-managed cache — must ask SW via MessageChannel
+  const checkCtrl = await waitForSWController(6000);
+  if (checkCtrl) {
     try {
       const result = await new Promise((resolve) => {
         const ch = new MessageChannel();
         ch.port1.onmessage = e => resolve(e.data);
-        navigator.serviceWorker.controller.postMessage({ type: 'CHECK_CACHE' }, [ch.port2]);
+        checkCtrl.postMessage({ type: 'CHECK_CACHE' }, [ch.port2]);
         setTimeout(() => resolve({ shell: 0, images: 0, fonts: 0 }), 5000);
       });
       shellCount = result.shell || 0;
       imgCount   = result.images || 0;
-    } catch {}
-  } else {
-    // SW not yet controlling this page — try direct cache access as fallback
-    try {
-      const [sc, ic] = await Promise.all([
-        caches.open('italy-shell-v4').then(c => c.keys()).then(k => k.length),
-        caches.open('italy-images-v4').then(c => c.keys()).then(k => k.length)
-      ]);
-      shellCount = sc; imgCount = ic;
     } catch {}
   }
 

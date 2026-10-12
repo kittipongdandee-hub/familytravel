@@ -186,6 +186,13 @@ function offlineFallback() {
 self.addEventListener('message', async event => {
   const { type, urls } = event.data || {};
 
+  /* Allow page to force SW claim (helps iOS Safari first-load) */
+  if (type === 'SKIP_WAITING') {
+    await self.skipWaiting();
+    await self.clients.claim();
+    return;
+  }
+
   /* Cache image URLs sent from page */
   if (type === 'CACHE_IMAGES' && Array.isArray(urls)) {
     const cache = await caches.open(IMG_CACHE);
