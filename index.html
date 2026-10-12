@@ -1881,13 +1881,28 @@ async function checkOfflineReady() {
   const dataOk = !!localStorage.getItem('italyTripData');
 
   let shellCount = 0, imgCount = 0;
-  try {
-    const [sc, ic] = await Promise.all([
-      caches.open('italy-shell-v4').then(c => c.keys()).then(k => k.length),
-      caches.open('italy-images-v4').then(c => c.keys()).then(k => k.length)
-    ]);
-    shellCount = sc; imgCount = ic;
-  } catch {}
+  // iOS Safari: page JS cannot read SW-managed cache — must ask SW via message
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    try {
+      const result = await new Promise((resolve) => {
+        const ch = new MessageChannel();
+        ch.port1.onmessage = e => resolve(e.data);
+        navigator.serviceWorker.controller.postMessage({ type: 'CHECK_CACHE' }, [ch.port2]);
+        setTimeout(() => resolve({ shell: 0, images: 0, fonts: 0 }), 5000);
+      });
+      shellCount = result.shell || 0;
+      imgCount   = result.images || 0;
+    } catch {}
+  } else {
+    // SW not yet controlling this page — try direct cache access as fallback
+    try {
+      const [sc, ic] = await Promise.all([
+        caches.open('italy-shell-v4').then(c => c.keys()).then(k => k.length),
+        caches.open('italy-images-v4').then(c => c.keys()).then(k => k.length)
+      ]);
+      shellCount = sc; imgCount = ic;
+    } catch {}
+  }
 
   const imgTotal = collectImageUrls().length;
   const swOk = 'serviceWorker' in navigator && !!navigator.serviceWorker.controller;
