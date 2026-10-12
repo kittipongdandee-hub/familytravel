@@ -635,6 +635,7 @@ footer .footer-logo {
   padding: .3rem 0; font-size: .8rem;
   border-bottom: 1px solid var(--border);
 }
+.budget-row .bdate { font-size: .72rem; color: var(--muted); min-width: 4.5rem; }
 .budget-row .bamt { color: var(--accent); font-weight: 500; }
 .budget-row .bdel { cursor: pointer; opacity: .4; font-size: .75rem; padding: 0 .3rem; }
 .budget-row .bdel:hover { opacity: 1; color: #cf5e5e; }
@@ -663,7 +664,7 @@ footer .footer-logo {
     <li><a href="#days">Days</a></li>
     <li><a href="#overview">Overview</a></li>
     <li><a href="#car">Car</a></li>
-    <li><a href="#checklists">✓</a></li>
+    <li><a href="#checklists">💶</a></li>
     <li><a href="#emergency">🆘</a></li>
     <li><a href="#offline-prep">📥</a></li>
   </ul>
@@ -768,23 +769,9 @@ footer .footer-logo {
 <section class="section" id="checklists" style="border-top:1px solid var(--border)">
   <div style="max-width:1100px;margin:0 auto">
     <div class="section-label">Tools</div>
-    <h2 class="section-title" style="margin-bottom:2rem">Checklists &amp;<br><em>Budget</em></h2>
+    <h2 class="section-title" style="margin-bottom:2rem">Budget</h2>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem">
-
-      <!-- Travel Checklist -->
-      <div class="pwa-card">
-        <h3 style="font-size:1.2rem;margin-bottom:1rem">✈ Pre-Departure Checklist</h3>
-        <div id="travelChecklist"></div>
-        <button class="pwa-btn secondary" style="margin-top:.75rem;font-size:.78rem" onclick="resetChecklist('travel')">Reset</button>
-      </div>
-
-      <!-- Packing Checklist -->
-      <div class="pwa-card">
-        <h3 style="font-size:1.2rem;margin-bottom:1rem">🎒 Packing Checklist</h3>
-        <div id="packingChecklist"></div>
-        <button class="pwa-btn secondary" style="margin-top:.75rem;font-size:.78rem" onclick="resetChecklist('packing')">Reset</button>
-      </div>
 
       <!-- Budget Tracker -->
       <div class="pwa-card">
@@ -971,7 +958,7 @@ footer .footer-logo {
   <button class="fab-item" onclick="jumpTo('days')">D1–9 Itinerary</button>
   <button class="fab-item" onclick="jumpTo('overview')">Overview Table</button>
   <button class="fab-item" onclick="jumpTo('car')">🚗 Rental Car</button>
-  <button class="fab-item" onclick="jumpTo('checklists')">✓ Checklists</button>
+  <button class="fab-item" onclick="jumpTo('checklists')">💶 Budget</button>
   <button class="fab-item" onclick="jumpTo('emergency')">🆘 Emergency</button>
   <button class="fab-item" onclick="jumpTo('offline-prep')">📥 Offline</button>
 </div>
@@ -2057,75 +2044,6 @@ function exportPDF() {
   setTimeout(() => window.print(), 500);
 }
 
-// ── CHECKLISTS ───────────────────────────────────────────────────────────────
-const CHECKLIST_DEFS = {
-  travel: [
-    { text: 'Passport (ตรวจวันหมดอายุ)', cat: 'เอกสาร' },
-    { text: 'Visa / ETIAS (EU entry)', cat: 'เอกสาร' },
-    { text: 'ตั๋วเครื่องบิน (🔒 Locked)', cat: 'เอกสาร' },
-    { text: 'ใบจองโรงแรมทุกคืน', cat: 'เอกสาร' },
-    { text: 'ใบจองรถเช่า Hyundai Staria', cat: 'เอกสาร' },
-    { text: 'Travel Insurance', cat: 'ประกัน' },
-    { text: 'แจ้งธนาคารก่อนเดินทาง', cat: 'เงิน' },
-    { text: 'แลกเงิน EUR ล่วงหน้า', cat: 'เงิน' },
-    { text: 'โหลดแผนที่ Google Maps ออฟไลน์', cat: 'แผนที่' },
-    { text: 'ดาวน์โหลดข้อมูลทริปออฟไลน์ (เว็บนี้)', cat: 'ออฟไลน์' },
-    { text: 'บันทึกเบอร์โรงแรมและฉุกเฉินลงโทรศัพท์', cat: 'ฉุกเฉิน' },
-    { text: 'ชาร์จ Power bank', cat: 'อุปกรณ์' },
-    { text: 'Adapter ปลั๊กยุโรป (Type C/F)', cat: 'อุปกรณ์' },
-  ],
-  packing: [
-    { text: 'เสื้อกันหนาวสำหรับโดโลไมท์ (~0–5°C)', cat: 'เสื้อผ้า' },
-    { text: 'Windproof / Waterproof Jacket', cat: 'เสื้อผ้า' },
-    { text: 'เสื้อ base layer thermal', cat: 'เสื้อผ้า' },
-    { text: 'กางเกงยีนส์/trousers (ไม่ใช่กางเกงขาสั้น — ต.ค. หนาว)', cat: 'เสื้อผ้า' },
-    { text: 'รองเท้าเดินเขา / hiking shoes', cat: 'รองเท้า' },
-    { text: 'รองเท้าท่องเที่ยวเมือง (สบาย)', cat: 'รองเท้า' },
-    { text: 'ถุงเท้าหนา 3–4 คู่', cat: 'รองเท้า' },
-    { text: 'หมวก beanie + ถุงมือ (โดโลไมท์)', cat: 'เครื่องแต่งกาย' },
-    { text: 'ยา / ของใช้ส่วนตัว', cat: 'สุขภาพ' },
-    { text: 'Sunscreen + ครีมกันหนาว', cat: 'สุขภาพ' },
-    { text: 'กระเป๋าเป้เล็กสำหรับ day hike', cat: 'กระเป๋า' },
-    { text: 'ถุงพลาสติก/ซิปล็อคสำหรับของเปียก', cat: 'กระเป๋า' },
-    { text: 'Universal adapter + สายชาร์จครบ', cat: 'อุปกรณ์' },
-    { text: 'Power bank (ชาร์จแล้ว)', cat: 'อุปกรณ์' },
-    { text: 'กล้อง / SD card พิเศษ', cat: 'อุปกรณ์' },
-    { text: 'ซิม Italy / EU data sim', cat: 'อุปกรณ์' },
-  ]
-};
-
-function renderChecklist(type) {
-  const container = document.getElementById(type + 'Checklist');
-  if (!container) return;
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem('cl_' + type) || '{}'); } catch {}
-
-  container.innerHTML = CHECKLIST_DEFS[type].map((item, i) => {
-    const checked = !!saved[i];
-    return `<label class="cl-item${checked?' done':''}">
-      <input type="checkbox" ${checked?'checked':''} onchange="toggleCL('${type}',${i},this)">
-      <span>${item.text}</span>
-      <span class="cl-cat">${item.cat}</span>
-    </label>`;
-  }).join('');
-}
-
-function toggleCL(type, idx, checkbox) {
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem('cl_' + type) || '{}'); } catch {}
-  if (checkbox.checked) saved[idx] = true; else delete saved[idx];
-  try { localStorage.setItem('cl_' + type, JSON.stringify(saved)); } catch {}
-  checkbox.closest('.cl-item').classList.toggle('done', checkbox.checked);
-}
-
-function resetChecklist(type) {
-  try { localStorage.removeItem('cl_' + type); } catch {}
-  renderChecklist(type);
-}
-
-renderChecklist('travel');
-renderChecklist('packing');
-
 // ── BUDGET TRACKER ────────────────────────────────────────────────────────────
 function getBudget() {
   try { return JSON.parse(localStorage.getItem('italyBudget') || '[]'); } catch { return []; }
@@ -2142,6 +2060,7 @@ function renderBudget() {
   else {
     el.innerHTML = list.map((r,i) =>
       `<div class="budget-row">
+        <span class="bdate">${r.date||''}</span>
         <span>${r.desc}</span>
         <span class="bamt">€${Number(r.amt).toFixed(2)}</span>
         <span class="bdel" onclick="delBudget(${i})">✕</span>
