@@ -986,21 +986,18 @@ const DAYS = [
     stayLink:'',
     tl:[
       {time:'07:30',place:'✈ ถึง Malpensa T1',h:false,items:[
-        {text:'รอกระเป๋า',map:'https://www.google.com/maps/search/?api=1&query=Malpensa+Terminal+1+Milan+Airport'},
-        {text:'เปลี่ยนชุด',map:''},
+        {text:'รอกระเป๋า เปลี่ยนชุด',map:'https://www.google.com/maps/search/?api=1&query=Malpensa+Terminal+1+Milan+Airport'},
       ]},
-      {time:'08:00–09:30',place:'🚆 Malpensa Express → Centrale',h:false,items:[
-        {text:'€13–15/คน',map:'https://maps.app.goo.gl/aiSfuGCVJh5y3Hg56'},
-        {text:'50 นาที',map:''},
+      {time:'09:30–10:30',place:'🚆 Malpensa Express → Centrale',h:false,items:[
+        {text:'ขึ้น Malpensa Express คนละ 15ยูโร',map:'https://maps.app.goo.gl/aiSfuGCVJh5y3Hg56'},
       ]},
-      {time:'09:30–11:00',place:'🏨 เช็คอินที่พัก / ฝากกระเป๋า',h:false,items:[
-        {text:'🔒 Hotel — Locked',map:''},
-        {text:'ฝากกระเป๋าก่อนได้ถ้ายังเช็คอินไม่ได้',map:''},
-        {text:'เปลี่ยนชุด + พัก',map:''},
+      {time:'10:30–11:30',place:'🏨 Milano Centrale / ไปที่พักเลย',h:false,items:[
+        {text:'ฝากกระเป๋าที่ Galleria delle Carrozze ฟรี 11.00',map:'https://maps.app.goo.gl/mZ7HQkh8exdgb8Xu7'},
+        {text:'🔒 Milan City Chic — Locked',map:''},
       ]},
-      {time:'11:00–13:30',place:'🏛 Duomo di Milano',h:true,items:[
+      {time:'12:00–14:00',place:'🏛 Duomo di Milano',h:true,items:[
         {text:'Combo Lift €26',map:'https://www.google.com/maps/search/?api=1&query=Duomo+di+Milano'},
-        {text:'Rooftop + ภายใน',map:''},
+        {text:'Rooftop time slot 12:30–13:30',map:''},
         {text:'⚠ จอง ticket.duomomilano.it ก่อน',map:''},
       ]},
       {time:'14:00–15:00',place:'🛍 Galleria Vittorio Emanuele II',h:false,items:[
@@ -1019,10 +1016,16 @@ const DAYS = [
         {text:'🌳 Parco Sempione',map:''},
         {text:'🚇 Cairoli: M1 → Cadorna → M2 → Porta Genova FS เดิน 10 นาที',map:'https://www.google.com/maps/dir/?api=1&origin=Cairoli+M1%2C+Milano%2C+Italy&waypoints=Cadorna+FN%2C+Milano%2C+Italy&destination=Porta+Genova+FS%2C+Milano%2C+Italy&travelmode=transit'},
       ]},
-      {time:'18:00–20:30',place:'🌊 Navigli',h:true,items:[
+      {time:'18:00–18:30',place:'🌊 Navigli District',h:true,items:[
         {text:'📸 เดินเล่นและถ่ายรูปที่ Darsena',map:'https://maps.app.goo.gl/e4SWzQJetbCXvnrw7'},
         {text:'🌊 เดินเลียบคลอง Naviglio Grande ⭐',map:'https://maps.app.goo.gl/1YNjMy4DhprKbBkX7'},
         {text:'🧺 แวะ Vicolo dei Lavandai',map:'https://maps.app.goo.gl/jxdxGosRUYwt4GKv5'},
+      ]},
+      {time:'18:30–19:30',place:'🍽 มื้อเย็น',h:false,items:[
+        {text:'ร้านอาหารริมคลอง / บาร์และคาเฟ่',map:''},
+      ]},
+      {time:'19:30–20:30',place:'🏨 กลับที่พัก Milan City Chic',h:false,items:[
+        {text:'🔒 Milan City Chic — Locked',map:''},
       ]},
     ],
     maps:[
@@ -1042,7 +1045,7 @@ const DAYS = [
     stayLink:'',
     tl:[
       {time:'08:00',place:'🚗 รับรถ Milano Centrale',h:true,items:[
-        {text:'Galleria delle Carrozze',map:'https://www.google.com/maps/search/?api=1&query=Galleria+delle+Carrozze+Milano+Centrale'},
+        {text:'Galleria delle Carrozze',map:'https://maps.app.goo.gl/mZ7HQkh8exdgb8Xu7'},
         {text:'ออกเส้น SS36 ไม่เจอ ZTL',map:''},
       ]},
       {time:'09:15',place:'🅿 จอดรถ Como – Autosilo Valduce',h:false,items:[
