@@ -1407,32 +1407,48 @@ const DAYS = [
     detailImg:'italy_photos/Venice Islands Day_8-2.jpg',
     stay:'Venice Center',stayPrice:'฿44,621 +€13',stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
     tl:[
-      {time:'08:20',place:'🚤 ออกจากที่พัก → Fondamente Nove A',h:false,items:[
-        {text:'เดิน ~8 นาที จากที่พักไป Fondamente Nove A',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
+      {time:'08:20',place:'🏨 ออกจากที่พัก',h:false,items:[
+        {text:'↓ 🚶 5–7 นาที ไป Fondamente Nove A',map:''},
       ]},
-      {time:'08:30',place:'🚤 → Murano (Line 12)',h:false,items:[
-        {text:'Fondamente Nove A → Murano Faro A (Line 12)',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+vaporetto+Venice'},
-        {text:'~35 นาที',map:''},
+      {time:'08:30–09:00',place:'🚤 Fondamente Nove A → Murano (ACTV Line 12)',h:false,items:[
+        {text:'📍 Fondamente Nove A ท่าเรือ',map:'https://maps.app.goo.gl/mQYF39nKAjbZZqj86'},
+        {text:'เช็คตารางเรือ actv.avmspa.it/en/content/timetable-water-bus-service',map:''},
       ]},
-      {time:'09:05–10:30',place:'📍 Murano Island',h:true,items:[
-        {text:'09:10–09:25 Campo Santo Stefano + Torre Orologio',map:'https://www.google.com/maps/search/?api=1&query=Campo+Santo+Stefano+Murano+Venice'},
-        {text:'09:25–09:45 Rio dei Vetrai (คลองแก้ว)',map:'https://www.google.com/maps/search/?api=1&query=Rio+dei+Vetrai+Murano+Venice'},
-        {text:'09:45–10:00 Glass shops + ดูการเป่าแก้ว',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+factory+Venice'},
-        {text:'10:10–10:20 Fondamenta S. Giovanni dei Battuti',map:'https://www.google.com/maps/search/?api=1&query=Murano+glass+shop+Venice'},
-        {text:'10:20–10:30 กลับ Faro A รอเรือ',map:''},
+      {time:'09:05',place:'⭐ Murano Faro A + คลอง',h:false,items:[
+        {text:'📍 Murano Faro A ท่าเรือ',map:'https://maps.app.goo.gl/HrnuPPxNEP4L47bX9'},
+        {text:'↓ 🚶 5 นาที',map:''},
       ]},
-      {time:'10:30–11:10',place:'🚤 Murano → Burano',h:false,items:[
-        {text:'เรือ Line 12 Murano Faro → Burano ~40 นาที',map:''},
+      {time:'09:10–10:30',place:'📍 Murano Island',h:true,items:[
+        {text:'09:10–09:25 ⭐ Rio dei Vetrai คลองหลักย่านร้านแก้ว – Fondamenta dei Vetrai',map:'https://maps.app.goo.gl/WWi22FGd7bVEUGEz6'},
+        {text:'09:25–09:45 ⭐ Ponte San Pietro Martire สะพาน',map:'https://maps.app.goo.gl/jNis7Fjwwmdiypqn9'},
+        {text:'⭐ Campo Santo Stefano ลานกว้าง',map:'https://maps.app.goo.gl/yKifFYzm4z7ko5sW9'},
+        {text:'⭐ Torre dell\'Orologio หอระฆัง/หอนาฬิกา',map:''},
+        {text:'09:45–10:00 ⭐ Glass shops 🛍️ ซื้อของ',map:'https://maps.app.goo.gl/k88iCjUBtboge4Ta7'},
+        {text:'↓ 🚶 10 นาที ไป Fondamenta S. Giovanni dei Battuti',map:''},
+        {text:'10:10–10:20 ⭐ เดินชมแนวคลอง/ร้านแก้ว + Banksy cat street art',map:'https://maps.app.goo.gl/qY8ZPQMy9KpyZXfu6'},
+        {text:'10:20–10:30 🚶 กลับ Murano Faro A',map:'https://maps.app.goo.gl/mQYF39nKAjbZZqj86'},
       ]},
-      {time:'11:10–13:30',place:'📍 Burano Island',h:true,items:[
-        {text:'11:10–11:20 Via Baldassarre Galuppi (ถนนหลัก)',map:'https://www.google.com/maps/search/?api=1&query=Via+Baldassarre+Galuppi+Burano+Venice'},
-        {text:'11:20–11:35 Piazza Galuppi + Church of San Martino',map:'https://www.google.com/maps/search/?api=1&query=Piazza+Galuppi+Burano+Venice'},
-        {text:'11:45–12:30 Tre Ponti + Fondamenta di Terranova (บ้านสีสัน)',map:'https://www.google.com/maps/search/?api=1&query=Burano+island+colorful+houses+Venice'},
-        {text:'🍝 12:45–13:00 Lunch Burano',map:'https://www.google.com/maps/search/?api=1&query=restaurant+Burano+Venice'},
+      {time:'10:30–11:00',place:'🚤 Murano Faro "A" → Line 12 → Burano "C"',h:false,items:[
+        {text:'📍 Burano "C" ท่าเรือ',map:'https://maps.app.goo.gl/Tcu2ZyfLdRhZL9xy8'},
       ]},
-      {time:'13:30–14:15',place:'🚤 Burano → Fondamente Nove → San Zaccaria',h:false,items:[
-        {text:'13:30–14:00 เรือ Burano → Fondamente Nove',map:''},
-        {text:'14:00–14:15 รอ + เรือ Fondamente Nove → San Zaccaria',map:''},
+      {time:'11:00–13:15',place:'📍 Burano Island',h:true,items:[
+        {text:'ลิ้งรวมเส้นทางเดินใน Burano',map:'https://maps.app.goo.gl/9QMs4DYLkgUgi92i8'},
+        {text:'↓ 🚶 10 นาที',map:''},
+        {text:'11:10–11:20 ⭐ Via Baldassarre Galuppi ถนนหลัก – บ้านสี + ร้านค้า',map:'https://maps.app.goo.gl/EkDLtVTkfRadDZUe9'},
+        {text:'11:20–11:35 ⭐ Piazza Baldassarre Galuppi',map:'https://maps.app.goo.gl/h76sxE3XR175AdQ59'},
+        {text:'⛪ San Martino + 🗼 หอระฆังเอียง + 🏠 บ้านสีรอบจัตุรัส',map:'https://maps.app.goo.gl/fkAtMPShKxkbo7vPA'},
+        {text:'↓ 🚶 10 นาที',map:''},
+        {text:'11:45–12:10 ⭐ Tre Ponti 🌉 สะพานไม้เชื่อม 3 ทาง',map:'https://maps.app.goo.gl/uboeYsnqtedqcYN6A'},
+        {text:'12:10–12:30 ⭐ Fondamenta di Terranova 🌈 บ้านสี 💧 คลอง + เรือ',map:'https://maps.app.goo.gl/aZtPM7kPcEeRKQQq8'},
+        {text:'↓ 🚶 15 นาที',map:''},
+        {text:'12:45–13:00 🍝 Lunch แบบเร็ว',map:''},
+        {text:'↓ 🚶 15 นาที กลับท่าเรือ Burano ACTV',map:''},
+      ]},
+      {time:'13:15–14:15',place:'🚤 Burano → Fondamente Nove → San Zaccaria',h:false,items:[
+        {text:'13:15–13:30 รอ/ขึ้นเรือ Burano',map:'https://maps.app.goo.gl/Pxnexsnz1xjCQJZD6'},
+        {text:'13:30–14:00 🚤 Burano "C" ACTV Line 12 → Fondamente Nove "A"',map:'https://maps.app.goo.gl/in65qAFmHT8GQbFw8'},
+        {text:'14:00–14:15 รอ/เดินเปลี่ยนเรือ',map:''},
+        {text:'14:15–14:30 🚤 Fondamente Nove "A" → San Zaccaria',map:''},
       ]},
       {time:'14:30–14:45',place:'🚤 San Zaccaria → Zattere',h:false,items:[
         {text:'Vaporetto จาก San Zaccaria ไป Zattere',map:'https://www.google.com/maps/search/?api=1&query=San+Zaccaria+vaporetto+Venice'},
