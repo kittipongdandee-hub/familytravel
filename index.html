@@ -400,24 +400,6 @@ nav {
   font-family: inherit; font-weight: 300;
 }
 .map-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-/* ── OVERVIEW TABLE ── */
-.overview-section { background: var(--surface); }
-.overview-table { width: 100%; border-collapse: collapse; }
-.overview-table th {
-  text-align: left; padding: 1rem 1.5rem;
-  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--muted); border-bottom: 1px solid var(--border); font-weight: 400;
-}
-.overview-table td {
-  padding: 1.1rem 1.5rem; font-size: 0.85rem;
-  border-bottom: 1px solid var(--border); vertical-align: middle;
-}
-.overview-table tr:hover td { background: rgba(255,255,255,0.02); }
-.overview-table td:first-child {
-  font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
-  color: var(--accent2); width: 60px;
-}
 .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .badge-car { background: rgba(200,146,58,0.12); color: var(--accent); border: 1px solid rgba(200,146,58,0.25); }
 .badge-train { background: rgba(58,110,80,0.12); color: #5aaf80; border: 1px solid rgba(58,110,80,0.25); }
@@ -698,25 +680,65 @@ footer .footer-logo {
   <div class="days-grid" id="daysGrid"></div>
 </section>
 
-<!-- OVERVIEW TABLE -->
-<section class="section overview-section" id="overview">
+<!-- ═══════════════════════════════════════════════════════
+     EMERGENCY INFO SECTION
+     ข้อมูลฉุกเฉิน — ใช้เมื่อไม่มีอินเทอร์เน็ต
+     ⚠ ข้อมูลที่นี่มาจาก DAYS data เท่านั้น ไม่มีการสร้างขึ้นเอง
+     ═══════════════════════════════════════════════════════ -->
+<section class="emergency-section" id="emergency">
   <div style="max-width:1100px;margin:0 auto">
-    <div class="section-label">At a Glance</div>
-    <h2 class="section-title" style="margin-bottom:3rem">Full<br><em>Overview</em></h2>
-    <table class="overview-table">
-      <thead><tr><th>#</th><th>Date</th><th>Destination</th><th>Stay</th><th>Transport</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td>18 Oct · Sun</td><td>✈ ถึง Milan 07:10 · Duomo · Navigli</td><td class="priv-cell" data-priv-day="1" data-priv-type="hotel"><span class="priv-locked">🔒 Hotel — Locked</span><span class="priv-data" style="display:none"></span></td><td><span class="badge badge-fly">✈ Arrive</span></td></tr>
-        <tr><td>2</td><td>19 Oct · Mon</td><td>Como → Varenna → Bellagio → Como</td><td class="priv-cell" data-priv-day="2" data-priv-type="hotel"><span class="priv-locked">🔒 Hotel — Locked</span><span class="priv-data" style="display:none"></span></td><td><span class="badge badge-car">🚗 รับรถ 08:00</span></td></tr>
-        <tr><td>3</td><td>20 Oct · Tue</td><td>Sirmione · Verona · Castel San Pietro</td><td class="priv-cell" data-priv-day="3" data-priv-type="hotel"><span class="priv-locked">🔒 Hotel — Locked</span><span class="priv-data" style="display:none"></span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>4</td><td>21 Oct · Wed</td><td>Lake Carezza → Alpe di Siusi → Ortisei</td><td>Apt Rainer</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>5</td><td>22 Oct · Thu</td><td>Seceda · Lago di Braies · Dobbiaco</td><td>Dobbiaco</td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>6</td><td>23 Oct · Fri</td><td>Tre Cime · Ra Gusela · Cortina 🎂</td><td class="priv-cell" data-priv-day="6" data-priv-type="hotel"><span class="priv-locked">🔒 Hotel — Locked</span><span class="priv-data" style="display:none"></span></td><td><span class="badge badge-car">🚗 Drive</span></td></tr>
-        <tr><td>7</td><td>24 Oct · Sat</td><td>Cortina → Venice (คืนรถ VCE)</td><td>Venice Center</td><td><span class="badge badge-car">🚗 คืน 12:30</span></td></tr>
-        <tr><td>8</td><td>25 Oct · Sun</td><td>Murano · Burano · San Giorgio</td><td>Venice Center</td><td><span class="badge badge-boat">🚤 Vaporetto</span></td></tr>
-        <tr><td>9</td><td>26 Oct · Mon</td><td>Venice → Bergamo → Milan ✈ 22:10</td><td>—</td><td><span class="badge badge-car">🚗 รถเช่า</span></td></tr>
-      </tbody>
-    </table>
+    <div class="section-label">ข้อมูลฉุกเฉิน</div>
+    <h2 class="section-title">Emergency<br><em>Info</em></h2>
+    <p style="color:var(--muted);font-size:.85rem;max-width:600px;margin-bottom:1rem">
+      ข้อมูลที่พักและเส้นทางรายวัน — ใช้ได้แม้ไม่มีอินเทอร์เน็ต
+    </p>
+    <div class="emer-note">
+      ⚠ <strong>หมายเหตุ:</strong> หน้านี้แสดงชื่อที่พักและลิงก์ Google Maps เท่าที่บันทึกไว้ใน PPTX เดิม
+      ข้อมูลเบอร์โทร หมายเลขการจอง และรายละเอียดการจองไม่ได้ถูกบันทึกไว้ในไฟล์นี้ —
+      กรุณาบันทึกข้อมูลเหล่านั้นแยกไว้ใน Notes บนโทรศัพท์ก่อนเดินทาง
+    </div>
+    <div class="emergency-grid" id="emergencyGrid">
+      <!-- Populated by JS from DAYS data -->
+    </div>
+
+    <div style="max-width:1100px;margin:2rem auto 0">
+      <div class="section-label" style="margin-bottom:1rem">ข้อมูลพื้นฐานฉุกเฉิน</div>
+      <div class="emergency-grid">
+        <div class="emer-card" style="border-left-color:#cf5e5e">
+          <div class="emer-day">เที่ยวบิน ขาไป</div>
+          <div class="emer-hotel priv-flights-dep"><span class="priv-locked">🔒 เที่ยวบิน — Locked</span><span class="priv-data" style="display:none"></span></div>
+          <div class="emer-addr">BKK 17 Oct 20:00 → DOH 22:55<br>DOH 18 Oct 02:00 → MXP 07:10</div>
+        </div>
+        <div class="emer-card" style="border-left-color:#cf5e5e">
+          <div class="emer-day">เที่ยวบิน ขากลับ</div>
+          <div class="emer-hotel priv-flights-ret"><span class="priv-locked">🔒 เที่ยวบิน — Locked</span><span class="priv-data" style="display:none"></span></div>
+          <div class="emer-addr">MXP 26 Oct 22:10 → DOH 05:55<br>DOH 27 Oct 07:50 → BKK 18:25</div>
+        </div>
+        <div class="emer-card" style="border-left-color:#c8923a">
+          <div class="emer-day">รถเช่า</div>
+          <div class="emer-hotel">Hyundai Staria 9 ที่นั่ง</div>
+          <div class="emer-addr">
+            รับรถ: Milano Centrale 19 Oct 08:00<br>
+            คืนรถ: Venice Marco Polo 24 Oct 12:00<br>
+            Galleria delle Carrozze, Piazza Duca d'Aosta 1
+          </div>
+        </div>
+        <div class="emer-card" style="border-left-color:#c8923a">
+          <div class="emer-day">เบอร์ฉุกเฉินอิตาลี</div>
+          <div class="emer-hotel">ตำรวจ / กู้ชีพ</div>
+          <div class="emer-addr">
+            ตำรวจ: <strong>112</strong><br>
+            เจ็บป่วย/กู้ชีพ: <strong>118</strong><br>
+            ดับเพลิง: <strong>115</strong><br>
+            Qatar Airways: ตรวจสอบตั๋วและ App
+          </div>
+          <div class="emer-actions">
+            <a href="tel:112" class="emer-btn">📞 112 ตำรวจ</a>
+            <a href="tel:118" class="emer-btn">🚑 118 กู้ชีพ</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -788,68 +810,6 @@ footer .footer-logo {
       • <strong>Alpe di Siusi (Day 4):</strong> เปิดถึง 2 พ.ย. 2026 | Cable car เปิด 08:00–18:00<br>
       • <strong>สายฟ้า/พายุ:</strong> หากมีเมฆฝนในโดโลไมท์ ให้ลงจากยอดเขาก่อน 14:00<br>
       • ⚠ ข้อมูลอากาศแบบ real-time ต้องดูจาก <a href="https://www.yr.no" target="_blank" style="color:#5ca87a">yr.no</a> หรือ <a href="https://www.mountain-forecast.com" target="_blank" style="color:#5ca87a">mountain-forecast.com</a> — เว็บนี้ไม่มี live weather API
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     EMERGENCY INFO SECTION
-     ข้อมูลฉุกเฉิน — ใช้เมื่อไม่มีอินเทอร์เน็ต
-     ⚠ ข้อมูลที่นี่มาจาก DAYS data เท่านั้น ไม่มีการสร้างขึ้นเอง
-     ═══════════════════════════════════════════════════════ -->
-<section class="emergency-section" id="emergency">
-  <div style="max-width:1100px;margin:0 auto">
-    <div class="section-label">ข้อมูลฉุกเฉิน</div>
-    <h2 class="section-title">Emergency<br><em>Info</em></h2>
-    <p style="color:var(--muted);font-size:.85rem;max-width:600px;margin-bottom:1rem">
-      ข้อมูลที่พักและเส้นทางรายวัน — ใช้ได้แม้ไม่มีอินเทอร์เน็ต
-    </p>
-    <div class="emer-note">
-      ⚠ <strong>หมายเหตุ:</strong> หน้านี้แสดงชื่อที่พักและลิงก์ Google Maps เท่าที่บันทึกไว้ใน PPTX เดิม
-      ข้อมูลเบอร์โทร หมายเลขการจอง และรายละเอียดการจองไม่ได้ถูกบันทึกไว้ในไฟล์นี้ —
-      กรุณาบันทึกข้อมูลเหล่านั้นแยกไว้ใน Notes บนโทรศัพท์ก่อนเดินทาง
-    </div>
-    <div class="emergency-grid" id="emergencyGrid">
-      <!-- Populated by JS from DAYS data -->
-    </div>
-
-    <div style="max-width:1100px;margin:2rem auto 0">
-      <div class="section-label" style="margin-bottom:1rem">ข้อมูลพื้นฐานฉุกเฉิน</div>
-      <div class="emergency-grid">
-        <div class="emer-card" style="border-left-color:#cf5e5e">
-          <div class="emer-day">เที่ยวบิน ขาไป</div>
-          <div class="emer-hotel priv-flights-dep"><span class="priv-locked">🔒 เที่ยวบิน — Locked</span><span class="priv-data" style="display:none"></span></div>
-          <div class="emer-addr">BKK 17 Oct 20:00 → DOH 22:55<br>DOH 18 Oct 02:00 → MXP 07:10</div>
-        </div>
-        <div class="emer-card" style="border-left-color:#cf5e5e">
-          <div class="emer-day">เที่ยวบิน ขากลับ</div>
-          <div class="emer-hotel priv-flights-ret"><span class="priv-locked">🔒 เที่ยวบิน — Locked</span><span class="priv-data" style="display:none"></span></div>
-          <div class="emer-addr">MXP 26 Oct 22:10 → DOH 05:55<br>DOH 27 Oct 07:50 → BKK 18:25</div>
-        </div>
-        <div class="emer-card" style="border-left-color:#c8923a">
-          <div class="emer-day">รถเช่า</div>
-          <div class="emer-hotel">Hyundai Staria 9 ที่นั่ง</div>
-          <div class="emer-addr">
-            รับรถ: Milano Centrale 19 Oct 08:00<br>
-            คืนรถ: Venice Marco Polo 24 Oct 12:00<br>
-            Galleria delle Carrozze, Piazza Duca d'Aosta 1
-          </div>
-        </div>
-        <div class="emer-card" style="border-left-color:#c8923a">
-          <div class="emer-day">เบอร์ฉุกเฉินอิตาลี</div>
-          <div class="emer-hotel">ตำรวจ / กู้ชีพ</div>
-          <div class="emer-addr">
-            ตำรวจ: <strong>112</strong><br>
-            เจ็บป่วย/กู้ชีพ: <strong>118</strong><br>
-            ดับเพลิง: <strong>115</strong><br>
-            Qatar Airways: ตรวจสอบตั๋วและ App
-          </div>
-          <div class="emer-actions">
-            <a href="tel:112" class="emer-btn">📞 112 ตำรวจ</a>
-            <a href="tel:118" class="emer-btn">🚑 118 กู้ชีพ</a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -983,7 +943,7 @@ const DAYS = [
     img:'italy_photos/Milan Day_1-1.jpg',
     detailImg:'italy_photos/Milan Day_1-2.jpg',
     stay:'Milan City Chic – Porta Venezia',stayPrice:'฿18,628',
-    stayLink:'https://maps.app.goo.gl/eFFCNn73nPHcTRS59',
+    stayLink:'https://goo.gl/maps/ua6Tybqtu9uVpFeB7',
     checkIn:'15:00',checkOut:'11:00',
     carPickup:{time:'08:00',name:'🚗 รับรถ Milano Centrale',addr:'c/o Stazione Centrale Milano – Galleria delle Carrozze – Piazza Duca d\'Aosta, 1',map:'https://maps.app.goo.gl/bAdVQYqU3y3W3o8x5'},
     tl:[
@@ -1334,6 +1294,7 @@ const DAYS = [
     detailImg:'italy_photos/Venice Day_7-2.jpg',
     stay:'Venice Center',stayPrice:'฿44,621 +€13',
     stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
+    stayLink2:'https://goo.gl/maps/qot5ghF98Pj2ZHKs9',
     checkIn:'14:00',checkOut:'10:00',
     tl:[
       {time:'09:00',place:'🚗 Cortina → Venice Marco Polo Airport',h:false,items:[
@@ -1415,7 +1376,7 @@ const DAYS = [
     tags:['🚤 Islands','Sunset ★'], temp:'16°/10°C',
     img:'italy_photos/Venice Islands Day_8-1.jpg',
     detailImg:'italy_photos/Venice Islands Day_8-2.jpg',
-    stay:'Venice Center',stayPrice:'฿44,621 +€13',stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
+    stay:'Venice Center',stayPrice:'฿44,621 +€13',stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',stayLink2:'https://goo.gl/maps/qot5ghF98Pj2ZHKs9',
     checkIn:'14:00',checkOut:'10:00',
     tl:[
       {time:'08:20',place:'🏨 ออกจากที่พัก',h:false,items:[
@@ -1708,6 +1669,7 @@ function buildGrid(days) {
               ${d.stayPrice ? `<div class="meta-price">${d.stayPrice}</div>` : ''}
               ${(d.checkIn || d.checkOut) ? `<div class="meta-price" style="margin-top:.25rem">🕐 Check-in ${d.checkIn||'–'} · Check-out ${d.checkOut||'–'}</div>` : ''}
               ${d.stayLink ? `<a${mapsLinkAttrs(d.stayLink)} class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+              ${d.stayLink2 ? `<a${mapsLinkAttrs(d.stayLink2)} class="map-btn" style="margin-top:.25rem">📍 Google Maps</a>` : ''}
               ${d.carPickup ? `<div style="margin-top:.6rem;font-size:.8rem;font-weight:600;color:#c8923a">${d.carPickup.name}</div><div class="meta-price">${d.carPickup.time} · ${d.carPickup.addr}</div><a${mapsLinkAttrs(d.carPickup.map)} class="map-btn" style="margin-top:.25rem">📍 แผนที่รับรถ</a>` : ''}
               ${d.carReturn ? `<div style="margin-top:.6rem;font-size:.8rem;font-weight:600;color:#c8923a">${d.carReturn.name}</div><div class="meta-price">${d.carReturn.time} · ${d.carReturn.addr}</div><a${mapsLinkAttrs(d.carReturn.map)} class="map-btn" style="margin-top:.25rem">📍 แผนที่คืนรถ</a>` : ''}
             </div>
@@ -1831,16 +1793,13 @@ function buildEmergencyGrid() {
   const stayDays = DAYS.filter(d => d.stay && d.stay !== '—');
 
   grid.innerHTML = stayDays.map(d => {
-    const mapsBtn = d.stayLink
-      ? `<a${mapsLinkAttrs(d.stayLink)} class="emer-btn">📍 Google Maps</a>`
+    const checkTime = (d.checkIn || d.checkOut)
+      ? `🕐 Check-in ${d.checkIn||'–'} · Check-out ${d.checkOut||'–'}`
       : '';
-    const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
-
     return `<div class="emer-card">
       <div class="emer-day">Day ${d.num} · ${d.date}</div>
-      <div class="emer-hotel">${d.stay}</div>
-      <div class="emer-addr">${d.stayPrice || ''}</div>
-      <div class="emer-actions">${mapsBtn}${copyBtn}</div>
+      <div class="emer-hotel">${d.stay}${d.stayLink ? ` <a${mapsLinkAttrs(d.stayLink)} style="font-size:.9em">📍</a>` : ''}${d.stayLink2 ? ` <a${mapsLinkAttrs(d.stayLink2)} style="font-size:.9em">📍</a>` : ''}</div>
+      ${checkTime ? `<div class="emer-addr">${checkTime}</div>` : ''}
     </div>`;
   }).join('');
 }
