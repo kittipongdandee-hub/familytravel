@@ -400,7 +400,6 @@ nav {
   font-family: inherit; font-weight: 300;
 }
 .map-btn:hover { border-color: var(--accent); color: var(--accent); }
-
 .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .badge-car { background: rgba(200,146,58,0.12); color: var(--accent); border: 1px solid rgba(200,146,58,0.25); }
 .badge-train { background: rgba(58,110,80,0.12); color: #5aaf80; border: 1px solid rgba(58,110,80,0.25); }
@@ -607,6 +606,7 @@ footer .footer-logo {
   padding: .3rem 0; font-size: .8rem;
   border-bottom: 1px solid var(--border);
 }
+.budget-row .bdate { font-size: .72rem; color: var(--muted); min-width: 4.5rem; }
 .budget-row .bamt { color: var(--accent); font-weight: 500; }
 .budget-row .bdel { cursor: pointer; opacity: .4; font-size: .75rem; padding: 0 .3rem; }
 .budget-row .bdel:hover { opacity: 1; color: #cf5e5e; }
@@ -634,7 +634,7 @@ footer .footer-logo {
   <ul class="nav-links">
     <li><a href="#days">Days</a></li>
     <li><a href="#car">Car</a></li>
-    <li><a href="#checklists">✓</a></li>
+    <li><a href="#checklists">💶</a></li>
     <li><a href="#emergency">🆘</a></li>
     <li><a href="#offline-prep">📥</a></li>
   </ul>
@@ -677,79 +677,6 @@ footer .footer-logo {
   </div>
 
   <div class="days-grid" id="daysGrid"></div>
-</section>
-
-
-<!-- CAR SECTION -->
-<section class="car-section" id="car">
-  <div style="max-width:1100px;margin:0 auto">
-    <div class="section-label">Rental Car</div>
-    <h2 class="section-title">Hyundai Staria<br><em>9 Seats</em></h2>
-    <div class="car-grid">
-      <div class="car-block">
-        <div class="car-block-label">Pick-up</div>
-        <div class="car-block-val">Milano Centrale<br>19 Oct · 08:00</div>
-        <div class="car-block-sub">Galleria delle Carrozze<br>Piazza Duca d'Aosta 1</div>
-      </div>
-      <div class="car-block">
-        <div class="car-block-label">Drop-off</div>
-        <div class="car-block-val">Venice Marco Polo<br>24 Oct · 12:00</div>
-        <div class="car-block-sub">Viale Galileo Galilei 30<br>Drop-off 08:00–23:00</div>
-      </div>
-      <div class="car-block">
-        <div class="car-block-label">Route</div>
-        <div class="car-block-val">Milan → Como → Sirmione<br>→ Verona → Dolomites → Venice</div>
-      </div>
-      <div class="car-block">
-        <div class="car-block-label">Duration</div>
-        <div class="car-block-val">5 Days<br>19 — 24 October</div>
-      </div>
-    </div>
-    <div class="warn-bar">
-      🔴 <strong>ZTL ATTIVA / VARCO ATTIVO</strong> — เห็นป้ายนี้อย่าขับเข้าเด็ดขาด<br>
-      🚗 Venice ห้ามขับรถเข้าเกาะ — คืนรถที่ Marco Polo Airport แล้วนั่ง Water Bus เข้า
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     TRAVEL CHECKLIST + PACKING + BUDGET
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="checklists" style="border-top:1px solid var(--border)">
-  <div style="max-width:1100px;margin:0 auto">
-    <div class="section-label">Tools</div>
-    <h2 class="section-title" style="margin-bottom:2rem">Budget</h2>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem">
-
-      <!-- Budget Tracker -->
-      <div class="pwa-card">
-        <h3 style="font-size:1.2rem;margin-bottom:1rem">💶 Budget Tracker</h3>
-        <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem">บันทึกรายจ่ายระหว่างเดินทาง (บันทึกใน localStorage)</p>
-        <div style="display:flex;gap:.5rem;margin-bottom:.75rem">
-          <input id="budgetDesc" placeholder="รายการ" style="flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.4rem .6rem;border-radius:3px;font-size:.82rem">
-          <input id="budgetAmt" type="number" placeholder="€" style="width:70px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.4rem .6rem;border-radius:3px;font-size:.82rem">
-          <button class="pwa-btn" style="padding:.4rem .75rem;font-size:.78rem;margin:0" onclick="addBudget()">+</button>
-        </div>
-        <div id="budgetList" style="max-height:200px;overflow-y:auto"></div>
-        <div id="budgetTotal" style="margin-top:.75rem;font-size:.9rem;color:var(--accent);font-weight:500"></div>
-        <button class="pwa-btn secondary" style="margin-top:.75rem;font-size:.78rem" onclick="clearBudget()">ล้างรายการ</button>
-        <button class="pwa-btn secondary" style="margin-top:.75rem;font-size:.78rem" onclick="exportBudget()">💾 Export CSV</button>
-      </div>
-
-    </div>
-
-    <!-- Dolomites Weather & Safety Note -->
-    <div class="install-guide" style="margin-top:2rem;border-color:#1a3a2a;background:#0a1e14;color:#5ca87a">
-      <strong>🏔 ความปลอดภัยในโดโลไมท์ (ข้อมูล ณ วันที่สร้างเว็บ — ตรวจสอบสภาพอากาศจริงก่อนออกเดินทางทุกครั้ง)</strong><br>
-      • <strong>Tre Cime di Lavaredo (Day 6, 2,999m):</strong> เดือน ต.ค. อาจมีหิมะ ต้องใส่รองเท้า grip ดี + เสื้อหนาว + กันน้ำ
-        เส้นทาง loop ~9.5km ใช้เวลา 3–4 ชม. | ตรวจสอบสภาพเส้นทาง: <a href="https://www.dolomiti.org" target="_blank" style="color:#5ca87a">dolomiti.org</a><br>
-      • <strong>Seceda (Day 5, 2,500m):</strong> Gondola เปิดถึงต้น พ.ย. ตรวจสอบก่อนไป | อุณหภูมิ ~0–5°C<br>
-      • <strong>Alpe di Siusi (Day 4):</strong> เปิดถึง 2 พ.ย. 2026 | Cable car เปิด 08:00–18:00<br>
-      • <strong>สายฟ้า/พายุ:</strong> หากมีเมฆฝนในโดโลไมท์ ให้ลงจากยอดเขาก่อน 14:00<br>
-      • ⚠ ข้อมูลอากาศแบบ real-time ต้องดูจาก <a href="https://www.yr.no" target="_blank" style="color:#5ca87a">yr.no</a> หรือ <a href="https://www.mountain-forecast.com" target="_blank" style="color:#5ca87a">mountain-forecast.com</a> — เว็บนี้ไม่มี live weather API
-    </div>
-  </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -810,6 +737,78 @@ footer .footer-logo {
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAR SECTION -->
+<section class="car-section" id="car">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Rental Car</div>
+    <h2 class="section-title">Hyundai Staria<br><em>9 Seats</em></h2>
+    <div class="car-grid">
+      <div class="car-block">
+        <div class="car-block-label">Pick-up</div>
+        <div class="car-block-val">Milano Centrale<br>19 Oct · 08:00</div>
+        <div class="car-block-sub">Galleria delle Carrozze<br>Piazza Duca d'Aosta 1</div>
+      </div>
+      <div class="car-block">
+        <div class="car-block-label">Drop-off</div>
+        <div class="car-block-val">Venice Marco Polo<br>24 Oct · 12:00</div>
+        <div class="car-block-sub">Viale Galileo Galilei 30<br>Drop-off 08:00–23:00</div>
+      </div>
+      <div class="car-block">
+        <div class="car-block-label">Route</div>
+        <div class="car-block-val">Milan → Como → Sirmione<br>→ Verona → Dolomites → Venice</div>
+      </div>
+      <div class="car-block">
+        <div class="car-block-label">Duration</div>
+        <div class="car-block-val">5 Days<br>19 — 24 October</div>
+      </div>
+    </div>
+    <div class="warn-bar">
+      🔴 <strong>ZTL ATTIVA / VARCO ATTIVO</strong> — เห็นป้ายนี้อย่าขับเข้าเด็ดขาด<br>
+      🚗 Venice ห้ามขับรถเข้าเกาะ — คืนรถที่ Marco Polo Airport แล้วนั่ง Water Bus เข้า
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     BUDGET
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="checklists" style="border-top:1px solid var(--border)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Tools</div>
+    <h2 class="section-title" style="margin-bottom:2rem">Budget</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem">
+
+      <!-- Budget Tracker -->
+      <div class="pwa-card">
+        <h3 style="font-size:1.2rem;margin-bottom:1rem">💶 Budget Tracker</h3>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem">บันทึกรายจ่ายระหว่างเดินทาง (บันทึกใน localStorage)</p>
+        <div style="display:flex;gap:.5rem;margin-bottom:.75rem">
+          <input id="budgetDesc" placeholder="รายการ" style="flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.4rem .6rem;border-radius:3px;font-size:.82rem">
+          <input id="budgetAmt" type="number" placeholder="€" style="width:70px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.4rem .6rem;border-radius:3px;font-size:.82rem">
+          <button class="pwa-btn" style="padding:.4rem .75rem;font-size:.78rem;margin:0" onclick="addBudget()">+</button>
+        </div>
+        <div id="budgetList" style="max-height:200px;overflow-y:auto"></div>
+        <div id="budgetTotal" style="margin-top:.75rem;font-size:.9rem;color:var(--accent);font-weight:500"></div>
+        <button class="pwa-btn secondary" style="margin-top:.75rem;font-size:.78rem" onclick="clearBudget()">ล้างรายการ</button>
+        <button class="pwa-btn secondary" style="margin-top:.75rem;font-size:.78rem" onclick="exportBudget()">💾 Export CSV</button>
+      </div>
+
+    </div>
+
+    <!-- Dolomites Weather & Safety Note -->
+    <div class="install-guide" style="margin-top:2rem;border-color:#1a3a2a;background:#0a1e14;color:#5ca87a">
+      <strong>🏔 ความปลอดภัยในโดโลไมท์ (ข้อมูล ณ วันที่สร้างเว็บ — ตรวจสอบสภาพอากาศจริงก่อนออกเดินทางทุกครั้ง)</strong><br>
+      • <strong>Tre Cime di Lavaredo (Day 6, 2,999m):</strong> เดือน ต.ค. อาจมีหิมะ ต้องใส่รองเท้า grip ดี + เสื้อหนาว + กันน้ำ
+        เส้นทาง loop ~9.5km ใช้เวลา 3–4 ชม. | ตรวจสอบสภาพเส้นทาง: <a href="https://www.dolomiti.org" target="_blank" style="color:#5ca87a">dolomiti.org</a><br>
+      • <strong>Seceda (Day 5, 2,500m):</strong> Gondola เปิดถึงต้น พ.ย. ตรวจสอบก่อนไป | อุณหภูมิ ~0–5°C<br>
+      • <strong>Alpe di Siusi (Day 4):</strong> เปิดถึง 2 พ.ย. 2026 | Cable car เปิด 08:00–18:00<br>
+      • <strong>สายฟ้า/พายุ:</strong> หากมีเมฆฝนในโดโลไมท์ ให้ลงจากยอดเขาก่อน 14:00<br>
+      • ⚠ ข้อมูลอากาศแบบ real-time ต้องดูจาก <a href="https://www.yr.no" target="_blank" style="color:#5ca87a">yr.no</a> หรือ <a href="https://www.mountain-forecast.com" target="_blank" style="color:#5ca87a">mountain-forecast.com</a> — เว็บนี้ไม่มี live weather API
     </div>
   </div>
 </section>
@@ -906,7 +905,7 @@ footer .footer-logo {
 <div class="fab-menu" id="fabMenu">
   <button class="fab-item" onclick="jumpTo('days')">D1–9 Itinerary</button>
   <button class="fab-item" onclick="jumpTo('car')">🚗 Rental Car</button>
-  <button class="fab-item" onclick="jumpTo('checklists')">✓ Checklists</button>
+  <button class="fab-item" onclick="jumpTo('checklists')">💶 Budget</button>
   <button class="fab-item" onclick="jumpTo('emergency')">🆘 Emergency</button>
   <button class="fab-item" onclick="jumpTo('offline-prep')">📥 Offline</button>
 </div>
@@ -1664,9 +1663,13 @@ function buildGrid(days) {
           <div class="detail-meta">
             <div class="meta-block">
               <div class="meta-label">Stay</div>
-              <div class="meta-value">${d.stay}</div>
-              <div class="meta-price">${d.stayPrice}</div>
+              ${d.stay ? `<div class="meta-value">${d.stay}</div>` : ''}
+              ${d.stayPrice ? `<div class="meta-price">${d.stayPrice}</div>` : ''}
+              ${(d.checkIn || d.checkOut) ? `<div class="meta-price" style="margin-top:.25rem">🕐 Check-in ${d.checkIn||'–'} · Check-out ${d.checkOut||'–'}</div>` : ''}
               ${d.stayLink ? `<a${mapsLinkAttrs(d.stayLink)} class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+              ${d.stayLink2 ? `<a${mapsLinkAttrs(d.stayLink2)} class="map-btn" style="margin-top:.25rem">📍 Google Maps</a>` : ''}
+              ${d.carPickup ? `<div style="margin-top:.6rem;font-size:.8rem;font-weight:600;color:#c8923a">${d.carPickup.name}</div><div class="meta-price">${d.carPickup.time} · ${d.carPickup.addr}</div><a${mapsLinkAttrs(d.carPickup.map)} class="map-btn" style="margin-top:.25rem">📍 แผนที่รับรถ</a>` : ''}
+              ${d.carReturn ? `<div style="margin-top:.6rem;font-size:.8rem;font-weight:600;color:#c8923a">${d.carReturn.name}</div><div class="meta-price">${d.carReturn.time} · ${d.carReturn.addr}</div><a${mapsLinkAttrs(d.carReturn.map)} class="map-btn" style="margin-top:.25rem">📍 แผนที่คืนรถ</a>` : ''}
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
@@ -1788,16 +1791,13 @@ function buildEmergencyGrid() {
   const stayDays = DAYS.filter(d => d.stay && d.stay !== '—');
 
   grid.innerHTML = stayDays.map(d => {
-    const mapsBtn = d.stayLink
-      ? `<a${mapsLinkAttrs(d.stayLink)} class="emer-btn">📍 Google Maps</a>`
+    const checkTime = (d.checkIn || d.checkOut)
+      ? `🕐 Check-in ${d.checkIn||'–'} · Check-out ${d.checkOut||'–'}`
       : '';
-    const copyBtn = `<button class="emer-btn" onclick="copyText('${d.stay.replace(/'/g,"\\'")}')">📋 คัดลอกชื่อ</button>`;
-
     return `<div class="emer-card">
       <div class="emer-day">Day ${d.num} · ${d.date}</div>
-      <div class="emer-hotel">${d.stay}</div>
-      <div class="emer-addr">${d.stayPrice || ''}</div>
-      <div class="emer-actions">${mapsBtn}${copyBtn}</div>
+      <div class="emer-hotel">${d.stay}${d.stayLink ? ` <a${mapsLinkAttrs(d.stayLink)} style="font-size:.9em">📍</a>` : ''}${d.stayLink2 ? ` <a${mapsLinkAttrs(d.stayLink2)} style="font-size:.9em">📍</a>` : ''}</div>
+      ${checkTime ? `<div class="emer-addr">${checkTime}</div>` : ''}
     </div>`;
   }).join('');
 }
@@ -2078,6 +2078,7 @@ function renderBudget() {
   else {
     el.innerHTML = list.map((r,i) =>
       `<div class="budget-row">
+        <span class="bdate">${r.date||''}</span>
         <span>${r.desc}</span>
         <span class="bamt">€${Number(r.amt).toFixed(2)}</span>
         <span class="bdel" onclick="delBudget(${i})">✕</span>
@@ -2493,6 +2494,18 @@ window.addEventListener('load', () => {
       renderDay(currentDay);
     }
 
+    /* Direct DOM: itinerary overview table cells */
+    document.querySelectorAll('.priv-cell[data-priv-day]').forEach(function(cell) {
+      const day = parseInt(cell.getAttribute('data-priv-day'));
+      const a = accomMap[day];
+      const locked = cell.querySelector('.priv-locked');
+      const shown  = cell.querySelector('.priv-data');
+      if (a && locked && shown) {
+        shown.textContent = a.name;
+        locked.style.display = 'none';
+        shown.style.display  = '';
+      }
+    });
 
     /* Direct DOM: emergency section flight numbers */
     const depEl = document.querySelector('.priv-flights-dep');
