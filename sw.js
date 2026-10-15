@@ -18,7 +18,7 @@
      NEVER stored or passed through the service worker.
    ============================================================ */
 
-const CACHE_VERSION = 'v36';
+const CACHE_VERSION = 'v37';
 const SHELL_CACHE   = `italy-shell-${CACHE_VERSION}`;
 const IMG_CACHE     = `italy-images-${CACHE_VERSION}`;
 const FONT_CACHE    = `italy-fonts-${CACHE_VERSION}`;
