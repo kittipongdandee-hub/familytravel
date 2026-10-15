@@ -2493,18 +2493,6 @@ window.addEventListener('load', () => {
       renderDay(currentDay);
     }
 
-    /* Direct DOM: itinerary overview table cells */
-    document.querySelectorAll('.priv-cell[data-priv-day]').forEach(function(cell) {
-      const day = parseInt(cell.getAttribute('data-priv-day'));
-      const a = accomMap[day];
-      const locked = cell.querySelector('.priv-locked');
-      const shown  = cell.querySelector('.priv-data');
-      if (a && locked && shown) {
-        shown.textContent = a.name;
-        locked.style.display = 'none';
-        shown.style.display  = '';
-      }
-    });
 
     /* Direct DOM: emergency section flight numbers */
     const depEl = document.querySelector('.priv-flights-dep');
