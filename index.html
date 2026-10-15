@@ -984,6 +984,8 @@ const DAYS = [
     detailImg:'italy_photos/Milan Day_1-2.jpg',
     stay:'Milan City Chic – Porta Venezia',stayPrice:'฿18,628',
     stayLink:'https://maps.app.goo.gl/eFFCNn73nPHcTRS59',
+    checkIn:'15:00',checkOut:'11:00',
+    carPickup:{time:'08:00',name:'🚗 รับรถ Milano Centrale',addr:'c/o Stazione Centrale Milano – Galleria delle Carrozze – Piazza Duca d\'Aosta, 1',map:'https://maps.app.goo.gl/bAdVQYqU3y3W3o8x5'},
     tl:[
       {time:'07:30',place:'✈ ถึง Malpensa T1',h:false,items:[
         {text:'เปลี่ยนชุด',map:''},
@@ -1048,6 +1050,7 @@ const DAYS = [
     detailImg:'italy_photos/Lake como Day_2-2.jpg',
     stay:'Zeus – Luxury Apartment Como',stayPrice:'฿16,062',
     stayLink:'https://maps.app.goo.gl/cJUmdWL6Eq1gQxKWA',
+    checkIn:'15:00',checkOut:'11:00',
     tl:[
       {time:'08:00–08:30',place:'🚗 รับรถ Milano Centrale',h:true,items:[
         {text:'📍 c/o Stazione Centrale – Galleria delle Carrozze, Piazza Duca d\'Aosta 1',map:'https://maps.app.goo.gl/bAdVQYqU3y3W3o8x5'},
@@ -1110,6 +1113,7 @@ const DAYS = [
     detailImg:'italy_photos/Verona Day 3-2.jpg',
     stay:'Arena on foot Verona',stayPrice:'฿12,283',
     stayLink:'https://maps.app.goo.gl/cAfzRrH6dtmAeECJ6',
+    checkIn:'15:00',checkOut:'10:00',
     tl:[
       {time:'07:30',place:'🚗 ออกเดินทาง → Sirmione',h:false,items:[
         {text:'ขับ ~2.30 ชม.',map:''},
@@ -1173,6 +1177,7 @@ const DAYS = [
     detailImg:'italy_photos/West Dolomites Day_4-2.jpg',
     stay:'Apartment Rainer Ortisei',stayPrice:'฿31,511',
     stayLink:'https://maps.app.goo.gl/pR1zTUWP9S4LbQzB7',
+    checkIn:'15:00',checkOut:'10:00',
     tl:[
       {time:'07:00',place:'🚗 ออกจาก Verona',h:false,items:[
         {text:'ขับ ~2.30 ชม.',map:''},
@@ -1220,6 +1225,7 @@ const DAYS = [
     detailImg:'italy_photos/Seceda + Braies Day_5-2.jpg',
     stay:'Hotel Rosengarten Dobbiaco',stayPrice:'฿25,550 +€22.4',
     stayLink:'https://maps.app.goo.gl/x3yzfbXLSycR6xWeA',
+    checkIn:'12:30',checkOut:'10:00',
     tl:[
       {time:'07:30',place:'🚗 ออกจากที่พัก Ortisei',h:false,items:[]},
       {time:'07:45–08:00',place:'🅿 Parkgarage Seceda H2.2m',h:false,items:[
@@ -1275,6 +1281,8 @@ const DAYS = [
     detailImg:'italy_photos/Tre Cime Day_6-2.jpg',
     stay:'CORTINA Lodge',stayPrice:'฿17,900 +€663',
     stayLink:'https://maps.app.goo.gl/82iVP5XQt6H8ERUd7',
+    checkIn:'15:00',checkOut:'10:00',
+    carReturn:{time:'13:00',name:'🚗 คืนรถ Venice',addr:'Viale Galileo Galilei, 30, 30173 Venezia VE, Italy',map:'https://maps.app.goo.gl/4osF6Dufnk4XQCeY8'},
     tl:[
       {time:'08:00',place:'🚗 ออกจากที่พัก Dobbiaco',h:false,items:[]},
       {time:'08:00–09:00',place:'🚗 Dobbiaco → Rifugio Auronzo',h:false,items:[]},
@@ -1326,6 +1334,7 @@ const DAYS = [
     detailImg:'italy_photos/Venice Day_7-2.jpg',
     stay:'Venice Center',stayPrice:'฿44,621 +€13',
     stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
+    checkIn:'14:00',checkOut:'10:00',
     tl:[
       {time:'09:00',place:'🚗 Cortina → Venice Marco Polo Airport',h:false,items:[
         {text:'~2 ชม. ผ่าน Belluno → Treviso',map:''},
@@ -1382,12 +1391,12 @@ const DAYS = [
         {text:'📸 San Marco + Doge\'s Palace + Lagoon skyline 🌅',map:''},
       ]},
       {time:'18:40–19:00',place:'🚤 San Giorgio → กลับฝั่ง Venice',h:false,items:[]},
-      {time:'19:00',place:'🎂 Birthday Dinner — WOW Seafood',h:true,items:[
-        {text:'🦞 Seafood restaurants Venice',map:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Venice+Italy'},
-        {text:'จองล่วงหน้า',map:''},
+      {time:'19:00',place:'🎂 Belated Birthday Dinner — WOW Seafood',h:true,items:[
+        {text:'🦞 Seafood restaurants Venice – จองล่วงหน้า',map:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Venice+Italy'},
       ]},
-      {time:'21:00',place:'🌙 Fondamenta Misericordia',h:false,items:[
-        {text:'ย่าน local ยามค่ำคืน',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Misericordia+Venice'},
+      {time:'21:00',place:'📍🌙 Fondamenta Misericordia',h:false,items:[
+        {text:'📍 Fondamenta Misericordia ย่าน local ยามค่ำคืน',map:'https://maps.app.goo.gl/5UEqygUVKk6XzRhQ9'},
+        {text:'↓ 🏨 กลับที่พัก',map:''},
       ]},
     ],
     maps:[
@@ -1407,6 +1416,7 @@ const DAYS = [
     img:'italy_photos/Venice Islands Day_8-1.jpg',
     detailImg:'italy_photos/Venice Islands Day_8-2.jpg',
     stay:'Venice Center',stayPrice:'฿44,621 +€13',stayLink:'https://maps.app.goo.gl/wmytJHiNu4ee4VFw7',
+    checkIn:'14:00',checkOut:'10:00',
     tl:[
       {time:'08:20',place:'🏨 ออกจากที่พัก',h:false,items:[
         {text:'↓ 🚶 5–7 นาที ไป Fondamente Nove A',map:''},
@@ -1451,40 +1461,37 @@ const DAYS = [
         {text:'14:00–14:15 รอ/เดินเปลี่ยนเรือ',map:''},
         {text:'14:15–14:30 🚤 Fondamente Nove "A" → San Zaccaria',map:''},
       ]},
-      {time:'14:30–14:45',place:'🚤 San Zaccaria → Zattere',h:false,items:[
-        {text:'Vaporetto จาก San Zaccaria ไป Zattere',map:'https://www.google.com/maps/search/?api=1&query=San+Zaccaria+vaporetto+Venice'},
+      {time:'14:30–14:45',place:'🚤 San Zaccaria → Zattere',h:false,items:[]},
+      {time:'14:45–15:15',place:'📍 Punta della Dogana ⭐',h:false,items:[
+        {text:'📍 Punta della Dogana ปลายแหลม Dorsoduro',map:'https://maps.app.goo.gl/gBr4MLUTE1i3Qqoh8'},
+        {text:'📸 Grand Canal · Santa Maria della Salute · Giudecca Canal',map:''},
+        {text:'🚶 15 นาที',map:''},
       ]},
-      {time:'14:45–15:50',place:'📍 Punta della Dogana + Santa Maria della Salute',h:false,items:[
-        {text:'14:45–15:15 Punta della Dogana (ปลายแหลม Dorsoduro)',map:'https://www.google.com/maps/search/?api=1&query=Punta+della+Dogana+Dorsoduro+Venice'},
-        {text:'15:20–15:50 Santa Maria della Salute (โบสถ์ Baroque)',map:'https://www.google.com/maps/search/?api=1&query=Santa+Maria+della+Salute+Venice'},
-        {text:'วิวสวยมาก Grand Canal + San Marco',map:''},
+      {time:'15:20–15:50',place:'📍 Santa Maria della Salute ⭐',h:false,items:[
+        {text:'📍 Santa Maria della Salute',map:'https://maps.app.goo.gl/jJMyy8yETzTTrCYKA'},
+        {text:'⛪ Basilica + ถ่ายรูป',map:''},
       ]},
-      {time:'15:50–16:20',place:'📍 Zattere + Giudecca Canal',h:false,items:[
-        {text:'Fondamenta Zattere',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
-        {text:'เดินริมคลอง Giudecca ช้า ๆ',map:''},
-        {text:'☕ Café Zattere',map:'https://www.google.com/maps/search/?api=1&query=cafe+Zattere+Venice'},
+      {time:'15:50–16:30',place:'📍 Zattere + Giudecca Canal',h:false,items:[
+        {text:'📍 Fondamenta Zattere ทางเดินเลียบริมน้ำฝั่ง Dorsoduro',map:'https://maps.app.goo.gl/1YS3anZYBffHoY6J7'},
+        {text:'☕ พัก / ถ่ายรูป',map:''},
       ]},
-      {time:'16:20–17:25',place:'🌅 San Giorgio Maggiore — Sunset',h:true,items:[
-        {text:'16:10–16:20 Zattere → San Giorgio (Vaporetto Line 2)',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
-        {text:'16:20–17:00 ขึ้นหอระฆัง Campanile วิว 360° Venice',map:'https://www.google.com/maps/search/?api=1&query=San+Giorgio+Maggiore+campanile+Venice'},
-        {text:'17:00–17:25 Sunset + ชม lagoon',map:''},
-        {text:'17:25–17:45 กลับ Zattere',map:''},
+      {time:'16:30–16:40',place:'🚤 Zattere → San Giorgio Maggiore',h:false,items:[
+        {text:'📍 San Giorgio Maggiore',map:'https://maps.app.goo.gl/1Y9t5VaoeTCPx3WG8'},
       ]},
-      {time:'17:45–18:30',place:'📍 Zattere + Giudecca Canal (เย็น)',h:false,items:[
-        {text:'เดินริมคลอง Giudecca ยามเย็น',map:'https://www.google.com/maps/search/?api=1&query=Fondamenta+Zattere+Venice'},
-        {text:'บรรยากาศ golden hour ริมน้ำ',map:''},
+      {time:'16:40–17:25',place:'📍 San Giorgio Maggiore ⭐⭐⭐',h:true,items:[
+        {text:'📍 San Giorgio Maggiore',map:'https://maps.app.goo.gl/6McSwXfgBfRkdYb37'},
+        {text:'⭐ San Marco + Doge\'s Palace + lagoon + Venice skyline',map:''},
+        {text:'17:10–17:25 🌅 Sunset มุมมอง Venice/San Marco/Lagoon',map:''},
       ]},
-      {time:'18:30–19:00',place:'📍 Campo Santa Margherita',h:false,items:[
-        {text:'Campo Santa Margherita — จัตุรัส local ที่สุดใน Venice',map:'https://www.google.com/maps/search/?api=1&query=Campo+Santa+Margherita+Venice'},
-        {text:'ชม aperitivo / เดินเล่น',map:''},
+      {time:'17:25–17:45',place:'🚤 San Giorgio → Zattere',h:false,items:[]},
+      {time:'17:45–18:30',place:'📍🌊 Zattere + Giudecca Canal (เย็น)',h:false,items:[
+        {text:'☕ Cafe · 📸 Giudecca Canal · 🌃 เริ่มเปิดไฟ Venice',map:''},
       ]},
-      {time:'19:00–20:30',place:'🍝 ดินเนอร์ Dorsoduro',h:false,items:[
-        {text:'ย่าน Dorsoduro บรรยากาศ local',map:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Dorsoduro+Venice'},
-        {text:'ร้านอาหารทะเล Dorsoduro',map:'https://www.google.com/maps/search/?api=1&query=seafood+restaurant+Dorsoduro+Venice'},
+      {time:'18:30–19:00',place:'🚶 Zattere → Campo Santa Margherita',h:false,items:[
+        {text:'📍 Campo Santa Margherita',map:'https://maps.app.goo.gl/MYJkxKLFpMipowHy5'},
       ]},
-      {time:'20:30–21:15',place:'🚤 กลับที่พัก',h:false,items:[
-        {text:'เรือ Vaporetto กลับ Fondamente Nove ย่านที่พัก',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
-      ]},
+      {time:'19:00–20:30',place:'🍝 Dinner (แนะนำกินฝั่ง Dorsoduro/Zattere)',h:false,items:[]},
+      {time:'20:30–21:15',place:'🚤 กลับที่พัก Zattere → Fondamente Nove',h:false,items:[]},
     ],
     maps:[
       {name:'Fondamente Nove',url:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
@@ -1503,6 +1510,8 @@ const DAYS = [
     img:'italy_photos/Bergamo Day_9-1.jpg',
     detailImg:'italy_photos/Bergamo Day_9-2.jpg',
     stay:'',stayPrice:'',stayLink:'',
+    carPickup:{time:'09:00',name:'🚗 รับรถ Venice',addr:'Viale Galileo Gallei, 30, 30173 Venezia VE, Italy',map:'https://maps.app.goo.gl/HoZ1i9Lc88rQJg4z9'},
+    carReturn:{time:'19:00',name:'🚗 คืนรถ Somma Lombardo',addr:'Via Cipriano Facchinetti, 51, 21019 Somma Lombardo VA, Italy',map:'https://maps.app.goo.gl/SGRVapppjcYJHDZDA'},
     tl:[
       {time:'07:30',place:'🚤 Fondamente Nove → VCE Airport',h:false,items:[
         {text:'เรือ/water taxi จาก Fondamente Nove ไปสนามบิน Venice (VCE)',map:'https://www.google.com/maps/search/?api=1&query=Fondamente+Nove+Venice'},
@@ -1695,9 +1704,12 @@ function buildGrid(days) {
           <div class="detail-meta">
             <div class="meta-block">
               <div class="meta-label">Stay</div>
-              <div class="meta-value">${d.stay}</div>
-              <div class="meta-price">${d.stayPrice}</div>
+              ${d.stay ? `<div class="meta-value">${d.stay}</div>` : ''}
+              ${d.stayPrice ? `<div class="meta-price">${d.stayPrice}</div>` : ''}
+              ${(d.checkIn || d.checkOut) ? `<div class="meta-price" style="margin-top:.25rem">🕐 Check-in ${d.checkIn||'–'} · Check-out ${d.checkOut||'–'}</div>` : ''}
               ${d.stayLink ? `<a${mapsLinkAttrs(d.stayLink)} class="map-btn" style="margin-top:.5rem">📍 Google Maps</a>` : ''}
+              ${d.carPickup ? `<div style="margin-top:.6rem;font-size:.8rem;font-weight:600;color:#c8923a">${d.carPickup.name}</div><div class="meta-price">${d.carPickup.time} · ${d.carPickup.addr}</div><a${mapsLinkAttrs(d.carPickup.map)} class="map-btn" style="margin-top:.25rem">📍 แผนที่รับรถ</a>` : ''}
+              ${d.carReturn ? `<div style="margin-top:.6rem;font-size:.8rem;font-weight:600;color:#c8923a">${d.carReturn.name}</div><div class="meta-price">${d.carReturn.time} · ${d.carReturn.addr}</div><a${mapsLinkAttrs(d.carReturn.map)} class="map-btn" style="margin-top:.25rem">📍 แผนที่คืนรถ</a>` : ''}
             </div>
             <div class="meta-block">
               <div class="meta-label">Maps</div>
